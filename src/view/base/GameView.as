@@ -3,8 +3,8 @@ package view.base {
 
 	import view.BackgroundView;
 
-	public class GameStart extends Sprite{
-		public function GameStart(){
+	public class GameView extends Sprite{
+		public function GameView(){
 
 			addChild( new BackgroundView());
 		}

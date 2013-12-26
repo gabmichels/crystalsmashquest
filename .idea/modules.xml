@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/crystalsmashquest.iml" filepath="$PROJECT_DIR$/crystalsmashquest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../flash/frameworks/robotlegs-framework-v2.1.0/robotlegs-framework-v2.1.0.iml" filepath="$PROJECT_DIR$/../flash/frameworks/robotlegs-framework-v2.1.0/robotlegs-framework-v2.1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../flash/examples/robotlegs2-signals-feathers-flickr-example/robotlegs2-signals-feathers-flickr-example.iml" filepath="$PROJECT_DIR$/../flash/examples/robotlegs2-signals-feathers-flickr-example/robotlegs2-signals-feathers-flickr-example.iml" />
+    </modules>
+  </component>
+</project>
+

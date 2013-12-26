@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="crystalcrushquest">
+  <component name="FlexBuildConfigurationManager" active="crystalsmashquest">
     <configurations>
-      <configuration name="crystalcrushquest" pure-as="true" main-class="Application" output-file="crystalcrushquest.swf" output-folder="$MODULE_DIR$/../crystalcrushquest/bin">
+      <configuration name="crystalsmashquest" pure-as="true" main-class="Application" output-file="crystalsmashquest.swf" output-folder="$MODULE_DIR$/bin">
         <dependencies target-player="11.9">
           <entries>
-            <entry library-id="b9e67af6-6ecd-4ae4-a779-b784d1b55dfa">
+            <entry library-id="2ea0bff2-92f7-4920-b9fd-e30c117f86e6">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="f53f900d-3321-4bb9-a818-ca501c16d0bc">
+            <entry library-id="7cd26eef-dee3-4cdd-aceb-72547a8bee99">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="61116d71-b31d-48f0-bc46-92b479cf380b">
+            <entry library-id="42da2bd8-8a37-4799-b7d4-86f8a5fd4573">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="715c9790-ba94-42c2-b804-9cd5018f6c0a">
+            <entry library-id="8c068312-70a4-434a-bc0f-c4a0c900488a">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="56180798-fe2b-4245-a7c4-aeef46c44fa1">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="ff7ec656-f02e-4b5d-a95e-9c61ba40213a">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -37,9 +43,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="b9e67af6-6ecd-4ae4-a779-b784d1b55dfa" />
+        <properties id="2ea0bff2-92f7-4920-b9fd-e30c117f86e6" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../frameworks/Starling-Framework/starling/src" />
+          <root url="file://$MODULE_DIR$/../flash/frameworks/Starling-Framework/starling/src" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -47,9 +53,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="f53f900d-3321-4bb9-a818-ca501c16d0bc" />
+        <properties id="7cd26eef-dee3-4cdd-aceb-72547a8bee99" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../frameworks/feathers/source" />
+          <root url="file://$MODULE_DIR$/../flash/frameworks/as3-signals/src" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -57,9 +63,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="61116d71-b31d-48f0-bc46-92b479cf380b" />
+        <properties id="42da2bd8-8a37-4799-b7d4-86f8a5fd4573" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../frameworks/robotlegs-framework/src" />
+          <root url="jar://$MODULE_DIR$/../flash/frameworks/robotlegs-framework-v2.1.0/bin/robotlegs-framework-v2.1.0.swc!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -67,9 +73,29 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="715c9790-ba94-42c2-b804-9cd5018f6c0a" />
+        <properties id="8c068312-70a4-434a-bc0f-c4a0c900488a" />
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../frameworks/greensock-as3/greensock.swc!/" />
+          <root url="file://$MODULE_DIR$/../flash/frameworks/GreenSock-AS3/src" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="56180798-fe2b-4245-a7c4-aeef46c44fa1" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../flash/frameworks/rl2-extensions/robotlegs2-starling-viewmap/src" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="ff7ec656-f02e-4b5d-a95e-9c61ba40213a" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../flash/frameworks/rl2-extensions/robotlegs-extensions-SignalCommandMap/src" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
