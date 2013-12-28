@@ -23,6 +23,12 @@
             <entry library-id="ff7ec656-f02e-4b5d-a95e-9c61ba40213a">
               <dependency linkage="Merged" />
             </entry>
+            <entry library-id="348a04f5-32cf-4867-b1c5-c454857a51f6">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="7b955eb3-aa8a-4686-8576-535ae15b5021">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="AIR SDK" />
         </dependencies>
@@ -96,6 +102,26 @@
         <properties id="ff7ec656-f02e-4b5d-a95e-9c61ba40213a" />
         <CLASSES>
           <root url="file://$MODULE_DIR$/../flash/frameworks/rl2-extensions/robotlegs-extensions-SignalCommandMap/src" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="348a04f5-32cf-4867-b1c5-c454857a51f6" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../flash/frameworks/feathers/source" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="7b955eb3-aa8a-4686-8576-535ae15b5021" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../flash/frameworks/feathers/themes/AeonDesktopTheme/source" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

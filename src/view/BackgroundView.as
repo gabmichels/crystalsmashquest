@@ -28,9 +28,9 @@ package view {
 		}
 
 		private function handleComplete(event:LoaderEvent):void {
-			var bmp:Bitmap = _loader.rawContent;
-			var texture:Texture = Texture.fromBitmap(bmp);
-			var img:Image = new Image(texture);
+			var bmp		:Bitmap 	= _loader.rawContent;
+			var texture	:Texture 	= Texture.fromBitmap(bmp);
+			var img		:Image 		= new Image(texture);
 
 			_backgroundImage.addChild(img);
 		}

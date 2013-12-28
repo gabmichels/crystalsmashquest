@@ -1,16 +1,17 @@
 package model {
-	import starling.display.Image;
+	import model.vo.CrystalVo;
 
 	public class CrystalModel {
 
-		private var _crystalImages:Vector.<Image> = new Vector.<Image>();
+		private var _crystals:Vector.<CrystalVo> = new <CrystalVo>[];
 
-		public function get crystalImages():Vector.<Image> {
-			return _crystalImages;
+		public function get crystals():Vector.<CrystalVo> {
+			return _crystals;
 		}
 
-		public function set crystalImages(value:Vector.<Image>):void {
-			_crystalImages = value;
+		public function set crystals(value:Vector.<CrystalVo>):void {
+			_crystals = value;
 		}
+
 	}
 }

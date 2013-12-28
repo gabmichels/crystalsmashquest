@@ -2,8 +2,8 @@ package signals.notifications {
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
 
-	public class CrystalsLoaded extends Signal implements ISignal{
-		public function CrystalsLoaded() {
+	public class CrystalsLoadedSignal extends Signal implements ISignal{
+		public function CrystalsLoadedSignal() {
 			super ();
 		}
 	}

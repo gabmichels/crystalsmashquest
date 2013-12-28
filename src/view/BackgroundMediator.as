@@ -2,7 +2,7 @@ package view {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
-	import signals.requests.LoadCrystalSignal;
+	import signals.requests.GameStartupSignal;
 
 	public class BackgroundMediator extends StarlingMediator{
 
@@ -10,13 +10,12 @@ package view {
 		public var logger:ILogger;
 
 		[Inject]
-		public var view:BackgroundView;
+		public var backgroundView:BackgroundView;
 
 		public function BackgroundMediator() {
 		}
 
 		override public function initialize():void {
-
 			logger.info( "initialized" );
 
 		}

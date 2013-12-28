@@ -1,9 +1,11 @@
 package view {
-	import com.greensock.events.LoaderEvent;
-	import com.greensock.loading.ImageLoader;
-	import com.greensock.loading.LoaderMax;
-
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.display.Shape;
+
+	import model.vo.GridVo;
+
+	import org.osflash.signals.Signal;
 
 	import starling.display.Image;
 
@@ -13,27 +15,41 @@ package view {
 
 	public class CrystalView extends Sprite
 	{
-		private var _loader				: ImageLoader;
-		private var _stoneImages	 	: Vector.<Sprite>;
-		private var _queue				: LoaderMax;
+		private var _vo : GridVo;
 
-		public function CrystalView() {
+		public function CrystalView(vo : GridVo) {
+			_vo = vo;
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 
 		private function onAddedToStage(event:Event):void {
-
+//			var w : int = GameConstants.GRID_CELL_SIZE;
+//			var h : int = GameConstants.GRID_CELL_SIZE;
+//			var s2:flash.display.Shape = new flash.display.Shape();
+//			s2.graphics.beginFill(Math.random() * 0xFFFFFF, 1);
+//			s2.graphics.drawRect(0, 0, w, h);
+//			s2.graphics.endFill();
+//
+//			var bmpData:BitmapData = new BitmapData(w,h);
+//			bmpData.draw(s2);
+//
+//			var bmp:Image = Image.fromBitmap(new Bitmap(bmpData, "auto", true));
+//
+//			addChild(bmp)
 		}
 
-		private function handleComplete(event:LoaderEvent) : void {
-			var bmp 		: Bitmap 	= _loader.rawContent;
-			var texture 	: Texture 	= Texture.fromBitmap(bmp);
-			var img 	   	: Image		= new Image(texture);
-			var sprite 		: Sprite	= new Sprite();
-
-			sprite.addChild(img);
-			_stoneImages.push(sprite);
+		public function init(bmp : Bitmap) : void {
+			var texture	:Texture 	= Texture.fromBitmap(bmp);
+			var img		:Image 		= new Image(texture);
+			addChild(img);
 		}
 
+		public function get vo():GridVo {
+			return _vo;
+		}
+
+		public function set vo(value:GridVo):void {
+			_vo = value;
+		}
 	}
 }

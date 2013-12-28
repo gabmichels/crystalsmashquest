@@ -7,8 +7,9 @@ package service {
 	import flash.display.Bitmap;
 
 	import model.CrystalModel;
+	import model.vo.CrystalVo;
 
-	import signals.notifications.CrystalsLoaded;
+	import signals.notifications.CrystalsLoadedSignal;
 
 	import starling.display.Image;
 	import starling.textures.Texture;
@@ -19,7 +20,7 @@ package service {
 		public var crystalModel : CrystalModel;
 
 		[Inject]
-		public var completeSignal:CrystalsLoaded;
+		public var completeSignal:CrystalsLoadedSignal;
 
 		public function loadImages() :void {
 			var queue:LoaderMax = new LoaderMax({name:"imageQueue" , onComplete:handleQueueComplete});
@@ -37,10 +38,8 @@ package service {
 
 		private function handleImageComplete(event:LoaderEvent) : void {
 			var bmp 		: Bitmap 	= event.target.rawContent;
-			var texture 	: Texture 	= Texture.fromBitmap(bmp);
-			var img 	   	: Image		= new Image(texture);
 
-			crystalModel.crystalImages.push(img);
+			crystalModel.crystals.push( new CrystalVo(bmp, event.target.name ) );
 			trace(event.target + " Image is complete!");
 
 		}

@@ -1,12 +1,12 @@
 package {
 
-	import controller.LoadCrystalImagesCommand;
+	import controller.GameStartupCommand;
 
 	import flash.events.IEventDispatcher;
 
 	import model.CrystalModel;
-
-	import org.swiftsuspenders.Injector;
+	import model.GameModel;
+	import model.GridModel;
 
 	import robotlegs.bender.extensions.contextView.ContextView;
 	import robotlegs.bender.extensions.mediatorMap.api.IMediatorMap;
@@ -18,18 +18,24 @@ package {
 	import robotlegs.bender.framework.api.LogLevel;
 
 	import service.CrystalImageService;
+	import service.GridService;
 	import service.ICrystalImageService;
+	import service.IGridService;
 
-	import signals.notifications.CrystalsLoaded;
-
-	import signals.requests.LoadCrystalSignal;
+	import signals.notifications.CrystalsLoadedSignal;
+	import signals.notifications.GameStartSignal;
+	import signals.requests.GameStartupSignal;
 
 	import view.BackgroundMediator;
 	import view.BackgroundView;
 	import view.CrystalMediator;
 	import view.CrystalView;
+	import view.GridMediator;
+	import view.GridView;
 	import view.base.GameMediator;
 	import view.base.GameView;
+	import view.layer.StartLayerMediator;
+	import view.layer.StartLayerView;
 
 	public class AppConfig implements IConfig
 	{
@@ -61,22 +67,27 @@ package {
 			logger.info( "configuring application" );
 
 			// Map commands.
-			commandMap.map( LoadCrystalSignal).toCommand(LoadCrystalImagesCommand);
-			commandMap.map( CrystalsLoaded).toCommand(ShowStartLayerCommand);
+			commandMap.map( GameStartupSignal).toCommand(GameStartupCommand);
 
 			// Map independent notification signals.
-//			injector.map( CrystalsLoaded ).asSingleton();
+			injector.map( CrystalsLoadedSignal ).asSingleton();
+			injector.map( GameStartSignal ).asSingleton();
 
 			// Map views.
 			mediatorMap.map( GameView ).toMediator( GameMediator );
 			mediatorMap.map( BackgroundView ).toMediator( BackgroundMediator );
 			mediatorMap.map( CrystalView ).toMediator( CrystalMediator );
+			mediatorMap.map( StartLayerView ).toMediator( StartLayerMediator );
+			mediatorMap.map( GridView ).toMediator( GridMediator );
 
 			// Map models.
 			injector.map( CrystalModel ).asSingleton();
+			injector.map( GridModel ).asSingleton();
+			injector.map( GameModel ).asSingleton();
 
 			// Map services.
 			injector.map( ICrystalImageService ).toSingleton( CrystalImageService );
+			injector.map( IGridService ).toSingleton( GridService );
 
 			// Start.
 			context.afterInitializing( init );
