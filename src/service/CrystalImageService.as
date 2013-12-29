@@ -38,8 +38,9 @@ package service {
 
 		private function handleImageComplete(event:LoaderEvent) : void {
 			var bmp 		: Bitmap 	= event.target.rawContent;
+			var texture	:Texture 	= Texture.fromBitmap(bmp);
 
-			crystalModel.crystals.push( new CrystalVo(bmp, event.target.name ) );
+			crystalModel.crystals.push( new CrystalVo(texture, event.target.name ) );
 			trace(event.target + " Image is complete!");
 
 		}

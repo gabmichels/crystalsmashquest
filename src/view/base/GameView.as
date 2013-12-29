@@ -8,7 +8,7 @@ package view.base {
 
 	import view.BackgroundView;
 	import view.GridView;
-	import view.layer.StartLayerView;
+	import view.layer.GUIView;
 
 	public class GameView extends Sprite{
 
@@ -35,7 +35,7 @@ package view.base {
 
 		public function showLayer() : void {
 			if(!_startLayer) {
-				_startLayer = new StartLayerView();
+				_startLayer = new GUIView();
 				addChild(_startLayer);
 			} else {
 				_startLayer.visible = true;

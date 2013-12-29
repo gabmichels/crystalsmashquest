@@ -26,28 +26,23 @@ package view {
 		public var responseGridSignal 	: ResponseGridSignal;
 
 
+
+
 		override public function initialize():void {
 
-			logger.info( "initialized" );
 			gameStartSignal.add(handleGameStart);
-			gridView.gridComplete.add(handleGridComplete);
-			responseGridSignal.add(handleGridResponse)
-
+			responseGridSignal.add(handleGridResponse);
 		}
 
 		private function handleGridResponse(data : Vector.<GridVo>):void {
+			responseGridSignal.remove(handleGridResponse);
 			gridView.init(data);
 		}
 
-		private function handleGridComplete():void {
-
-		}
-
 		private function handleGameStart():void {
+			gameStartSignal.remove(handleGameStart);
 			requestGridSignal.dispatch();
 		}
-
-
 
 	}
 }

@@ -7,7 +7,7 @@ package view.base {
 
 	import starling.core.Starling;
 
-	import view.layer.StartLayerView;
+	import view.layer.GUIView;
 
 	public class GameMediator extends StarlingMediator{
 

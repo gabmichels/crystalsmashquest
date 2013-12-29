@@ -27,6 +27,7 @@ package {
 
 	import signals.notifications.CrystalsLoadedSignal;
 	import signals.notifications.GameStartSignal;
+	import signals.notifications.RestartSignal;
 	import signals.notifications.StateUpdateSignal;
 	import signals.requests.GameStartupSignal;
 	import signals.requests.RequestCrystalDataSignal;
@@ -44,8 +45,8 @@ package {
 	import view.GridView;
 	import view.base.GameMediator;
 	import view.base.GameView;
-	import view.layer.StartLayerMediator;
-	import view.layer.StartLayerView;
+	import view.layer.GUIMediator;
+	import view.layer.GUIView;
 
 	public class AppConfig implements IConfig
 	{
@@ -85,6 +86,7 @@ package {
 			// Map independent notification signals.
 			injector.map( CrystalsLoadedSignal ).asSingleton();
 			injector.map( GameStartSignal ).asSingleton();
+			injector.map( RestartSignal ).asSingleton();
 			injector.map( ResponseGridSignal ).asSingleton();
 			injector.map( ResponseCrystalsSignal ).asSingleton();
 			injector.map( ResponseCrystalDataSignal ).asSingleton();
@@ -94,7 +96,7 @@ package {
 			mediatorMap.map( GameView ).toMediator( GameMediator );
 			mediatorMap.map( BackgroundView ).toMediator( BackgroundMediator );
 			mediatorMap.map( CrystalView ).toMediator( CrystalMediator );
-			mediatorMap.map( StartLayerView ).toMediator( StartLayerMediator );
+			mediatorMap.map( GUIView ).toMediator( GUIMediator );
 			mediatorMap.map( GridView ).toMediator( GridMediator );
 
 			// Map models.

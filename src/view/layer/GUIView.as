@@ -6,11 +6,11 @@ package view.layer {
 	import starling.display.Sprite;
 	import starling.events.Event;
 
-	public class StartLayerView extends Sprite{
+	public class GUIView extends Sprite{
 
 		public var startSignal : Signal = new Signal();
 
-		public function StartLayerView() {
+		public function GUIView() {
 			var startButton : Button = new Button();
 			startButton.label = "START";
 			startButton.x = 100;

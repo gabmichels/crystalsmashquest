@@ -5,6 +5,8 @@ package view {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
+	import signals.notifications.RestartSignal;
+
 	import signals.notifications.StateUpdateSignal;
 
 	import signals.requests.RequestCrystalDataSignal;
@@ -27,6 +29,9 @@ package view {
 		[Inject]
 		public var stateSignal				: StateUpdateSignal;
 
+		[Inject]
+		public var restartSignal			: RestartSignal;
+
 
 		public function CrystalMediator() {
 		}
@@ -35,6 +40,11 @@ package view {
 			responseCrystalData.add(handleDataResponse);
 			crystalView.requestSignal.add(handleViewRequest);
 			stateSignal.add(handleStateUpdate);
+			restartSignal.add(handleRestart);
+		}
+
+		private function handleRestart():void {
+			crystalView.reset();
 		}
 
 		private function handleStateUpdate(newState : int):void {

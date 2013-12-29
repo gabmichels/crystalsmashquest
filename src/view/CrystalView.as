@@ -41,15 +41,19 @@ package view {
 			_gridData 		= grid;
 			_crystalData 	= crystals;
 
-			if(_state == GameConstants.STATE_GAME_INIT) {
-				startupCrystalCreation();
-			} else if(_state == GameConstants.STATE_GAME_RUNNING) {
-
-			}
+			initCrystal();
 		}
 
-		private function addCrystalBitmap(bmp : Bitmap) : void {
-			var texture	:Texture 	= Texture.fromBitmap(bmp);
+		public function reset() : void {
+			while(numChildren > 0) removeChildAt(0); // remove old crystal
+
+			this.alpha = 0;	// set alpha to zero for fade in
+
+			initCrystal(); // add new crystal
+		}
+
+		private function addCrystalTexture(texture : Texture) : void {
+
 			var img		:Image 		= new Image(texture);
 			var tween	:Tween 		= new Tween(this, 0.5, Transitions.LINEAR);
 
@@ -60,8 +64,8 @@ package view {
 			Starling.juggler.add(tween);
 		}
 
-		private function startupCrystalCreation():void {
-			var bm 			: Bitmap;
+		private function initCrystal():void {
+			var texture 	: Texture;
 			var colorNum 	: int;
 			var crystals	: Vector.<CrystalVo> = _crystalData;
 
@@ -71,10 +75,10 @@ package view {
 			}
 
 			colorNum 	= Math.random() * crystals.length;
-			bm 			= crystals[colorNum].bitmap;
+			texture 	= crystals[colorNum].texture;
 			vo.color	= crystals[colorNum].color;
 
-			addCrystalBitmap(bm);
+			addCrystalTexture(texture);
 
 		}
 
@@ -89,21 +93,21 @@ package view {
 			for(var i : int = 0; i < _crystalData.length;i++) {
 				color = _crystalData[i].color;
 
-				if(vo.idX > 2 && vo.idY <= 2) {
+				if(vo.idX > 2 && vo.idY <= 2) { // get 2 crystals left from this
 					gridDataLeft1 	= getGridById(vo.idX - 1, vo.idY);
 					gridDataLeft2 	= getGridById(vo.idX - 2, vo.idY);
 
-					if(!(gridDataLeft1.color == color && gridDataLeft2.color == color)) {
+					if(!(gridDataLeft1.color == color && gridDataLeft2.color == color)) { // only add when the checked crystal colors do not match
 						availableColors.push(_crystalData[i]);
 					}
-				} else if(vo.idX <= 2 && vo.idY > 2) {
+				} else if(vo.idX <= 2 && vo.idY > 2) { // get 2 crystals top from this
 					gridDataTop1 	= getGridById(vo.idX, vo.idY - 1);
 					gridDataTop2 	= getGridById(vo.idX, vo.idY - 2);
 
-					if(!(gridDataTop1.color == color && gridDataTop2.color == color)) {
+					if(!(gridDataTop1.color == color && gridDataTop2.color == color)) { // only add when the checked crystal colors do not match
 						availableColors.push(_crystalData[i]);
 					}
-				}  else if(vo.idX > 2 && vo.idY > 2) {
+				}  else if(vo.idX > 2 && vo.idY > 2) {   // get 2 crystals left AND top from this
 
 					gridDataLeft1 	= getGridById(vo.idX - 1, vo.idY);
 					gridDataLeft2 	= getGridById(vo.idX - 2, vo.idY);
@@ -111,7 +115,7 @@ package view {
 					gridDataTop2 	= getGridById(vo.idX, vo.idY - 2);
 
 					if(	!(gridDataTop1.color == color && gridDataTop2.color == color) &&
-							!(gridDataLeft1.color == color && gridDataLeft2.color == color)) {
+							!(gridDataLeft1.color == color && gridDataLeft2.color == color)) { // only add when the checked crystal colors do not match
 						availableColors.push(_crystalData[i]);
 					}
 				}
