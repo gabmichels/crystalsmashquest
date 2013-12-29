@@ -26,8 +26,6 @@ package view.layer {
 		}
 
 		private function handleGameStart():void {
-			// TODO dispatch
-			trace("start game from mediator")
 			gameStartSignal.dispatch();
 		}
 

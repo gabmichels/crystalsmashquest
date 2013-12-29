@@ -2,36 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d09a5b5-3faa-41ce-9677-e7ea9f896703" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\workspace\crystalsmashquest\src\controller\ShowStartLayerCommand.as" afterPath="" />
-      <change type="MOVED" beforePath="C:\workspace\crystalsmashquest\src\controller\LoadCrystalImagesCommand.as" afterPath="$PROJECT_DIR$/src/controller/GameStartupCommand.as" />
-      <change type="MOVED" beforePath="C:\workspace\crystalsmashquest\src\signals\notifications\CrystalsLoaded.as" afterPath="$PROJECT_DIR$/src/signals/notifications/CrystalsLoadedSignal.as" />
-      <change type="MOVED" beforePath="C:\workspace\crystalsmashquest\src\signals\requests\LoadCrystalSignal.as" afterPath="$PROJECT_DIR$/src/signals/requests/GameStartupSignal.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/crystalsmashquest.swf" afterPath="$PROJECT_DIR$/bin/crystalsmashquest.swf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppConfig.as" afterPath="$PROJECT_DIR$/src/AppConfig.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/BackgroundMediator.as" afterPath="$PROJECT_DIR$/src/view/BackgroundMediator.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/BackgroundView.as" afterPath="$PROJECT_DIR$/src/view/BackgroundView.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/CrystalImageService.as" afterPath="$PROJECT_DIR$/src/service/CrystalImageService.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/CrystalMediator.as" afterPath="$PROJECT_DIR$/src/view/CrystalMediator.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/CrystalModel.as" afterPath="$PROJECT_DIR$/src/model/CrystalModel.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/CrystalView.as" afterPath="$PROJECT_DIR$/src/view/CrystalView.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/base/GameMediator.as" afterPath="$PROJECT_DIR$/src/view/base/GameMediator.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/base/GameView.as" afterPath="$PROJECT_DIR$/src/view/base/GameView.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/crystalsmashquest.iml" afterPath="$PROJECT_DIR$/crystalsmashquest.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/GameModel.as" afterPath="$PROJECT_DIR$/src/model/GameModel.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/GridMediator.as" afterPath="$PROJECT_DIR$/src/view/GridMediator.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/GridModel.as" afterPath="$PROJECT_DIR$/src/model/GridModel.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/GridView.as" afterPath="$PROJECT_DIR$/src/view/GridView.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/layer/StartLayerMediator.as" afterPath="$PROJECT_DIR$/src/view/layer/StartLayerMediator.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="crystalsmashquest.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388232253258" ignored="false" />
+    <file path="/Dummy.txt" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388317124032" ignored="false" />
     <file path="/fragment.js2" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388251557782" ignored="false" />
-    <file path="/CrystalView.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388246653150" ignored="false" />
+    <file path="/CrystalView.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388352815278" ignored="false" />
     <file path="/Application.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388145220558" ignored="false" />
     <file path="/CrystalImageService.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388252528097" ignored="false" />
-    <file path="/AppConfig.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388249931198" ignored="false" />
-    <file path="/CrystalMediator.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388255257508" ignored="false" />
+    <file path="/AppConfig.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388349017908" ignored="false" />
+    <file path="/CrystalMediator.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388354158990" ignored="false" />
     <file path="/BackgroundMediator.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388157635235" ignored="false" />
     <file path="/LoadCrystalSignal.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1387896072396" ignored="false" />
     <file path="/LoadCrystalImagesCommand.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1387908500438" ignored="false" />
-    <file path="/a.dummy" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388252371050" ignored="false" />
+    <file path="/a.dummy" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388319250742" ignored="false" />
     <file path="/GameMediator.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388146817199" ignored="false" />
     <file path="/ICrystalImageService.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1387908472041" ignored="false" />
     <file path="/CrystalModel.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388252489521" ignored="false" />
@@ -40,17 +34,21 @@
     <file path="/ShowStartLayerCommand.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388072255930" ignored="false" />
     <file path="/StartLayerMediator.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388154900322" ignored="false" />
     <file path="/GameConstants.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388249758395" ignored="false" />
-    <file path="/GridView.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388245137422" ignored="false" />
-    <file path="/GridMediator.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388242730610" ignored="false" />
+    <file path="/GridView.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388352698334" ignored="false" />
+    <file path="/GridMediator.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388331881992" ignored="false" />
     <file path="/GridService.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388241221945" ignored="false" />
     <file path="/IGridService.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388239945625" ignored="false" />
     <file path="/GridModel.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388247617887" ignored="false" />
     <file path="/GridVo.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388251850488" ignored="false" />
     <file path="/GameStartupCommand.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388249948990" ignored="false" />
     <file path="/BackgroundView.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388245314880" ignored="false" />
-    <file path="/GameModel.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388249805923" ignored="false" />
+    <file path="/GameModel.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388347602564" ignored="false" />
     <file path="/DictionaryUtils.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388251585605" ignored="false" />
     <file path="/CrystalVo.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388252605311" ignored="false" />
+    <file path="/GetCrystalDataCommand.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388352646289" ignored="false" />
+    <file path="/GetGridDataCommand.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388348865872" ignored="false" />
+    <file path="/GetGridElementCommand.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388332658513" ignored="false" />
+    <file path="/GetGridCommand.as" changelist="0d09a5b5-3faa-41ce-9677-e7ea9f896703" time="1388348330314" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +63,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -102,6 +99,7 @@
         <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -111,46 +109,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CrystalModel.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/CrystalModel.as">
+      <file leaf-file-name="GridMediator.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/GridMediator.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="65" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="22" column="36" selection-start="530" selection-end="547" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#16#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DictionaryUtils.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/DictionaryUtils.as">
+      <file leaf-file-name="GetGridCommand.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/GetGridCommand.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="14" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="5" column="33" selection-start="123" selection-end="123" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#22#45#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CrystalImageService.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/service/CrystalImageService.as">
+      <file leaf-file-name="GridView.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/GridView.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="88" selection-start="1570" selection-end="1570" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GridVo.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/vo/GridVo.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="45" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameConstants.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameConstants.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="59" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0">
+            <state line="23" column="32" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -159,7 +143,18 @@
       <file leaf-file-name="CrystalMediator.as" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/CrystalMediator.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="73" selection-start="2111" selection-end="2111" vertical-scroll-proportion="0.39641944">
+            <state line="48" column="59" selection-start="1286" selection-end="1286" vertical-scroll-proportion="1.2992126">
+              <folding>
+                <element signature="e#16#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CrystalView.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/CrystalView.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="21" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#16#44#0" expanded="true" />
               </folding>
@@ -167,31 +162,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CrystalVo.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/vo/CrystalVo.as">
+      <file leaf-file-name="GetCrystalDataCommand.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/GetCrystalDataCommand.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="28" selection-start="98" selection-end="98" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameModel.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/GameModel.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="8" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameStartupCommand.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/GameStartupCommand.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="38" selection-start="465" selection-end="465" vertical-scroll-proportion="0.0">
+            <state line="28" column="18" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#22#45#0" expanded="true" />
+                <element signature="e#22#48#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GetCrystalCommand.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/GetCrystalCommand.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="35" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StateUpdateSignal.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/signals/notifications/StateUpdateSignal.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -199,8 +194,10 @@
       <file leaf-file-name="AppConfig.as" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppConfig.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="35" selection-start="2449" selection-end="2449" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="82" column="74" selection-start="2475" selection-end="2475" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#12#49#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -223,21 +220,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/service/GridService.as" />
-        <option value="$PROJECT_DIR$/src/view/GridMediator.as" />
-        <option value="$PROJECT_DIR$/src/view/GridView.as" />
-        <option value="$PROJECT_DIR$/src/view/BackgroundView.as" />
-        <option value="$PROJECT_DIR$/src/view/CrystalView.as" />
-        <option value="$PROJECT_DIR$/src/model/GridModel.as" />
+        <option value="$PROJECT_DIR$/src/signals/response/ResponseGameStateSignal.as" />
+        <option value="$PROJECT_DIR$/src/signals/requests/RequestGridElementSignal.as" />
+        <option value="$PROJECT_DIR$/src/signals/response/ResponseGridElementSignal.as" />
+        <option value="$PROJECT_DIR$/src/controller/GetGridElementCommand.as" />
+        <option value="$PROJECT_DIR$/src/signals/requests/RequestCrystalDataSignal.as" />
+        <option value="$PROJECT_DIR$/src/signals/response/ResponseCrystalDataSignal.as" />
+        <option value="$PROJECT_DIR$/src/controller/GetCrystalViewDataCommand.as" />
+        <option value="$PROJECT_DIR$/src/signals/notifications/StateUpdateSignal.as" />
         <option value="$PROJECT_DIR$/src/model/GameModel.as" />
+        <option value="$PROJECT_DIR$/src/model/GridModel.as" />
+        <option value="$PROJECT_DIR$/src/controller/GetGridCommand.as" />
         <option value="$PROJECT_DIR$/src/AppConfig.as" />
-        <option value="$PROJECT_DIR$/src/controller/GameStartupCommand.as" />
-        <option value="$PROJECT_DIR$/src/GameConstants.as" />
-        <option value="$PROJECT_DIR$/src/utils/DictionaryUtils.as" />
-        <option value="$PROJECT_DIR$/src/model/vo/GridVo.as" />
-        <option value="$PROJECT_DIR$/src/model/CrystalModel.as" />
-        <option value="$PROJECT_DIR$/src/service/CrystalImageService.as" />
-        <option value="$PROJECT_DIR$/src/model/vo/CrystalVo.as" />
+        <option value="$PROJECT_DIR$/src/controller/GetCrystalDataCommand.as" />
+        <option value="$PROJECT_DIR$/src/view/GridView.as" />
+        <option value="$PROJECT_DIR$/src/view/CrystalView.as" />
         <option value="$PROJECT_DIR$/src/view/CrystalMediator.as" />
       </list>
     </option>
@@ -416,28 +413,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="crystalsmashquest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="robotlegs2-signals-feathers-flickr-example" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -480,7 +455,113 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="signals" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="response" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="signals" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="requests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="signals" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notifications" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -501,8 +582,22 @@
               <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vo" />
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="crystalsmashquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -524,24 +619,24 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\workspace\crystalsmashquest\src\model\vo" />
-      <recent name="C:\workspace\crystalsmashquest\src\service" />
-      <recent name="C:\workspace\crystalsmashquest\src\view" />
-      <recent name="C:\workspace\crystalsmashquest\src\signals\notifications" />
-      <recent name="C:\workspace\crystalsmashquest\src\view\layer" />
-    </key>
     <key name="CreateActionScriptClassDialog.DESTINATION_PACKAGE_RECENT_KEY">
       <recent name="utils" />
       <recent name="model" />
       <recent name="service" />
       <recent name="model.vo" />
       <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\workspace\crystalsmashquest\src\signals\notifications" />
+      <recent name="C:\workspace\crystalsmashquest\src\controller" />
+      <recent name="C:\workspace\crystalsmashquest\src\signals\response" />
+      <recent name="C:\workspace\crystalsmashquest\src\signals\requests" />
+      <recent name="C:\workspace\crystalsmashquest\src\model\vo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\workspace\crystalsmashquest\src\signals\requests" />
@@ -575,19 +670,6 @@
       <option name="trusted" value="true" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -614,6 +696,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -776,28 +871,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32784638" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31550068" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39917696" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41289437" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39917696" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32647464" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31687242" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24967825" sideWeight="0.60082304" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24967825" sideWeight="0.58710563" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -867,7 +962,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="33" />
+      <option name="time" value="38" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -875,120 +970,126 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../flash/examples/robotlegs2-signals-feathers-flickr-example/source/view/thumbsview/ThumbsViewMediator.as">
+    <entry file="file://$PROJECT_DIR$/src/signals/requests/RequestCrystalDataSignal.as">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../flash/examples/robotlegs2-signals-feathers-flickr-example/source/view/thumbsview/ThumbsView.as">
+    <entry file="file://$PROJECT_DIR$/src/signals/response/ResponseGameStateSignal.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="22" selection-start="415" selection-end="415" vertical-scroll-proportion="0.0">
+        <state line="10" column="0" selection-start="242" selection-end="242" vertical-scroll-proportion="0.33045357">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/GridView.as">
+    <entry file="file://$PROJECT_DIR$/../flash/examples/robotlegs2-signals-feathers-flickr-example/source/model/GalleryModel.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="40" selection-start="628" selection-end="628" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/CrystalView.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="21" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#16#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/GridModel.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="36" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
+        <state line="33" column="30" selection-start="860" selection-end="860" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/GameModel.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="8" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppConfig.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="35" selection-start="2449" selection-end="2449" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/GameStartupCommand.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="38" selection-start="465" selection-end="465" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#22#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../flash/frameworks/Starling-Framework/starling/src/starling/textures/Texture.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="189" column="0" selection-start="9337" selection-end="9337" vertical-scroll-proportion="0.33248082">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameConstants.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="59" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/DictionaryUtils.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="14" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
+        <state line="17" column="41" selection-start="374" selection-end="374" vertical-scroll-proportion="0.62017167">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/vo/GridVo.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="45" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/CrystalModel.as">
+    <entry file="file://$PROJECT_DIR$/src/model/GridModel.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="65" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0">
+        <state line="7" column="8" selection-start="111" selection-end="111" vertical-scroll-proportion="0.16927454">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/CrystalImageService.as">
+    <entry file="file://$PROJECT_DIR$/src/controller/GetGridCommand.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="88" selection-start="1570" selection-end="1570" vertical-scroll-proportion="0.0">
+        <state line="5" column="33" selection-start="123" selection-end="123" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/GetCrystalCommand.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="35" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/vo/CrystalVo.as">
+    <entry file="file://$PROJECT_DIR$/src/AppConfig.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="28" selection-start="98" selection-end="98" vertical-scroll-proportion="0.0">
+        <state line="82" column="74" selection-start="2475" selection-end="2475" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#12#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/GameStartupCommand.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/GridMediator.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="36" selection-start="530" selection-end="547" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#16#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/GetCrystalDataCommand.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="18" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#22#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/GridView.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="32" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/CrystalView.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="21" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#16#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/signals/notifications/StateUpdateSignal.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/CrystalMediator.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="73" selection-start="2111" selection-end="2111" vertical-scroll-proportion="0.39641944">
+        <state line="48" column="59" selection-start="1286" selection-end="1286" vertical-scroll-proportion="1.2992126">
           <folding>
-            <element signature="e#16#44#0" expanded="true" />
+            <element signature="e#16#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
