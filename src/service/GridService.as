@@ -34,5 +34,25 @@ package service {
 
 			gridModel.grid = grid;
 		}
+
+		public function swapCrystals(data1 : GridVo, data2 : GridVo) : void {
+			var grid 		: Vector.<GridVo> 	= gridModel.grid;
+			var currentVo 	: GridVo;
+
+			for(var i : int = 0; i < grid.length; i++) {
+				currentVo = grid[i];
+
+				if(currentVo.idX == data1.idX && currentVo.idY == data1.idY) {
+					currentVo = data2;
+				}
+
+				if(currentVo.idX == data2.idX && currentVo.idY == data2.idY) {
+					currentVo = data1;
+				}
+			}
+
+			gridModel.grid = grid;
+
+		}
 	}
 }

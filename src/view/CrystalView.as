@@ -4,6 +4,7 @@ package view {
 	import model.vo.CrystalVo;
 
 	import model.vo.GridVo;
+	import model.vo.SwapCrystalVo;
 
 	import org.osflash.signals.Signal;
 
@@ -13,20 +14,28 @@ package view {
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	import starling.textures.Texture;
 
 	public class CrystalView extends Sprite
 	{
 		public var requestSignal 	: Signal;
+		public var swapSignal	 	: Signal;
 
 		private var _vo 			: GridVo;
 		private var _state			: int;
 		private var _gridData		: Vector.<GridVo>;
 		private var _crystalData	: Vector.<CrystalVo>;
+		private var _dragStartX		: Number;
+		private var _dragStartY		: Number;
+		private var _id				: int;
 
 		public function CrystalView(vo : GridVo) {
 			_vo 			= vo;
 			requestSignal 	= new Signal();
+			swapSignal		= new Signal();
 
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -36,7 +45,7 @@ package view {
 			requestSignal.dispatch();
 		}
 
-		public function init(grid : Vector.<GridVo>, crystals : Vector.<CrystalVo> = null, state : int = NaN) : void {
+		public function init(grid : Vector.<GridVo>, crystals : Vector.<CrystalVo> = null, state : int = -1) : void {
 			while(numChildren > 0) removeChildAt(0); // remove old crystal
 			this.alpha 			= 0;	// set alpha to zero for fade in
 
@@ -62,6 +71,8 @@ package view {
 			tween.delay 			= (_vo.idX + _vo.idY) * 0.03;
 			tween.fadeTo(1);
 			Starling.juggler.add(tween);
+
+			addEventListener(TouchEvent.TOUCH, handleTouch);
 		}
 
 		private function initCrystal():void {
@@ -135,6 +146,81 @@ package view {
 			return null;
 		}
 
+		private function checkDragging(touch : Touch) : void {
+			var crystal1 	: GridVo;
+			var crystal2 	: GridVo;
+			var swapVo		: SwapCrystalVo;
+
+			crystal1 = vo;
+
+			if(touch.globalX >= (_dragStartX + GameConstants.DRAG_DISTANCE) ) {
+				removeEventListener(TouchEvent.TOUCH, handleTouch);
+				crystal2 = getGridById(vo.idX + 1, vo.idY);
+				swapVo			= new SwapCrystalVo();
+				swapVo.dir		= "right";
+				swapVo.data1	= vo;
+				swapVo.data2	= crystal2;
+
+				swapSignal.dispatch(swapVo);
+				trace("swap right");
+			}
+
+			if(touch.globalX <= (_dragStartX - GameConstants.DRAG_DISTANCE) ) {
+				removeEventListener(TouchEvent.TOUCH, handleTouch);
+				crystal2 		= getGridById(vo.idX - 1, vo.idY);
+				swapVo			= new SwapCrystalVo();
+				swapVo.dir		= "left";
+				swapVo.data1	= vo;
+				swapVo.data2	= crystal2;
+
+				swapSignal.dispatch(swapVo);
+				trace("swap left");
+			}
+
+			if(touch.globalY >= (_dragStartY + GameConstants.DRAG_DISTANCE) ) {
+				removeEventListener(TouchEvent.TOUCH, handleTouch);
+				crystal2 = getGridById(vo.idX, vo.idY + 1);
+
+				swapVo			= new SwapCrystalVo();
+				swapVo.dir		= "bottom";
+				swapVo.data1	= vo;
+				swapVo.data2	= crystal2;
+
+				swapSignal.dispatch(swapVo);
+				trace("swap bottom");
+			}
+
+			if(touch.globalY <= (_dragStartY - GameConstants.DRAG_DISTANCE) ) {
+				removeEventListener(TouchEvent.TOUCH, handleTouch);
+				crystal2 = getGridById(vo.idX, vo.idY - 1);
+
+				swapVo			= new SwapCrystalVo();
+				swapVo.dir		= "left";
+				swapVo.data1	= vo;
+				swapVo.data2	= crystal2;
+
+				swapSignal.dispatch(swapVo);
+
+				trace("swap top");
+			}
+		}
+
+		public function destroy():void {
+			removeEventListener(TouchEvent.TOUCH, handleTouch);
+		}
+
+		// events
+
+		private function handleTouch(event:TouchEvent):void {
+			var touch:Touch = event.getTouch(this);
+			if (touch && touch.phase == TouchPhase.BEGAN) {
+				_dragStartX = touch.globalX;
+				_dragStartY = touch.globalY;
+			} else if(touch && touch.phase == TouchPhase.MOVED) {
+				checkDragging(touch);
+			}
+		}
+
 		// getter and setter
 		public function get vo():GridVo {
 			return _vo;
@@ -146,6 +232,14 @@ package view {
 
 		public function set state(value:int):void {
 			_state = value;
+		}
+
+		public function get id():int {
+			return _id;
+		}
+
+		public function set id(value:int):void {
+			_id = value;
 		}
 	}
 }

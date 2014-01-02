@@ -1,6 +1,7 @@
 package view {
 	import model.vo.CrystalVo;
 	import model.vo.GridVo;
+	import model.vo.SwapCrystalVo;
 
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
@@ -10,6 +11,7 @@ package view {
 	import signals.notifications.RestartSignal;
 
 	import signals.notifications.StateUpdateSignal;
+	import signals.notifications.SwapCrystalsSignal;
 
 	import signals.requests.RequestCrystalDataSignal;
 	import signals.response.ResponseCrystalDataSignal;
@@ -37,6 +39,9 @@ package view {
 		[Inject]
 		public var restartSignal			: RestartSignal;
 
+		[Inject]
+		public var swapSignal				: SwapCrystalsSignal;
+
 
 		public function CrystalMediator() {
 		}
@@ -44,8 +49,13 @@ package view {
 		override public function initialize():void {
 			responseCrystalData.add(handleDataResponse);
 			crystalView.requestSignal.add(handleViewRequest);
+			crystalView.swapSignal.add(handleCrystalSwap);
 			stateSignal.add(handleStateUpdate);
 			restartSignal.add(handleRestart);
+		}
+
+		private function handleCrystalSwap(data : SwapCrystalVo):void {
+			swapSignal.dispatch( data );
 		}
 
 		private function handleRestart():void {

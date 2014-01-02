@@ -1,10 +1,12 @@
 package view {
 	import model.vo.GridVo;
+	import model.vo.SwapCrystalVo;
 
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.GameStartSignal;
+	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.RequestGridSignal;
 	import signals.response.ResponseGridSignal;
 
@@ -25,6 +27,9 @@ package view {
 		[Inject]
 		public var responseGridSignal 	: ResponseGridSignal;
 
+		[Inject]
+		public var swapSignal				: SwapCrystalsSignal;
+
 
 
 
@@ -42,6 +47,12 @@ package view {
 		private function handleGameStart():void {
 			gameStartSignal.remove(handleGameStart);
 			requestGridSignal.dispatch();
+			swapSignal.add(handleSwap)
+		}
+
+		private function handleSwap(data : SwapCrystalVo):void {
+			trace("swap crystals visually");
+			gridView.swapCrystals(data.data1, data.data2);
 		}
 
 	}

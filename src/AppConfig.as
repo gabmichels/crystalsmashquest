@@ -2,7 +2,7 @@ package {
 
 	import controller.GameRestartCommand;
 	import controller.GameStartupCommand;
-	import controller.GetCrystalCommand;
+	import controller.SwapCrystalCommand;
 	import controller.GetCrystalDataCommand;
 	import controller.GetGridCommand;
 
@@ -33,7 +33,7 @@ package {
 	import signals.notifications.StateUpdateSignal;
 	import signals.requests.GameStartupSignal;
 	import signals.requests.RequestCrystalDataSignal;
-	import signals.requests.RequestCrystalsSignal;
+	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.RequestGridSignal;
 	import signals.response.ResponseCrystalDataSignal;
 	import signals.response.ResponseCrystalsSignal;
@@ -83,7 +83,7 @@ package {
 			commandMap.map( GameStartupSignal).toCommand(GameStartupCommand);
 			commandMap.map( RestartSignal).toCommand(GameRestartCommand);
 			commandMap.map( RequestGridSignal).toCommand(GetGridCommand);
-			commandMap.map( RequestCrystalsSignal).toCommand(GetCrystalCommand);
+			commandMap.map( SwapCrystalsSignal).toCommand(SwapCrystalCommand);
 			commandMap.map( RequestCrystalDataSignal).toCommand(GetCrystalDataCommand);
 
 			// Map independent notification signals.

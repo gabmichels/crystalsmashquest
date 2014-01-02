@@ -6,6 +6,7 @@ package {
 		public static const GRID_CELL_SIZE 		: int = 43;
 		public static const GRID_XPOS	 		: int = 330;
 		public static const GRID_YPOS	 		: int = 100;
+		public static const DRAG_DISTANCE		: int = 15;
 
 		// game states
 		public static const STATE_APP_INIT			: int = 0;

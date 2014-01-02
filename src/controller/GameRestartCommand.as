@@ -15,7 +15,7 @@ package controller {
 		[Inject]
 		public var gameModel : GameModel;
 
-		public function execute() {
+		public function execute() : void {
 			gridService.resetColors();
 		}
 	}
