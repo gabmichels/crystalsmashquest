@@ -36,21 +36,21 @@ package view {
 			requestSignal.dispatch();
 		}
 
-		public function init(grid : Vector.<GridVo>, crystals : Vector.<CrystalVo>, state : int) : void {
-			_state 			= state;
-			_gridData 		= grid;
-			_crystalData 	= crystals;
+		public function init(grid : Vector.<GridVo>, crystals : Vector.<CrystalVo> = null, state : int = NaN) : void {
+			while(numChildren > 0) removeChildAt(0); // remove old crystal
+			this.alpha 			= 0;	// set alpha to zero for fade in
+
+			if(!(isNaN(state)))
+				_state 			= state;
+
+			if(crystals != null)
+				_crystalData 	= crystals;
+
+			_gridData 			= grid;
 
 			initCrystal();
 		}
 
-		public function reset() : void {
-			while(numChildren > 0) removeChildAt(0); // remove old crystal
-
-			this.alpha = 0;	// set alpha to zero for fade in
-
-			initCrystal(); // add new crystal
-		}
 
 		private function addCrystalTexture(texture : Texture) : void {
 

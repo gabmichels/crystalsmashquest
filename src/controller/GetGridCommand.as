@@ -11,7 +11,7 @@ package controller {
 		[Inject]
 		public var response : ResponseGridSignal;
 
-		public function execute() {
+		public function execute() : void{
 			response.dispatch(gridModel.grid);
 		}
 	}

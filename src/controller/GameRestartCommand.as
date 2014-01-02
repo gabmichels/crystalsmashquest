@@ -4,7 +4,7 @@ package controller {
 	import service.ICrystalImageService;
 	import service.IGridService;
 
-	public class GameStartupCommand {
+	public class GameRestartCommand {
 
 		[Inject]
 		public var crystalLoader : ICrystalImageService;
@@ -15,11 +15,8 @@ package controller {
 		[Inject]
 		public var gameModel : GameModel;
 
-		public function execute() : void {
-			trace("load images command")
-			crystalLoader.loadImages();
-			gridService.initGrid();
-			gameModel.state = GameConstants.STATE_GAME_INIT;
+		public function execute() {
+			gridService.resetColors();
 		}
 	}
 }

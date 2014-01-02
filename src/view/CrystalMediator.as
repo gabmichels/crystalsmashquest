@@ -5,6 +5,8 @@ package view {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
+	import signals.notifications.GridUpdateSignal;
+
 	import signals.notifications.RestartSignal;
 
 	import signals.notifications.StateUpdateSignal;
@@ -30,6 +32,9 @@ package view {
 		public var stateSignal				: StateUpdateSignal;
 
 		[Inject]
+		public var gridUpdateSignal			: GridUpdateSignal;
+
+		[Inject]
 		public var restartSignal			: RestartSignal;
 
 
@@ -44,7 +49,12 @@ package view {
 		}
 
 		private function handleRestart():void {
-			crystalView.reset();
+			gridUpdateSignal.add(handleGridUpdate);
+		}
+
+		private function handleGridUpdate(grid : Vector.<GridVo>):void {
+			gridUpdateSignal.remove(handleGridUpdate);
+			crystalView.init(grid);
 		}
 
 		private function handleStateUpdate(newState : int):void {
@@ -55,7 +65,7 @@ package view {
 		 	requestCrystalData.dispatch();
 		}
 
-		private function handleDataResponse(grid : Vector.<GridVo>, crystals : Vector.<CrystalVo>, state : int) {
+		private function handleDataResponse(grid : Vector.<GridVo>, crystals : Vector.<CrystalVo>, state : int) : void {
 			responseCrystalData.remove(handleDataResponse);
 			crystalView.init(grid, crystals, state);
 		}

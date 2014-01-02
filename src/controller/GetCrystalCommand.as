@@ -6,7 +6,7 @@ package controller {
 		[Inject]
 		public var crystalModel : CrystalModel;
 
-		public function execute() {
+		public function execute() : void {
 		}
 	}
 }

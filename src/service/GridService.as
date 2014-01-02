@@ -22,5 +22,17 @@ package service {
 
 			gridModel.grid = grid;
 		}
+
+		public function resetColors() : void {
+			var grid 		: Vector.<GridVo> 	= gridModel.grid;
+			var cell 		: GridVo;
+
+			for(var i : int = 0; i < grid.length; i++) {
+				cell 		= grid[i];
+				cell.color 	= null;
+			}
+
+			gridModel.grid = grid;
+		}
 	}
 }

@@ -1,5 +1,6 @@
 package {
 
+	import controller.GameRestartCommand;
 	import controller.GameStartupCommand;
 	import controller.GetCrystalCommand;
 	import controller.GetCrystalDataCommand;
@@ -27,6 +28,7 @@ package {
 
 	import signals.notifications.CrystalsLoadedSignal;
 	import signals.notifications.GameStartSignal;
+	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.RestartSignal;
 	import signals.notifications.StateUpdateSignal;
 	import signals.requests.GameStartupSignal;
@@ -79,6 +81,7 @@ package {
 
 			// Map commands.
 			commandMap.map( GameStartupSignal).toCommand(GameStartupCommand);
+			commandMap.map( RestartSignal).toCommand(GameRestartCommand);
 			commandMap.map( RequestGridSignal).toCommand(GetGridCommand);
 			commandMap.map( RequestCrystalsSignal).toCommand(GetCrystalCommand);
 			commandMap.map( RequestCrystalDataSignal).toCommand(GetCrystalDataCommand);
@@ -86,11 +89,11 @@ package {
 			// Map independent notification signals.
 			injector.map( CrystalsLoadedSignal ).asSingleton();
 			injector.map( GameStartSignal ).asSingleton();
-			injector.map( RestartSignal ).asSingleton();
 			injector.map( ResponseGridSignal ).asSingleton();
 			injector.map( ResponseCrystalsSignal ).asSingleton();
 			injector.map( ResponseCrystalDataSignal ).asSingleton();
 			injector.map( StateUpdateSignal ).asSingleton();
+			injector.map( GridUpdateSignal ).asSingleton();
 
 			// Map views.
 			mediatorMap.map( GameView ).toMediator( GameMediator );

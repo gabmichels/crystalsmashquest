@@ -21,7 +21,7 @@ package controller {
 		[Inject]
 		public var response 	: ResponseCrystalDataSignal;
 
-		public function execute() {
+		public function execute() : void {
 			var gridData 		: Vector.<GridVo> 		= gridModel.grid;
 			var crystalData 	: Vector.<CrystalVo> 	= crystalModel.crystals; // TODO pass all top, left, right, bottom crystals
 			var gameState 		: int 					= gameModel.state;
