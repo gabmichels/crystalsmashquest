@@ -5,28 +5,28 @@
       <configuration name="crystalsmashquest" pure-as="true" main-class="Application" output-file="crystalsmashquest.swf" output-folder="$MODULE_DIR$/bin">
         <dependencies target-player="11.9">
           <entries>
-            <entry library-id="2ea0bff2-92f7-4920-b9fd-e30c117f86e6">
+            <entry library-id="dbb70e10-23b1-4bf9-9647-624f8d1cfa16">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="7cd26eef-dee3-4cdd-aceb-72547a8bee99">
+            <entry library-id="546791bb-f0e1-47b1-b008-bd5d19e82f92">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="42da2bd8-8a37-4799-b7d4-86f8a5fd4573">
+            <entry library-id="7ed8979b-83e3-4061-abbd-a6e6173c495c">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="8c068312-70a4-434a-bc0f-c4a0c900488a">
+            <entry library-id="3829d5e2-9594-47fb-af6f-5b6fd80ebb24">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="56180798-fe2b-4245-a7c4-aeef46c44fa1">
+            <entry library-id="f018187c-8a8c-41ea-901f-b3db5be7fcc4">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="ff7ec656-f02e-4b5d-a95e-9c61ba40213a">
+            <entry library-id="9c1ced8a-452a-4bb3-b21c-ebf791902c13">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="348a04f5-32cf-4867-b1c5-c454857a51f6">
+            <entry library-id="a47d6461-4f6a-4ef5-a7e0-53118f5ff6a7">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="7b955eb3-aa8a-4686-8576-535ae15b5021">
+            <entry library-id="921cfd9f-2597-41a0-896a-56be0f5935d7">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -51,9 +51,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="2ea0bff2-92f7-4920-b9fd-e30c117f86e6" />
+        <properties id="dbb70e10-23b1-4bf9-9647-624f8d1cfa16" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../flash/frameworks/Starling-Framework/starling/src" />
+          <root url="jar://$MODULE_DIR$/../../frameworks/robotlegs-framework-v2.1.0/bin/robotlegs-framework-v2.1.0.swc!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -61,9 +61,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="7cd26eef-dee3-4cdd-aceb-72547a8bee99" />
+        <properties id="546791bb-f0e1-47b1-b008-bd5d19e82f92" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../flash/frameworks/as3-signals/src" />
+          <root url="file://$MODULE_DIR$/../../frameworks/as3-signals/src" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -71,9 +71,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="42da2bd8-8a37-4799-b7d4-86f8a5fd4573" />
+        <properties id="7ed8979b-83e3-4061-abbd-a6e6173c495c" />
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../flash/frameworks/robotlegs-framework-v2.1.0/bin/robotlegs-framework-v2.1.0.swc!/" />
+          <root url="file://$MODULE_DIR$/../../frameworks/feathers/source" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -81,9 +81,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="8c068312-70a4-434a-bc0f-c4a0c900488a" />
+        <properties id="3829d5e2-9594-47fb-af6f-5b6fd80ebb24" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../flash/frameworks/GreenSock-AS3/src" />
+          <root url="jar://$MODULE_DIR$/../../frameworks/greensock-as3/greensock.swc!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -91,9 +91,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="56180798-fe2b-4245-a7c4-aeef46c44fa1" />
+        <properties id="f018187c-8a8c-41ea-901f-b3db5be7fcc4" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../flash/frameworks/rl2-extensions/robotlegs2-starling-viewmap/src" />
+          <root url="file://$MODULE_DIR$/../../frameworks/Starling-Framework/starling/src" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -101,9 +101,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="ff7ec656-f02e-4b5d-a95e-9c61ba40213a" />
+        <properties id="9c1ced8a-452a-4bb3-b21c-ebf791902c13" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../flash/frameworks/rl2-extensions/robotlegs-extensions-SignalCommandMap/src" />
+          <root url="file://$MODULE_DIR$/../../frameworks/rl2-extentions/robotlegs2-starling-viewmap/src" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -111,9 +111,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="348a04f5-32cf-4867-b1c5-c454857a51f6" />
+        <properties id="a47d6461-4f6a-4ef5-a7e0-53118f5ff6a7" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../flash/frameworks/feathers/source" />
+          <root url="file://$MODULE_DIR$/../../frameworks/rl2-extentions/robotlegs-extensions-SignalCommandMap/src" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -121,9 +121,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="7b955eb3-aa8a-4686-8576-535ae15b5021" />
+        <properties id="921cfd9f-2597-41a0-896a-56be0f5935d7" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../flash/frameworks/feathers/themes/AeonDesktopTheme/source" />
+          <root url="file://$MODULE_DIR$/../../frameworks/feathers/themes/AeonDesktopTheme/source" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
