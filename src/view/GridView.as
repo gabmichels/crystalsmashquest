@@ -32,12 +32,19 @@ package view {
 			var tween1		: Tween 		= new Tween(crystal1, 0.2, Transitions.EASE_IN);
 			var tween2		: Tween 		= new Tween(crystal2, 0.2, Transitions.EASE_IN);
 
+			tween1.onComplete 				= handleTweenComplete;
+			tween1.onCompleteArgs 			= [crystal1];
+
 			tween1.moveTo(data2.x, data2.y);
 			tween2.moveTo(data1.x, data1.y);
 
 			Starling.juggler.add(tween1);
 			Starling.juggler.add(tween2);
 
+		}
+
+		private function handleTweenComplete(target : CrystalView):void {
+			target.addListener();
 		}
 
 		private function getCrystalById(id : int) : CrystalView {

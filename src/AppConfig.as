@@ -2,9 +2,9 @@ package {
 
 	import controller.GameRestartCommand;
 	import controller.GameStartupCommand;
-	import controller.SwapCrystalCommand;
 	import controller.GetCrystalDataCommand;
 	import controller.GetGridCommand;
+	import controller.SwapCrystalCommand;
 	import controller.UpdateGridObjectCommand;
 
 	import flash.events.IEventDispatcher;
@@ -28,20 +28,18 @@ package {
 	import service.IGridService;
 
 	import signals.notifications.CrystalUpdateSignal;
-
 	import signals.notifications.CrystalsLoadedSignal;
 	import signals.notifications.GameStartSignal;
-	import signals.requests.RequestGridObjectUpdateSignal;
 	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.RestartSignal;
 	import signals.notifications.StateUpdateSignal;
+	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.GameStartupSignal;
 	import signals.requests.RequestCrystalDataSignal;
-	import signals.notifications.SwapCrystalsSignal;
+	import signals.requests.RequestGridObjectUpdateSignal;
 	import signals.requests.RequestGridSignal;
 	import signals.response.ResponseCrystalDataSignal;
 	import signals.response.ResponseCrystalsSignal;
-	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.response.ResponseGridSignal;
 
 	import view.BackgroundMediator;
@@ -98,7 +96,6 @@ package {
 			injector.map( ResponseGridSignal ).asSingleton();
 			injector.map( ResponseCrystalsSignal ).asSingleton();
 			injector.map( ResponseCrystalDataSignal ).asSingleton();
-			injector.map( ResponseGridObjectUpdateSignal ).asSingleton();
 			injector.map( StateUpdateSignal ).asSingleton();
 			injector.map( GridUpdateSignal ).asSingleton();
 			injector.map( CrystalUpdateSignal ).asSingleton();

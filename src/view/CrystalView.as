@@ -206,10 +206,15 @@ package view {
 		}
 
 		public function update(newVo : GridVo) : void {
-			if(newVo.crystalID == vo.crystalID) {
+			if(newVo.crystalID == id) {
 				vo = newVo;
 			}
 
+		}
+
+		public function addListener() : void {
+			if(!(hasEventListener(TouchEvent.TOUCH)))
+				addEventListener(TouchEvent.TOUCH, handleTouch);
 		}
 
 		public function destroy():void {

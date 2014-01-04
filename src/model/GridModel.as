@@ -2,14 +2,11 @@ package model {
 	import model.vo.GridVo;
 
 	import signals.notifications.GridUpdateSignal;
-	import signals.response.ResponseGridObjectUpdateSignal;
 
 	public class GridModel {
 
 		[Inject]
 		public var gridUpdateSignal : GridUpdateSignal;
-		[Inject]
-		public var updateSignal	: ResponseGridObjectUpdateSignal;
 
 		private var _grid : Vector.<GridVo>;
 
@@ -22,7 +19,7 @@ package model {
 			gridUpdateSignal.dispatch(_grid);
 		}
 
-		public function updateGridObject(index : int, vo : GridVo) {
+		public function updateGridObject(index : int, vo : GridVo) : void {
 			_grid[index] = vo;
 		}
 	}
