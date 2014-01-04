@@ -1,6 +1,5 @@
 package controller {
 	import model.vo.GridUpdateVo;
-	import model.vo.SwapCrystalVo;
 
 	import service.IGridService;
 

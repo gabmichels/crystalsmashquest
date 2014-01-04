@@ -150,45 +150,57 @@ package view {
 			var swapVo		: SwapCrystalVo;
 
 			if(touch.globalX >= (_dragStartX + GameConstants.DRAG_DISTANCE) ) {
-				removeEventListener(TouchEvent.TOUCH, handleTouch);
 				crystal2 = getGridById(vo.idX + 1, vo.idY);
-				swapVo			= new SwapCrystalVo();
-				swapVo.data1	= vo;
-				swapVo.data2	= crystal2;
 
-				swapSignal.dispatch(swapVo);
+				if(crystal2) {
+					removeEventListener(TouchEvent.TOUCH, handleTouch);
+					swapVo			= new SwapCrystalVo();
+					swapVo.data1	= vo;
+					swapVo.data2	= crystal2;
+
+					swapSignal.dispatch(swapVo);
+				}
 			}
 
 			if(touch.globalX <= (_dragStartX - GameConstants.DRAG_DISTANCE) ) {
-				removeEventListener(TouchEvent.TOUCH, handleTouch);
 				crystal2 		= getGridById(vo.idX - 1, vo.idY);
-				swapVo			= new SwapCrystalVo();
-				swapVo.data1	= vo;
-				swapVo.data2	= crystal2;
 
-				swapSignal.dispatch(swapVo);
+				if(crystal2) {
+					removeEventListener(TouchEvent.TOUCH, handleTouch);
+
+					swapVo			= new SwapCrystalVo();
+					swapVo.data1	= vo;
+					swapVo.data2	= crystal2;
+
+					swapSignal.dispatch(swapVo);
+				}
 			}
 
 			if(touch.globalY >= (_dragStartY + GameConstants.DRAG_DISTANCE) ) {
-				removeEventListener(TouchEvent.TOUCH, handleTouch);
 				crystal2 = getGridById(vo.idX, vo.idY + 1);
 
-				swapVo			= new SwapCrystalVo();
-				swapVo.data1	= vo;
-				swapVo.data2	= crystal2;
+				if(crystal2) {
+					removeEventListener(TouchEvent.TOUCH, handleTouch);
 
-				swapSignal.dispatch(swapVo);
+					swapVo			= new SwapCrystalVo();
+					swapVo.data1	= vo;
+					swapVo.data2	= crystal2;
+
+					swapSignal.dispatch(swapVo);
+				}
 			}
 
 			if(touch.globalY <= (_dragStartY - GameConstants.DRAG_DISTANCE) ) {
-				removeEventListener(TouchEvent.TOUCH, handleTouch);
 				crystal2 = getGridById(vo.idX, vo.idY - 1);
+				if(crystal2) {
+					removeEventListener(TouchEvent.TOUCH, handleTouch);
 
-				swapVo			= new SwapCrystalVo();
-				swapVo.data1	= vo;
-				swapVo.data2	= crystal2;
+					swapVo			= new SwapCrystalVo();
+					swapVo.data1	= vo;
+					swapVo.data2	= crystal2;
 
-				swapSignal.dispatch(swapVo);
+					swapSignal.dispatch(swapVo);
+				}
 			}
 		}
 

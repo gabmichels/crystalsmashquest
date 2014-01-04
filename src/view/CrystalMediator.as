@@ -47,10 +47,10 @@ package view {
 		public var swapSignal				: SwapCrystalsSignal;
 
 		[Inject]
-		public var gridObjectUpdate			: ResponseGridObjectUpdateSignal;
+		public var responseGridObjectUpdate	: ResponseGridObjectUpdateSignal;
 
 		[Inject]
-		public var gridObjectUpdateSignal	: RequestGridObjectUpdateSignal;
+		public var requestGridObjectUpdate	: RequestGridObjectUpdateSignal;
 
 		public function CrystalMediator() {
 		}
@@ -59,22 +59,22 @@ package view {
 			responseCrystalData.add(handleDataResponse);
 			crystalView.requestSignal.add(handleViewRequest);
 			crystalView.swapSignal.add(handleCrystalSwap);
-			crystalView.updateGridRefSignal.add(handleGridObjectUpdate);
+			crystalView.updateGridRefSignal.add(handleGridObjectUpdateRequest);
 			stateSignal.add(handleStateUpdate);
 			restartSignal.add(handleRestart);
-			gridObjectUpdateSignal.add(handleCrystalUpdate);
+			responseGridObjectUpdate.add(handleGridObjectUpdateResponse);
 			gridUpdateSignal.add(handleGridUpdate);
 		}
 
-		private function handleGridObjectUpdate(vo : GridUpdateVo):void {
-			gridObjectUpdateSignal.dispatch(vo)
+		private function handleGridObjectUpdateRequest(vo : GridUpdateVo):void {
+			requestGridObjectUpdate.dispatch(vo)
 		}
 
 		private function handleGridUpdate(grid : Vector.<GridVo>):void {
 			crystalView.gridData = grid;
 		}
 
-		private function handleCrystalUpdate(newVo : GridVo):void {
+		private function handleGridObjectUpdateResponse(newVo : GridVo):void {
 			crystalView.update(newVo);
 		}
 
