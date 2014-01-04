@@ -27,13 +27,13 @@ package view {
 		}
 
 		public function swapCrystals(data1 : GridVo, data2 : GridVo) : void {
-			var crystal1 : CrystalView = getCrystalById(data1.crystalID);
-			var crystal2 : CrystalView = getCrystalById(data2.crystalID);
+			var crystal1 	: CrystalView 	= getCrystalById(data1.crystalID);
+			var crystal2 	: CrystalView 	= getCrystalById(data2.crystalID);
+			var tween1		: Tween 		= new Tween(crystal1, 0.2, Transitions.EASE_IN);
+			var tween2		: Tween 		= new Tween(crystal2, 0.2, Transitions.EASE_IN);
 
-			var tween1	:Tween 		= new Tween(crystal1, 0.2, Transitions.EASE_IN);
-			var tween2	:Tween 		= new Tween(crystal2, 0.2, Transitions.EASE_IN);
-			tween1.moveTo(crystal2.vo.x, crystal2.vo.y);
-			tween2.moveTo(crystal1.vo.x, crystal1.vo.y);
+			tween1.moveTo(data2.x, data2.y);
+			tween2.moveTo(data1.x, data1.y);
 
 			Starling.juggler.add(tween1);
 			Starling.juggler.add(tween2);
@@ -46,7 +46,6 @@ package view {
 					return _crystals[i];
 				}
 			}
-
 			return null;
 		}
 	}
