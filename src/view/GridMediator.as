@@ -51,7 +51,6 @@ package view {
 		}
 
 		private function handleSwap(data : SwapCrystalVo):void {
-			trace("swap crystals visually");
 			gridView.swapCrystals(data.data1, data.data2);
 		}
 

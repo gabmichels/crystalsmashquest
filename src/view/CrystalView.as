@@ -1,9 +1,6 @@
 package view {
-	import flash.display.Bitmap;
-
 	import model.vo.CrystalVo;
 	import model.vo.GridUpdateVo;
-
 	import model.vo.GridVo;
 	import model.vo.SwapCrystalVo;
 
@@ -149,7 +146,6 @@ package view {
 		}
 
 		private function checkDragging(touch : Touch) : void {
-			var crystal1 	: GridVo;
 			var crystal2 	: GridVo;
 			var swapVo		: SwapCrystalVo;
 
@@ -157,24 +153,20 @@ package view {
 				removeEventListener(TouchEvent.TOUCH, handleTouch);
 				crystal2 = getGridById(vo.idX + 1, vo.idY);
 				swapVo			= new SwapCrystalVo();
-				swapVo.dir		= "right";
 				swapVo.data1	= vo;
 				swapVo.data2	= crystal2;
 
 				swapSignal.dispatch(swapVo);
-				trace("swap right");
 			}
 
 			if(touch.globalX <= (_dragStartX - GameConstants.DRAG_DISTANCE) ) {
 				removeEventListener(TouchEvent.TOUCH, handleTouch);
 				crystal2 		= getGridById(vo.idX - 1, vo.idY);
 				swapVo			= new SwapCrystalVo();
-				swapVo.dir		= "left";
 				swapVo.data1	= vo;
 				swapVo.data2	= crystal2;
 
 				swapSignal.dispatch(swapVo);
-				trace("swap left");
 			}
 
 			if(touch.globalY >= (_dragStartY + GameConstants.DRAG_DISTANCE) ) {
@@ -182,12 +174,10 @@ package view {
 				crystal2 = getGridById(vo.idX, vo.idY + 1);
 
 				swapVo			= new SwapCrystalVo();
-				swapVo.dir		= "bottom";
 				swapVo.data1	= vo;
 				swapVo.data2	= crystal2;
 
 				swapSignal.dispatch(swapVo);
-				trace("swap bottom");
 			}
 
 			if(touch.globalY <= (_dragStartY - GameConstants.DRAG_DISTANCE) ) {
@@ -195,13 +185,10 @@ package view {
 				crystal2 = getGridById(vo.idX, vo.idY - 1);
 
 				swapVo			= new SwapCrystalVo();
-				swapVo.dir		= "left";
 				swapVo.data1	= vo;
 				swapVo.data2	= crystal2;
 
 				swapSignal.dispatch(swapVo);
-
-				trace("swap top");
 			}
 		}
 
