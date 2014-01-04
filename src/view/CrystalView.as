@@ -2,6 +2,7 @@ package view {
 	import flash.display.Bitmap;
 
 	import model.vo.CrystalVo;
+	import model.vo.GridUpdateVo;
 
 	import model.vo.GridVo;
 	import model.vo.SwapCrystalVo;
@@ -21,21 +22,23 @@ package view {
 
 	public class CrystalView extends Sprite
 	{
-		public var requestSignal 	: Signal;
-		public var swapSignal	 	: Signal;
+		public var requestSignal 		: Signal;
+		public var swapSignal	 		: Signal;
+		public var updateGridRefSignal	: Signal;
 
-		private var _vo 			: GridVo;
-		private var _state			: int;
-		private var _gridData		: Vector.<GridVo>;
-		private var _crystalData	: Vector.<CrystalVo>;
-		private var _dragStartX		: Number;
-		private var _dragStartY		: Number;
-		private var _id				: int;
+		private var _vo 				: GridVo;
+		private var _state				: int;
+		private var _gridData			: Vector.<GridVo>;
+		private var _crystalData		: Vector.<CrystalVo>;
+		private var _dragStartX			: Number;
+		private var _dragStartY			: Number;
+		private var _id					: int;
 
 		public function CrystalView(vo : GridVo) {
-			_vo 			= vo;
-			requestSignal 	= new Signal();
-			swapSignal		= new Signal();
+			_vo 					= vo;
+			requestSignal 			= new Signal();
+			swapSignal				= new Signal();
+			updateGridRefSignal		= new Signal();
 
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -81,13 +84,12 @@ package view {
 			var crystals	: Vector.<CrystalVo> = _crystalData;
 
 			if(vo.idX > 2 || vo.idY > 2) {
-
 				crystals = getAddableCrystals(vo);
 			}
 
 			colorNum 	= Math.random() * crystals.length;
 			texture 	= crystals[colorNum].texture;
-			vo.color	= crystals[colorNum].color;
+			updateGridRefSignal.dispatch(new GridUpdateVo(id, crystals[colorNum].color, vo));
 
 			addCrystalTexture(texture);
 
@@ -151,8 +153,6 @@ package view {
 			var crystal2 	: GridVo;
 			var swapVo		: SwapCrystalVo;
 
-			crystal1 = vo;
-
 			if(touch.globalX >= (_dragStartX + GameConstants.DRAG_DISTANCE) ) {
 				removeEventListener(TouchEvent.TOUCH, handleTouch);
 				crystal2 = getGridById(vo.idX + 1, vo.idY);
@@ -205,6 +205,13 @@ package view {
 			}
 		}
 
+		public function update(newVo : GridVo) : void {
+			if(newVo.crystalID == vo.crystalID) {
+				vo = newVo;
+			}
+
+		}
+
 		public function destroy():void {
 			removeEventListener(TouchEvent.TOUCH, handleTouch);
 		}
@@ -240,6 +247,10 @@ package view {
 
 		public function set id(value:int):void {
 			_id = value;
+		}
+
+		public function set gridData(value:Vector.<GridVo>):void {
+			_gridData = value;
 		}
 	}
 }

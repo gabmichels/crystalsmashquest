@@ -1,10 +1,14 @@
 package view {
 	import model.vo.CrystalVo;
+	import model.vo.GridUpdateVo;
 	import model.vo.GridVo;
 	import model.vo.SwapCrystalVo;
 
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
+
+	import signals.notifications.CrystalUpdateSignal;
+	import signals.requests.RequestGridObjectUpdateSignal;
 
 	import signals.notifications.GridUpdateSignal;
 
@@ -42,6 +46,11 @@ package view {
 		[Inject]
 		public var swapSignal				: SwapCrystalsSignal;
 
+		[Inject]
+		public var crystalUpdateSignal		: CrystalUpdateSignal;
+
+		[Inject]
+		public var gridObjectUpdateSignal	: RequestGridObjectUpdateSignal;
 
 		public function CrystalMediator() {
 		}
@@ -50,8 +59,23 @@ package view {
 			responseCrystalData.add(handleDataResponse);
 			crystalView.requestSignal.add(handleViewRequest);
 			crystalView.swapSignal.add(handleCrystalSwap);
+			crystalView.updateGridRefSignal.add(handleGridObjectUpdate);
 			stateSignal.add(handleStateUpdate);
 			restartSignal.add(handleRestart);
+			crystalUpdateSignal.add(handleCrystalUpdate);
+			gridUpdateSignal.add(handleGridUpdate);
+		}
+
+		private function handleGridObjectUpdate(vo : GridUpdateVo):void {
+			gridObjectUpdateSignal.dispatch(vo)
+		}
+
+		private function handleGridUpdate(grid : Vector.<GridVo>):void {
+			crystalView.gridData = grid;
+		}
+
+		private function handleCrystalUpdate(newVo : GridVo):void {
+			crystalView.update(newVo);
 		}
 
 		private function handleCrystalSwap(data : SwapCrystalVo):void {
@@ -59,11 +83,10 @@ package view {
 		}
 
 		private function handleRestart():void {
-			gridUpdateSignal.add(handleGridUpdate);
+			gridUpdateSignal.addOnce(handleRestartGridUpdate);
 		}
 
-		private function handleGridUpdate(grid : Vector.<GridVo>):void {
-			gridUpdateSignal.remove(handleGridUpdate);
+		private function handleRestartGridUpdate(grid : Vector.<GridVo>):void {
 			crystalView.init(grid);
 		}
 

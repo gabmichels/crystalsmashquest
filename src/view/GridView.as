@@ -20,14 +20,15 @@ package view {
 				crystal 	= new CrystalView(gridData);
 				crystal.x 	= gridData.x;
 				crystal.y 	= gridData.y;
+				crystal.id	= i + 1;
 				addChild(crystal);
 				_crystals.push(crystal);
 			}
 		}
 
 		public function swapCrystals(data1 : GridVo, data2 : GridVo) : void {
-			var crystal1 : CrystalView = getCrystalById(data1.idX, data1.idY);
-			var crystal2 : CrystalView = getCrystalById(data2.idX, data2.idY);
+			var crystal1 : CrystalView = getCrystalById(data1.crystalID);
+			var crystal2 : CrystalView = getCrystalById(data2.crystalID);
 
 			var tween1	:Tween 		= new Tween(crystal1, 0.2, Transitions.EASE_IN);
 			var tween2	:Tween 		= new Tween(crystal2, 0.2, Transitions.EASE_IN);
@@ -39,9 +40,9 @@ package view {
 
 		}
 
-		private function getCrystalById(x : int, y : int) : CrystalView {
+		private function getCrystalById(id : int) : CrystalView {
 			for(var i : int = 0; i < _crystals.length; i++) {
-				if(x == _crystals[i].vo.idX && y == _crystals[i].vo.idY) {
+				if(id == _crystals[i].id) {
 					return _crystals[i];
 				}
 			}
