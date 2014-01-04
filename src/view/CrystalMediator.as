@@ -62,7 +62,7 @@ package view {
 			crystalView.updateGridRefSignal.add(handleGridObjectUpdate);
 			stateSignal.add(handleStateUpdate);
 			restartSignal.add(handleRestart);
-			crystalUpdateSignal.add(handleCrystalUpdate);
+			gridObjectUpdateSignal.add(handleCrystalUpdate);
 			gridUpdateSignal.add(handleGridUpdate);
 		}
 
