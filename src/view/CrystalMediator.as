@@ -7,7 +7,7 @@ package view {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
-	import signals.notifications.CrystalUpdateSignal;
+	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.requests.RequestGridObjectUpdateSignal;
 
 	import signals.notifications.GridUpdateSignal;
@@ -47,7 +47,7 @@ package view {
 		public var swapSignal				: SwapCrystalsSignal;
 
 		[Inject]
-		public var crystalUpdateSignal		: CrystalUpdateSignal;
+		public var gridObjectUpdate			: ResponseGridObjectUpdateSignal;
 
 		[Inject]
 		public var gridObjectUpdateSignal	: RequestGridObjectUpdateSignal;

@@ -27,7 +27,7 @@ package {
 	import service.ICrystalImageService;
 	import service.IGridService;
 
-	import signals.notifications.CrystalUpdateSignal;
+	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.notifications.CrystalsLoadedSignal;
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
@@ -98,7 +98,7 @@ package {
 			injector.map( ResponseCrystalDataSignal ).asSingleton();
 			injector.map( StateUpdateSignal ).asSingleton();
 			injector.map( GridUpdateSignal ).asSingleton();
-			injector.map( CrystalUpdateSignal ).asSingleton();
+			injector.map( ResponseGridObjectUpdateSignal ).asSingleton();
 
 			// Map views.
 			mediatorMap.map( GameView ).toMediator( GameMediator );

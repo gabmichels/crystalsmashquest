@@ -3,7 +3,7 @@ package service {
 	import model.vo.GridUpdateVo;
 	import model.vo.GridVo;
 
-	import signals.notifications.CrystalUpdateSignal;
+	import signals.response.ResponseGridObjectUpdateSignal;
 
 	public class GridService implements IGridService{
 
@@ -11,7 +11,7 @@ package service {
 		public var gridModel : GridModel;
 
 		[Inject]
-		public var crystalUpdate : CrystalUpdateSignal;
+		public var gridObjectUpdate : ResponseGridObjectUpdateSignal;
 
 		public function initGrid():void {
 			var totalCells 	: int 				= GameConstants.GRID_ROWS * GameConstants.GRID_COLS;
@@ -68,7 +68,7 @@ package service {
 			var updatedVo 	: GridVo 			= vo.gridVo;
 			updatedVo.crystalID 				= vo.crystalID;
 			updatedVo.color 					= vo.color;
-			crystalUpdate.dispatch(updatedVo);
+			gridObjectUpdate.dispatch(updatedVo);
 
 			for(var i : int = 0; i < grid.length; i++) {
 				currentVo = grid[i];
