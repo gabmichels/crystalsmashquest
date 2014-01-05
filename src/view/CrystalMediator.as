@@ -1,4 +1,5 @@
 package view {
+	import model.vo.CollapseUpdateVo;
 	import model.vo.CrystalVo;
 	import model.vo.GridUpdateVo;
 	import model.vo.GridVo;
@@ -8,6 +9,7 @@ package view {
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.CombinationSignal;
+	import signals.requests.RequestCollapseUpdateSignal;
 
 	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.requests.RequestGridObjectUpdateSignal;
@@ -57,6 +59,9 @@ package view {
 		[Inject]
 		public var combinationSignal		: CombinationSignal;
 
+		[Inject]
+		public var requestCollapseUpdate	: RequestCollapseUpdateSignal;
+
 		public function CrystalMediator() {
 		}
 
@@ -65,11 +70,16 @@ package view {
 			crystalView.swapSignal.add(handleCrystalSwap);
 			crystalView.updateGridRefSignal.add(handleGridObjectUpdateRequest);
 			crystalView.combinationSignal.add(handleCombinationSignal)
+			crystalView.requestCollapseUpdate.add(handleCollapseUpdateRequest);
 			responseCrystalData.add(handleDataResponse);
 			stateSignal.add(handleStateUpdate);
 			restartSignal.add(handleRestart);
 			responseGridObjectUpdate.add(handleGridObjectUpdateResponse);
 			gridUpdateSignal.add(handleGridUpdate);
+		}
+
+		private function handleCollapseUpdateRequest(vo : CollapseUpdateVo):void {
+			requestCollapseUpdate.dispatch(vo);
 		}
 
 		private function handleCombinationSignal(combo : Vector.<GridVo>):void {

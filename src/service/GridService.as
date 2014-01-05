@@ -1,5 +1,6 @@
 package service {
 	import model.GridModel;
+	import model.vo.CollapseUpdateVo;
 	import model.vo.GridUpdateVo;
 	import model.vo.GridVo;
 
@@ -78,8 +79,23 @@ package service {
 			}
 		}
 
-		public function crushCrystals(data:Vector.<GridVo>):void {
-			trace("get crystals");
+		public function collapseUpdate(data:CollapseUpdateVo):void {
+			var vo : GridVo 			= getGridById(data.idx, data.idy);
+			vo.crystalID 				= data.id;
+			vo.color 					= data.color;
+			gridObjectUpdate.dispatch(vo);
+		}
+
+		private function getGridById(x : int, y : int) : GridVo {
+			var grid 		: Vector.<GridVo> 	= gridModel.grid;
+
+			for(var i : int = 0; i < grid.length; i++) {
+				if(grid[i].idX == x && grid[i].idY == y) {
+					return grid[i];
+				}
+			}
+
+			return null;
 		}
 	}
 }

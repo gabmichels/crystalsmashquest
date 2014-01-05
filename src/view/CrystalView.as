@@ -1,4 +1,5 @@
 package view {
+	import model.vo.CollapseUpdateVo;
 	import model.vo.CrystalVo;
 	import model.vo.GridUpdateVo;
 	import model.vo.GridVo;
@@ -23,6 +24,7 @@ package view {
 		public var swapSignal	 		: Signal;
 		public var updateGridRefSignal	: Signal;
 		public var combinationSignal	: Signal;
+		public var requestCollapseUpdate: Signal;
 
 		private var _vo 				: GridVo;
 		private var _state				: int;
@@ -33,11 +35,12 @@ package view {
 		private var _id					: int;
 
 		public function CrystalView(vo : GridVo) {
-			_vo 					= vo;
-			requestSignal 			= new Signal();
-			swapSignal				= new Signal();
-			updateGridRefSignal		= new Signal();
-			combinationSignal		= new Signal();
+			_vo 						= vo;
+			requestSignal 				= new Signal();
+			swapSignal					= new Signal();
+			updateGridRefSignal			= new Signal();
+			combinationSignal			= new Signal();
+			requestCollapseUpdate		= new Signal();
 
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -301,6 +304,8 @@ package view {
 		public function collapse(collapseCount:int):void {
 			var tween : Tween = new Tween(this, 0.5, Transitions.EASE_OUT_BOUNCE);
 			tween.moveTo(vo.x, vo.y + collapseCount * GameConstants.GRID_CELL_SIZE);
+
+			requestCollapseUpdate.dispatch(new CollapseUpdateVo(id, vo.color, vo.idX, vo.idY + collapseCount));
 
 			Starling.juggler.add(tween);
 		}
