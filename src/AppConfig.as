@@ -1,5 +1,6 @@
 package {
 
+	import controller.CrushCrystalCommand;
 	import controller.GameRestartCommand;
 	import controller.GameStartupCommand;
 	import controller.GetCrystalDataCommand;
@@ -26,6 +27,8 @@ package {
 	import service.GridService;
 	import service.ICrystalImageService;
 	import service.IGridService;
+
+	import signals.notifications.CombinationSignal;
 
 	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.notifications.CrystalsLoadedSignal;
@@ -89,6 +92,7 @@ package {
 			commandMap.map( SwapCrystalsSignal).toCommand(SwapCrystalCommand);
 			commandMap.map( RequestCrystalDataSignal).toCommand(GetCrystalDataCommand);
 			commandMap.map( RequestGridObjectUpdateSignal).toCommand(UpdateGridObjectCommand);
+			commandMap.map( CombinationSignal).toCommand(CrushCrystalCommand);
 
 			// Map independent notification signals.
 			injector.map( CrystalsLoadedSignal ).asSingleton();

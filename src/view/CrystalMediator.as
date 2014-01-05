@@ -7,6 +7,8 @@ package view {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
+	import signals.notifications.CombinationSignal;
+
 	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.requests.RequestGridObjectUpdateSignal;
 
@@ -52,18 +54,26 @@ package view {
 		[Inject]
 		public var requestGridObjectUpdate	: RequestGridObjectUpdateSignal;
 
+		[Inject]
+		public var combinationSignal		: CombinationSignal;
+
 		public function CrystalMediator() {
 		}
 
 		override public function initialize():void {
-			responseCrystalData.add(handleDataResponse);
 			crystalView.requestSignal.add(handleViewRequest);
 			crystalView.swapSignal.add(handleCrystalSwap);
 			crystalView.updateGridRefSignal.add(handleGridObjectUpdateRequest);
+			crystalView.combinationSignal.add(handleCombinationSignal)
+			responseCrystalData.add(handleDataResponse);
 			stateSignal.add(handleStateUpdate);
 			restartSignal.add(handleRestart);
 			responseGridObjectUpdate.add(handleGridObjectUpdateResponse);
 			gridUpdateSignal.add(handleGridUpdate);
+		}
+
+		private function handleCombinationSignal(combo : Vector.<GridVo>):void {
+			combinationSignal.dispatch(combo);
 		}
 
 		private function handleGridObjectUpdateRequest(vo : GridUpdateVo):void {

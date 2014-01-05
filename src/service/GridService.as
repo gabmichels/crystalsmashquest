@@ -78,5 +78,8 @@ package service {
 			}
 		}
 
+		public function crushCrystals(data:Vector.<GridVo>):void {
+			trace("get crystals");
+		}
 	}
 }

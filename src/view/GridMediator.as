@@ -5,6 +5,8 @@ package view {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
+	import signals.notifications.CombinationSignal;
+
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.RequestGridSignal;
@@ -28,8 +30,10 @@ package view {
 		public var responseGridSignal 	: ResponseGridSignal;
 
 		[Inject]
-		public var swapSignal				: SwapCrystalsSignal;
+		public var swapSignal			: SwapCrystalsSignal;
 
+		[Inject]
+		public var combinationSignal	: CombinationSignal;
 
 
 
@@ -37,6 +41,11 @@ package view {
 
 			gameStartSignal.add(handleGameStart);
 			responseGridSignal.add(handleGridResponse);
+			combinationSignal.add(handleCombination)
+		}
+
+		private function handleCombination(data : Vector.<GridVo>):void {
+			gridView.crushCrystals(data);
 		}
 
 		private function handleGridResponse(data : Vector.<GridVo>):void {

@@ -22,6 +22,7 @@ package view {
 		public var requestSignal 		: Signal;
 		public var swapSignal	 		: Signal;
 		public var updateGridRefSignal	: Signal;
+		public var combinationSignal	: Signal;
 
 		private var _vo 				: GridVo;
 		private var _state				: int;
@@ -36,6 +37,7 @@ package view {
 			requestSignal 			= new Signal();
 			swapSignal				= new Signal();
 			updateGridRefSignal		= new Signal();
+			combinationSignal		= new Signal();
 
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -65,7 +67,8 @@ package view {
 
 			var img		:Image 		= new Image(texture);
 			var tween	:Tween 		= new Tween(this, 0.5, Transitions.LINEAR);
-
+			img.pivotX 				= int(img.width / 2);
+			img.pivotY 				= int(img.height / 2);
 			addChild(img);
 
 			tween.delay 			= (_vo.idX + _vo.idY) * 0.03;
@@ -134,7 +137,63 @@ package view {
 			return availableColors;
 		}
 
-		public function getGridById(x : int, y : int) : GridVo {
+		public function checkCombination() : void {
+
+			var horizontalList 	: Vector.<GridVo> = getList(GameConstants.HORIZONTAL);
+			var verticalList 	: Vector.<GridVo> = getList(GameConstants.VERTICAL);
+
+			var vCombo 			: Vector.<GridVo> = checkListCombination(verticalList);
+			var hCombo 			: Vector.<GridVo> = checkListCombination(horizontalList);
+			var mergedCombo 	: Vector.<GridVo>;
+
+			if(hCombo && vCombo) {
+				mergedCombo = mergeCombinations(vCombo, hCombo);
+				combinationSignal.dispatch(mergedCombo);
+			} else if(hCombo && !vCombo) {
+				combinationSignal.dispatch(hCombo);
+			} else if(!hCombo && vCombo) {
+				combinationSignal.dispatch(vCombo);
+			}
+
+		}
+
+		private function mergeCombinations(vCombo:Vector.<GridVo>, hCombo:Vector.<GridVo>):Vector.<GridVo> {
+			var merged : Vector.<GridVo> = vCombo.concat(hCombo);
+
+			var lastVoPos : int = merged.lastIndexOf(vo);
+
+			merged.splice(lastVoPos,1);
+
+			return merged;
+		}
+
+		private function checkListCombination(list:Vector.<GridVo>):Vector.<GridVo> {
+			var currentVo 		: GridVo;
+			var combination 	: Vector.<GridVo> = new <GridVo>[];
+			var rest			: int = list.length;
+
+			for(var i : int = 0; i < list.length; i++) {
+				currentVo = list[i];
+				if(currentVo) {
+					if(currentVo.color == vo.color && (rest + combination.length) >= GameConstants.MINIMUM_COMBINATION_COUNT) {
+						combination.push(currentVo);
+					} else if(currentVo.color != vo.color && combination.length >= GameConstants.MINIMUM_COMBINATION_COUNT && combination.indexOf(vo) != -1) {
+						break;
+					} else if(currentVo.color != vo.color && combination.length < GameConstants.MINIMUM_COMBINATION_COUNT && rest >= GameConstants.MINIMUM_COMBINATION_COUNT) {
+						combination = new <GridVo>[];
+					}
+				}
+				rest--;
+			}
+
+			if(combination.length >= GameConstants.MINIMUM_COMBINATION_COUNT) {
+				return combination;
+			} else {
+				return null;
+			}
+		}
+
+		private function getGridById(x : int, y : int) : GridVo {
 
 			for(var i : int = 0; i < _gridData.length; i++) {
 				if(_gridData[i].idX == x && _gridData[i].idY == y) {
@@ -143,6 +202,25 @@ package view {
 			}
 
 			return null;
+		}
+
+		private function getList(direction : String) : Vector.<GridVo> {
+			var currentVo 	: GridVo;
+			var list 		: Vector.<GridVo> = new <GridVo>[];
+
+			for(var i : int = 0; i < _gridData.length; i++) {
+				currentVo = _gridData[i];
+
+				if(currentVo.idX == vo.idX && direction == GameConstants.HORIZONTAL) {
+					list.push(currentVo);
+				}
+
+				if(currentVo.idY == vo.idY && direction == GameConstants.VERTICAL) {
+					list.push(currentVo);
+				}
+			}
+
+			return list;
 		}
 
 		private function checkDragging(touch : Touch) : void {
@@ -208,7 +286,16 @@ package view {
 			if(newVo.crystalID == id) {
 				vo = newVo;
 			}
+		}
 
+		public function crush():void {
+			var tween : Tween = new Tween(this, 0.2, Transitions.EASE_IN);
+			tween.fadeTo(0);
+			tween.scaleTo(0);
+
+			Starling.juggler.add(tween);
+			destroy();
+			// TODO add particles
 		}
 
 		public function addListener() : void {
@@ -256,5 +343,6 @@ package view {
 		public function set gridData(value:Vector.<GridVo>):void {
 			_gridData = value;
 		}
+
 	}
 }

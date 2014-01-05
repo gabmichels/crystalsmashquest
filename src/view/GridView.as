@@ -35,6 +35,11 @@ package view {
 			tween1.onComplete 				= handleTweenComplete;
 			tween1.onCompleteArgs 			= [crystal1];
 
+			tween2.onComplete 				= handleTweenComplete;
+			tween2.onCompleteArgs 			= [crystal2];
+
+
+
 			tween1.moveTo(data2.x, data2.y);
 			tween2.moveTo(data1.x, data1.y);
 
@@ -44,7 +49,8 @@ package view {
 		}
 
 		private function handleTweenComplete(target : CrystalView):void {
-			target.addListener();
+			target.checkCombination();
+//			target.addListener();
 		}
 
 		private function getCrystalById(id : int) : CrystalView {
@@ -54,6 +60,15 @@ package view {
 				}
 			}
 			return null;
+		}
+
+		public function crushCrystals(data:Vector.<GridVo>):void {
+			var crystal : CrystalView;
+
+			for(var i : int = 0; i < data.length; i++) {
+				crystal = getCrystalById(data[i].crystalID);
+				crystal.crush();
+			}
 		}
 	}
 }
