@@ -298,6 +298,13 @@ package view {
 			// TODO add particles
 		}
 
+		public function collapse(collapseCount:int):void {
+			var tween : Tween = new Tween(this, 0.5, Transitions.EASE_OUT_BOUNCE);
+			tween.moveTo(vo.x, vo.y + collapseCount * GameConstants.GRID_CELL_SIZE);
+
+			Starling.juggler.add(tween);
+		}
+
 		public function addListener() : void {
 			if(!(hasEventListener(TouchEvent.TOUCH)))
 				addEventListener(TouchEvent.TOUCH, handleTouch);

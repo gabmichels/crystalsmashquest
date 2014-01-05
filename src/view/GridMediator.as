@@ -46,6 +46,8 @@ package view {
 
 		private function handleCombination(data : Vector.<GridVo>):void {
 			gridView.crushCrystals(data);
+			gridView.initCollapse(data);
+
 		}
 
 		private function handleGridResponse(data : Vector.<GridVo>):void {

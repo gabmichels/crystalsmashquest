@@ -11,8 +11,11 @@ package view {
 	public class GridView extends Sprite {
 
 		private var _crystals : Vector.<CrystalView> = new <CrystalView>[];
+		private var _grid : Vector.<GridVo>;
 
 		public function init(data:Vector.<GridVo>):void {
+			_grid = data;
+
 			var gridData	: GridVo;
 			var crystal		: CrystalView;
 			for (var i:int = 0; i < data.length; i++) {
@@ -62,6 +65,15 @@ package view {
 			return null;
 		}
 
+		private function getCrystalByPos(idx : int, idy : int) : CrystalView {
+			for(var i : int = 0; i < _crystals.length; i++) {
+				if(idx == _crystals[i].vo.idX && idy == _crystals[i].vo.idY) {
+					return _crystals[i];
+				}
+			}
+			return null;
+		}
+
 		public function crushCrystals(data:Vector.<GridVo>):void {
 			var crystal : CrystalView;
 
@@ -70,5 +82,102 @@ package view {
 				crystal.crush();
 			}
 		}
+
+		public function initCollapse(data:Vector.<GridVo>):void {
+			var collapseRowCount 		: Vector.<int>	= getCollapseCount(data);
+			var currentVo 				: GridVo;
+			var currentCollapseCount 	: int;
+			var vList					: Vector.<GridVo>
+			data.sort(sortDataX);
+
+			vList = getVerticalList(data);
+
+			if(vList.length > 0)
+				data.push(vList[0]);
+
+			for(var i : int = 0; i < data.length; i++) {
+				currentVo = data[i];
+				currentCollapseCount = collapseRowCount[currentVo.idX - 1];
+
+				if(currentCollapseCount > 0) {
+					collapseCrystals(getAllCollapsableCrystals(currentVo), currentCollapseCount);
+				}
+			}
+		}
+
+		private function collapseCrystals(crystals:Vector.<CrystalView>, collapseCount : int):void {
+			var crystal : CrystalView;
+
+			for(var i : int = 0; i < crystals.length; i++) {
+				crystal = crystals[i];
+				crystal.collapse(collapseCount);
+			}
+		}
+
+		private function getAllCollapsableCrystals(vo : GridVo) : Vector.<CrystalView> {
+
+			var crystals : Vector.<CrystalView> = new <CrystalView>[];
+
+			for(var i : int = 0; i < _crystals.length; i++) {
+				if(_crystals[i].vo.idX == vo.idX && _crystals[i].vo.idY < vo.idY) {
+					crystals.push(_crystals[i]);
+				}
+			}
+
+			return crystals;
+		}
+
+
+		private function getVerticalList(data:Vector.<GridVo>):Vector.<GridVo> {
+			var idx 		: int;
+			var vList 		: Vector.<GridVo> = new <GridVo>[];
+
+			for(var i : int = 0; i < data.length; i++) {
+				idx = data[i].idX;
+				if((i + 1) < data.length - 1 && data[i + 1].idX == idx) {
+					while(i < data.length && idx == data[i].idX ) {
+						vList.push(data[i]);
+						data.splice(i,1);
+					}
+					break;
+				}
+			}
+
+			return vList.sort(sortDataY);
+		}
+
+		private function getCollapseCount(data:Vector.<GridVo>): Vector.<int> {
+			var currentVo 			: GridVo;
+			var collapseRowCount 	: Vector.<int> = new <int>[0,0,0,0,0,0,0,0];
+
+			for(var i : int = 0; i < data.length; i++) {
+				currentVo = data[i];
+				collapseRowCount[currentVo.idX - 1] += 1;
+			}
+
+			return collapseRowCount;
+		}
+
+		// sort functions
+		private function sortDataY(x : GridVo, y : GridVo):int {
+			if(x.idY < y.idY) {
+				return -1
+			} else if(x.idY == y.idY){
+				return 0;
+			} else {
+				return 1;
+			}
+		}
+
+		private function sortDataX(x : GridVo, y : GridVo):int {
+			if(x.idX < y.idX) {
+				return 1
+			} else if(x.idX == y.idX){
+				return 0;
+			} else {
+				return -1;
+			}
+		}
+
 	}
 }
