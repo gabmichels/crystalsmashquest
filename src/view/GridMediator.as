@@ -71,10 +71,16 @@ package view {
 			updategrid.add(handleGridUpdate);
 			gridView.requestCollapseSignal.add(handleRequestCollapse);
 			gridView.requestParticleSignal.add(handleRequestParticle);
+			gridView.swapSignal.add(handleCrystalSwap);
 			resetComplete.add(handleResetComplete);
 			responseCollapse.add(handleResponseCollapse);
 			collapseComplete.add(handleCollapseComplete);
 			responseParticle.add(handleResponseParticle);
+			swapSignal.add(handleSwap);
+		}
+
+		private function handleCrystalSwap(data : SwapCrystalVo):void {
+			swapSignal.dispatch( data );
 		}
 
 
@@ -114,11 +120,10 @@ package view {
 		private function handleGameStart():void {
 			gameStartSignal.remove(handleGameStart);
 			requestGridSignal.dispatch();
-			swapSignal.add(handleSwap)
 		}
 
 		private function handleSwap(data : SwapCrystalVo):void {
-			gridView.swapCrystals(data.data1, data.data2);
+			gridView.swapCrystals(data);
 		}
 
 	}

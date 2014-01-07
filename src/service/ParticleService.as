@@ -17,8 +17,6 @@ package service {
 			var i:uint 		= MAX_VALUE;
 			_counter 		= MAX_VALUE;
 
-			trace("init particles ", _counter);
-
 			pool = new Vector.<CrushParticleView>(MAX_VALUE);
 			while (--i > -1)
 				pool[i] = new CrushParticleView(dataModel.crushParticleXML, dataModel.crushParticleTexture);

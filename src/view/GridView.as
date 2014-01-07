@@ -1,5 +1,6 @@
 package view {
 	import model.vo.GridVo;
+	import model.vo.SwapCrystalVo;
 
 	import org.osflash.signals.Signal;
 
@@ -16,6 +17,7 @@ package view {
 
 		public var requestCollapseSignal		: Signal;
 		public var requestParticleSignal		: Signal;
+		public var swapSignal	 				: Signal;
 
 		private var _crystals 					: Vector.<CrystalView> = new <CrystalView>[];
 		private var _particles 					: Vector.<CrushParticleView> = new <CrushParticleView>[];
@@ -25,10 +27,13 @@ package view {
 		private var _crystalCollapseAmount		: int;
 		private var _gridCon					: Sprite;
 		private var _gridMask					: Sprite;
+		private var _lastSwap					: SwapCrystalVo;
+		private var _swapTriggered				: Boolean = false;
 
 		public function GridView() {
-			requestCollapseSignal = new Signal();
-			requestParticleSignal = new Signal();
+			requestCollapseSignal 	= new Signal();
+			requestParticleSignal 	= new Signal();
+			swapSignal 				= new Signal();
 		}
 
 		public function init(data:Vector.<GridVo>):void {
@@ -74,13 +79,23 @@ package view {
 			}
 		}
 
-		public function swapCrystals(data1 : GridVo, data2 : GridVo) : void {
+		public function swapCrystals(data : SwapCrystalVo): void {
+			var data1		: GridVo		= data.data1;
+			var data2		: GridVo		= data.data2;
 			var crystal1 	: CrystalView 	= getCrystalById(data1.crystalID);
 			var crystal2 	: CrystalView 	= getCrystalById(data2.crystalID);
 			var tween1		: Tween 		= new Tween(crystal1, 0.2, Transitions.EASE_IN);
 			var tween2		: Tween 		= new Tween(crystal2, 0.2, Transitions.EASE_IN);
 
-			tween1.onComplete 				= handleTweenComplete;
+			_lastSwap 						= data;
+			_swapTriggered					= !data.reverse;
+
+			if(!data.reverse) {
+				tween1.onComplete 			= handleTweenComplete;
+			} else {
+				crystal1.addListener();
+				crystal2.addListener();
+			}
 
 			tween1.moveTo(data2.x, data2.y);
 			tween2.moveTo(data1.x, data1.y);
@@ -145,27 +160,37 @@ package view {
 			_crystalCollapseAmount = collapseData.length;
 
 			for(var i : int = collapseData.length - 1; i >= 0; i--) {
-				collapseCount = getCollapseCount(collapseData, collapseData[i].idX);
+				collapseCount = getCollapseCount(collapseData, collapseData[i]);
 				crystal = getCrystalById(collapseData[i].crystalID);
 				crystal.collapse(collapseCount);
 			}
 		}
 
-		private function getCollapseCount(collapseData : Vector.<GridVo>, xPos : int) : int {
+		private function getCollapseCount(collapseData : Vector.<GridVo>, checkedVo : GridVo) : int {
 		    var column			: Vector.<GridVo> = new <GridVo>[];
 			var collapseCount 	: int = 0;
+			var gap 			: int = 0;
 			var i 				: int;
 			var currentVo 		: GridVo;
 
 			for(i = 0; i < collapseData.length; i++) {
 				currentVo = collapseData[i];
-				if(currentVo.idX == xPos) column.push(currentVo)
+				if(currentVo.idX == checkedVo.idX) column.push(currentVo)
 			}
 
 			for(i = 0; i < column.length; i++) {
 				currentVo = column[i];
 				if(currentVo.idY < 0) collapseCount++;
 
+			}
+
+			for(i = column.length - 1; i >= 0; i--) {
+				currentVo = column[i];
+				if(currentVo.idY <= checkedVo.idY && currentVo.idY > 0) {
+					if((i - 1) < column.length && column[i - 1].idY > currentVo.idY - 1 && column[i - 1].idY > 0) {
+						gap++;
+					}
+				}
 			}
 
 			return collapseCount;
@@ -227,13 +252,22 @@ package view {
 
 			if(_combinationData.length > 0) {
 
-				_gridCon.touchable = false;
+				_gridCon.touchable	= false;
+				_swapTriggered 		= false;
 
-				_combinationData = mergeCombinations(_combinationData.sort(sortDataID));
+				_combinationData 	= mergeCombinations(_combinationData.sort(sortDataID));
 
 				crushCrystals(_combinationData);
 			} else {
 				_gridCon.touchable = true;
+				if(_swapTriggered) {
+					var swapVo : SwapCrystalVo = new SwapCrystalVo();
+					swapVo.data1 = _lastSwap.data2;
+					swapVo.data2 = _lastSwap.data1;
+					swapVo.reverse = true;
+					swapSignal.dispatch(swapVo);
+					trace("reverse swap")
+				}
 			}
 		}
 

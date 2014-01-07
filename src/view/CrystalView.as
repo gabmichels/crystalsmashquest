@@ -296,6 +296,11 @@ package view {
 			}
 		}
 
+		public function addListener() : void {
+			if(!(hasEventListener(TouchEvent.TOUCH)))
+				addEventListener(TouchEvent.TOUCH, handleTouch);
+		}
+
 		// getter and setter
 		public function get vo():GridVo {
 			return _vo;
