@@ -5,11 +5,15 @@ package view {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
+	import signals.notifications.CollapseCompleteSignal;
+
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.ResetCompleteSignal;
 	import signals.notifications.SwapCrystalsSignal;
+	import signals.requests.RequestCollapseSignal;
 	import signals.requests.RequestGridSignal;
+	import signals.response.ResponseCollapseSignal;
 	import signals.response.ResponseGridSignal;
 
 	public class GridMediator extends StarlingMediator{
@@ -38,6 +42,14 @@ package view {
 		[Inject]
 		public var resetComplete 		: ResetCompleteSignal;
 
+		[Inject]
+		public var requestCollapse		: RequestCollapseSignal;
+
+		[Inject]
+		public var responseCollapse		: ResponseCollapseSignal;
+
+		[Inject]
+		public var collapseComplete		: CollapseCompleteSignal;
 
 		override public function initialize():void {
 
@@ -46,14 +58,24 @@ package view {
 			updategrid.add(handleGridUpdate);
 			gridView.requestCollapseSignal.add(handleRequestCollapse);
 			resetComplete.add(handleResetComplete);
+			responseCollapse.add(handleResponseCollapse);
+			collapseComplete.add(handleCollapseComplete);
+		}
+
+		private function handleCollapseComplete():void {
+			gridView.checkCollapseStatus();
+		}
+
+		private function handleResponseCollapse(columnData : Vector.<GridVo>):void {
+			gridView.collapseColumn(columnData);
 		}
 
 		private function handleResetComplete():void {
 			gridView.checkResetStatus();
 		}
 
-		private function handleRequestCollapse():void {
-
+		private function handleRequestCollapse(vo : GridVo):void {
+			requestCollapse.dispatch(vo);
 		}
 
 		private function handleGridUpdate(grid : Vector.<GridVo>):void {

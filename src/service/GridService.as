@@ -4,6 +4,8 @@ package service {
 	import model.vo.GridUpdateVo;
 	import model.vo.GridVo;
 
+	import signals.response.ResponseCollapseSignal;
+
 	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.response.ResponseResetCrystalSignal;
 
@@ -18,6 +20,10 @@ package service {
 		[Inject]
 		public var resetCrystalResponse : ResponseResetCrystalSignal;
 
+		[Inject]
+		public var collapseColumnResponse : ResponseCollapseSignal;
+
+
 		public function initGrid():void {
 			var totalCells 		: int 				= GameConstants.GRID_ROWS * GameConstants.GRID_COLS;
 			var grid 			: Vector.<GridVo> 	= new Vector.<GridVo>();
@@ -31,7 +37,7 @@ package service {
 				var id	: int = -1;
 
 				grid.push(new GridVo(id, idx, idy, x, y));
-				collapsegrid.push(new GridVo(id, -idx, -idy, x, -y - GameConstants.GRID_CELL_SIZE));
+				collapsegrid.push(new GridVo(id, idx, -idy, x, -y - GameConstants.GRID_CELL_SIZE));
 			}
 
 			gridModel.grid = grid;
@@ -79,13 +85,21 @@ package service {
 		}
 
 		public function collapseUpdate(data:CollapseUpdateVo):void {
-			var vo : GridVo 			= getGridById(data.idx, data.idy);
-			updateGridObject(new GridUpdateVo(data.id, data.color,vo));
-			trace(data.id, data.color, vo.idX, vo.idY);
+			var oldVo : GridVo			= data.oldVo;
+			var collapseCount : int 	= (oldVo.idY < 1) ? data.collapseCount + 1 : data.collapseCount; // avoid idY = 0
+			var newVo : GridVo 			= getGridById(oldVo.idX, oldVo.idY + collapseCount);
+
+			if(oldVo.idY < 1) {
+				updateGridObject(new GridUpdateVo(data.id, oldVo.color,newVo));
+				oldVo.crystalID = -1;
+				oldVo.color 	= null;
+			} else {
+				updateGridObject(new GridUpdateVo(data.id, oldVo.color,newVo));
+			}
 		}
 
 		public function resetCrystal(id:int, color : String, xpos:int):void {
-			var columnData		: Vector.<GridVo> = getCollapseGridColumn(xpos);
+			var columnData		: Vector.<GridVo> = getGridColumn(xpos, GameConstants.COLLAPSE_GRID);
 			var currentVo 		: GridVo;
 
 			for(var i : int = 0; i < columnData.length; i++) {
@@ -100,22 +114,56 @@ package service {
 			}
 		}
 
+		public function requestCollapseData(data:GridVo):void {
+			var columnData		: Vector.<GridVo> = getGridColumn(data.idX, GameConstants.ALL_GRIDS);
+			var collapseData    : Vector.<GridVo> = new <GridVo>[];
+			var currentVo 		: GridVo;
+
+			for(var i : int = 0; i < columnData.length; i++) {
+				currentVo = columnData[i];
+
+				if(currentVo.idY < data.idY && currentVo.crystalID != -1 && currentVo.color != null) {
+					collapseData.push(currentVo);
+				}
+			}
+
+			collapseColumnResponse.dispatch(collapseData);
+		}
+
 
 		// helper functions
 
-		private function getCollapseGridColumn(xpos : int) : Vector.<GridVo> {
-			var collapseGrid 	: Vector.<GridVo> 	= gridModel.collapseGrid;
+		private function getGridColumn(xpos : int, type : int) : Vector.<GridVo> {
+			var grid 	: Vector.<GridVo> 	= getGrid(type);
 			var currentVo 		: GridVo;
 			var columnData		: Vector.<GridVo> = new <GridVo>[];
 
-			for(var i : int = 0; i < collapseGrid.length; i++) {
-				currentVo = collapseGrid[i];
-				if(Math.abs(currentVo.idX) == xpos) {
+			for(var i : int = 0; i < grid.length; i++) {
+				currentVo = grid[i];
+				if(currentVo.idX == xpos) {
 					columnData.push(currentVo);
 				}
 			}
 
 			return columnData;
+		}
+
+		private function getGrid(type : int) : Vector.<GridVo> {
+			switch (type) {
+				case (GameConstants.GAME_GRID):
+					return gridModel.grid;
+					break;
+				case (GameConstants.COLLAPSE_GRID):
+					return gridModel.collapseGrid;
+					break;
+				case (GameConstants.ALL_GRIDS):
+				    return gridModel.collapseGrid.concat(gridModel.grid);
+					break;
+				default:
+					return gridModel.grid;
+			}
+
+			return null;
 		}
 
 		private function getGridById(x : int, y : int) : GridVo {
@@ -129,7 +177,6 @@ package service {
 
 			return null;
 		}
-
 
 	}
 }

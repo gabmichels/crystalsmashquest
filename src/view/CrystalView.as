@@ -27,7 +27,8 @@ package view {
 		public var combinationSignal	: Signal;
 		public var requestCollapseUpdate: Signal;
 		public var resetSignal			: Signal;
-		public var resetComplete		:Signal;
+		public var resetComplete		: Signal;
+		public var collapseComplete		: Signal;
 
 		private var _vo 				: GridVo;
 		private var _state				: int;
@@ -46,6 +47,7 @@ package view {
 			requestCollapseUpdate		= new Signal();
 			resetSignal					= new Signal();
 			resetComplete				= new Signal();
+			collapseComplete			= new Signal();
 
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -161,25 +163,6 @@ package view {
 			return null;
 		}
 
-		private function getList(direction : String) : Vector.<GridVo> {
-			var currentVo 	: GridVo;
-			var list 		: Vector.<GridVo> = new <GridVo>[];
-
-			for(var i : int = 0; i < _gridData.length; i++) {
-				currentVo = _gridData[i];
-
-				if(currentVo.idX == vo.idX && direction == GameConstants.HORIZONTAL) {
-					list.push(currentVo);
-				}
-
-				if(currentVo.idY == vo.idY && direction == GameConstants.VERTICAL) {
-					list.push(currentVo);
-				}
-			}
-
-			return list;
-		}
-
 		private function checkDragging(touch : Touch) : void {
 			var crystal2 	: GridVo;
 			var swapVo		: SwapCrystalVo;
@@ -269,17 +252,16 @@ package view {
 		}
 
 		public function collapse(collapseCount:int):void {
-			var tween : Tween = new Tween(this, 0.5, Transitions.EASE_OUT_BOUNCE);
+			var tween : Tween = new Tween(this, 0.5 + (uint(collapseCount - 1)) * 0.2, Transitions.EASE_OUT_BOUNCE);
 			tween.moveTo(vo.x, vo.y + collapseCount * GameConstants.GRID_CELL_SIZE);
-//			tween.onComplete = checkCombination;
-//			requestCollapseUpdate.dispatch(new CollapseUpdateVo(id, vo.color, vo.idX, vo.idY + collapseCount));
+			tween.onComplete = handleCollapseComplete;
+			requestCollapseUpdate.dispatch(new CollapseUpdateVo(id, vo, collapseCount));
 
 			Starling.juggler.add(tween);
 		}
 
-		public function addListener() : void {
-			if(!(hasEventListener(TouchEvent.TOUCH)))
-				addEventListener(TouchEvent.TOUCH, handleTouch);
+		private function handleCollapseComplete():void {
+			collapseComplete.dispatch();
 		}
 
 		// events

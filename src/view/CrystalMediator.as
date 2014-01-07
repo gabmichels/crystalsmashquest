@@ -9,6 +9,8 @@ package view {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
+	import signals.notifications.CollapseCompleteSignal;
+
 	import signals.notifications.CombinationSignal;
 	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.ResetCompleteSignal;
@@ -70,6 +72,8 @@ package view {
 		[Inject]
 		public var resetComplete			: ResetCompleteSignal;
 
+		[Inject]
+		public var collapseComplete			: CollapseCompleteSignal;
 
 
 		public function CrystalMediator() {
@@ -83,12 +87,17 @@ package view {
 			crystalView.requestCollapseUpdate.add(handleCollapseUpdateRequest);
 			crystalView.resetSignal.add(handleRequestReset);
 			crystalView.resetComplete.add(handleResetComplete);
+			crystalView.collapseComplete.add(handleCollapseComplete);
 			responseCrystalData.add(handleDataResponse);
 			stateSignal.add(handleStateUpdate);
 			restartSignal.add(handleRestart);
 			responseGridObjectUpdate.add(handleGridObjectUpdateResponse);
 			gridUpdateSignal.add(handleGridUpdate);
 			responseReset.add(handleResetResponse);
+		}
+
+		private function handleCollapseComplete():void {
+			collapseComplete.dispatch();
 		}
 
 		private function handleResetComplete():void {

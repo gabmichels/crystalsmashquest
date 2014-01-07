@@ -1,5 +1,6 @@
 package {
 
+	import controller.CollapseColumnCommand;
 	import controller.CollapseUpdateCommand;
 	import controller.GameRestartCommand;
 	import controller.GameStartupCommand;
@@ -29,6 +30,8 @@ package {
 	import service.ICrystalImageService;
 	import service.IGridService;
 
+	import signals.notifications.CollapseCompleteSignal;
+
 	import signals.notifications.CombinationSignal;
 	import signals.notifications.CrystalsLoadedSignal;
 	import signals.notifications.GameStartSignal;
@@ -38,11 +41,13 @@ package {
 	import signals.notifications.StateUpdateSignal;
 	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.GameStartupSignal;
+	import signals.requests.RequestCollapseSignal;
 	import signals.requests.RequestCollapseUpdateSignal;
 	import signals.requests.RequestCrystalDataSignal;
 	import signals.requests.RequestGridObjectUpdateSignal;
 	import signals.requests.RequestGridSignal;
 	import signals.requests.RequestResetCrystalSignal;
+	import signals.response.ResponseCollapseSignal;
 	import signals.response.ResponseCrystalDataSignal;
 	import signals.response.ResponseCrystalsSignal;
 	import signals.response.ResponseGridObjectUpdateSignal;
@@ -85,21 +90,21 @@ package {
 
 		public function configure():void {
 
-			// Configure logger.
 			context.logLevel = LogLevel.DEBUG;
 			logger.info( "configuring application" );
 
-			// Map commands.
+			// commands.
 			commandMap.map( GameStartupSignal).toCommand(GameStartupCommand);
 			commandMap.map( RestartSignal).toCommand(GameRestartCommand);
 			commandMap.map( RequestGridSignal).toCommand(GetGridCommand);
 			commandMap.map( SwapCrystalsSignal).toCommand(SwapCrystalCommand);
 			commandMap.map( RequestCrystalDataSignal).toCommand(GetCrystalDataCommand);
 			commandMap.map( RequestGridObjectUpdateSignal).toCommand(UpdateGridObjectCommand);
-			commandMap.map( RequestCollapseUpdateSignal).toCommand(CollapseUpdateCommand);
 			commandMap.map( RequestResetCrystalSignal).toCommand(ResetCrystalCommand);
+			commandMap.map( RequestCollapseSignal).toCommand(CollapseColumnCommand);
+			commandMap.map( RequestCollapseUpdateSignal).toCommand(CollapseUpdateCommand);
 
-			// Map independent notification signals.
+			// signals.
 			injector.map( CrystalsLoadedSignal ).asSingleton();
 			injector.map( GameStartSignal ).asSingleton();
 			injector.map( ResponseGridSignal ).asSingleton();
@@ -111,32 +116,26 @@ package {
 			injector.map( CombinationSignal ).asSingleton();
 			injector.map( ResponseResetCrystalSignal ).asSingleton();
 			injector.map( ResetCompleteSignal ).asSingleton();
+			injector.map( ResponseCollapseSignal ).asSingleton();
+			injector.map( CollapseCompleteSignal ).asSingleton();
 
-			// Map views.
+			// views.
 			mediatorMap.map( GameView ).toMediator( GameMediator );
 			mediatorMap.map( BackgroundView ).toMediator( BackgroundMediator );
 			mediatorMap.map( CrystalView ).toMediator( CrystalMediator );
 			mediatorMap.map( GUIView ).toMediator( GUIMediator );
 			mediatorMap.map( GridView ).toMediator( GridMediator );
 
-			// Map models.
+			// models.
 			injector.map( CrystalModel ).asSingleton();
 			injector.map( GridModel ).asSingleton();
 			injector.map( GameModel ).asSingleton();
 
-			// Map services.
+			// services.
 			injector.map( ICrystalImageService ).toSingleton( CrystalImageService );
 			injector.map( IGridService ).toSingleton( GridService );
 
-			// Start.
-			context.afterInitializing( init );
-
 		}
 
-		private function init():void {
-
-			logger.info( "application ready" );
-
-		}
 	}
 }

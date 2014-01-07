@@ -14,9 +14,11 @@ package view {
 
 		public var requestCollapseSignal	: Signal;
 
-		private var _crystals : Vector.<CrystalView> = new <CrystalView>[];
-		private var _grid : Vector.<GridVo>;
-		private var _crystalCrushAmount : int;
+		private var _crystals 					: Vector.<CrystalView> = new <CrystalView>[];
+		private var _grid 						: Vector.<GridVo>;
+		private var _crystalCrushAmount 		: int;
+		private var _combinationData			: Vector.<GridVo>;
+		private var _crystalCollapseAmount		: int;
 
 		public function GridView() {
 			requestCollapseSignal = new Signal();
@@ -39,11 +41,20 @@ package view {
 		}
 
 		public function checkResetStatus():void {
-			if(_crystalCrushAmount > 0) {
+			if(_crystalCrushAmount > 1) {
 				_crystalCrushAmount--;
-				trace("reset ongoing");
 			} else {
-				trace("collapse");
+				if(_combinationData)
+					initCollapse(_combinationData);
+			}
+		}
+
+		public function checkCollapseStatus():void {
+			if(_crystalCollapseAmount > 1) {
+				_crystalCollapseAmount--;
+			} else {
+				trace("lookup again");
+				initCombinationLookup();
 			}
 		}
 
@@ -89,65 +100,57 @@ package view {
 		public function crushCrystals(data:Vector.<GridVo>):void {
 			var currentVo 				: GridVo;
 			var crystal 				: CrystalView;
-			var collapseRowCount 		: Vector.<int>	= getCollapseCount(data);
-			var currentCollapseCount 	: int;
 
-			_crystalCrushAmount = data.length - 1;
+			_crystalCrushAmount = data.length;
 
 			for(var i : int = 0; i < data.length; i++) {
 				currentVo 	= data[i];
 				crystal 	= getCrystalById(data[i].crystalID);
-				currentCollapseCount = collapseRowCount[currentVo.idX - 1];
 				if(crystal)
 					crystal.crush();
 			}
 		}
+
 		// collapse functions
 		public function initCollapse(data:Vector.<GridVo>):void {
-			var collapseRowCount 		: Vector.<int>	= getCollapseCount(data);
 			var currentVo 				: GridVo;
-			var currentCollapseCount 	: int;
 			var vList					: Vector.<GridVo>;
-			data.sort(sortDataX);
 
-			vList = getVerticalList(data);
+			_crystalCollapseAmount = 0;
+
+			data.sort(sortDataX);
+			// TODO FIX VERTICAL LIST
+			vList = getVerticalList(data); // remove all vertical gridvos from data to simplify looking for collapsable crystals
 
 			if(vList.length > 0)
-				data.push(vList[0]);
+				data.push(vList[0]); // add only the top gridvo of the vertical list for the collapsable crystal lookup
 
 			for(var i : int = 0; i < data.length; i++) {
 				currentVo = data[i];
-				currentCollapseCount = collapseRowCount[currentVo.idX - 1];
-
-				if(currentCollapseCount > 0) {
-					var test : Vector.<CrystalView> = getAllCollapsableCrystals(currentVo);
-					requestCollapseSignal.dispatch()
-//					collapseCrystals(test, currentCollapseCount);
-				}
+				requestCollapseSignal.dispatch(currentVo);
 			}
 		}
 
-		private function collapseCrystals(crystals:Vector.<CrystalView>, collapseCount : int):void {
-			var crystal : CrystalView;
+		public function collapseColumn(columnData:Vector.<GridVo>):void {
+			var crystal 			: CrystalView;
+			var collapseCount 		: int = getCollapseCount(columnData);
 
-			for(var i : int = 0; i < crystals.length; i++) {
-				_crystalCrushAmount++;
-				crystal = crystals[i];
+			for(var i : int = columnData.length - 1; i >= 0; i--) {
+
+				_crystalCollapseAmount++;
+				crystal = getCrystalById(columnData[i].crystalID);
 				crystal.collapse(collapseCount);
 			}
 		}
 
-		private function getAllCollapsableCrystals(vo : GridVo) : Vector.<CrystalView> {
+		private function getCollapseCount(columnData:Vector.<GridVo>) : int {
+			var collapseCount : int = 0;
 
-			var crystals : Vector.<CrystalView> = new <CrystalView>[];
-
-			for(var i : int = 0; i < _crystals.length; i++) {
-				if(_crystals[i].vo.idX == vo.idX && _crystals[i].vo.idY < vo.idY) {
-					crystals.push(_crystals[i]);
-				}
+			for(var i : int = 0; i < columnData.length; i++) {
+				if(columnData[i].idY < 0) collapseCount++;
 			}
 
-			return crystals;
+			return collapseCount;
 		}
 
 
@@ -169,34 +172,23 @@ package view {
 			return vList.sort(sortDataY);
 		}
 
-		private function getCollapseCount(data:Vector.<GridVo>): Vector.<int> {
-			var currentVo 			: GridVo;
-			var collapseRowCount 	: Vector.<int> = new <int>[0,0,0,0,0,0,0,0];
-
-			for(var i : int = 0; i < data.length; i++) {
-				currentVo = data[i];
-				collapseRowCount[currentVo.idX - 1] += 1;
-			}
-
-			return collapseRowCount;
-		}
-
 		// combination check functions
 
 		public function initCombinationLookup() : void {
 			var data 		: Vector.<GridVo>;
 			var combo 		: Vector.<GridVo>;
-			var allCombos 	: Vector.<GridVo> = new <GridVo>[];
 			var i 			: int;
+
+			_combinationData = new Vector.<GridVo>();
 
 			for(i = 1; i <= GameConstants.GRID_COLS; i++) {
 				data = getColumnData(i);
 				combo = checkCombination(data);
 
-				if(data.length > 0 && allCombos.length > 0 && combo) {
-					allCombos = allCombos.concat(combo);
-				} else if(data.length > 0 && allCombos.length == 0 && combo){
-					allCombos = combo;
+				if(data.length > 0 && _combinationData.length > 0 && combo) {
+					_combinationData = _combinationData.concat(combo);
+				} else if(data.length > 0 && _combinationData.length == 0 && combo){
+					_combinationData = combo;
 				}
 			}
 
@@ -204,17 +196,18 @@ package view {
 				data = getRowData(i);
 				combo = checkCombination(data);
 
-				if(data.length > 0 && allCombos.length > 0 && combo) {
-					allCombos = allCombos.concat(combo);
-				} else if(data.length > 0 && allCombos.length == 0 && combo){
-					allCombos = combo;
+				if(data.length > 0 && _combinationData.length > 0 && combo) {
+					_combinationData = _combinationData.concat(combo);
+				} else if(data.length > 0 && _combinationData.length == 0 && combo){
+					_combinationData = combo;
 				}
 			}
 
-			allCombos = mergeCombinations(allCombos.sort(sortDataID));
+			if(_combinationData) {
+				_combinationData = mergeCombinations(_combinationData.sort(sortDataID));
 
-			crushCrystals(allCombos);
-			initCollapse(allCombos);
+				crushCrystals(_combinationData);
+			}
 		}
 
 		private function mergeCombinations(data:Vector.<GridVo>):Vector.<GridVo> {

@@ -17,5 +17,10 @@ package {
 		public static const HORIZONTAL					: String = "horizontal";
 		public static const VERTICAL					: String = "vertical";
 
+		// grid types
+		public static const GAME_GRID					: int = 0;
+		public static const COLLAPSE_GRID				: int = 1;
+		public static const ALL_GRIDS					: int = 2;
+
 	}
 }

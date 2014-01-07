@@ -11,5 +11,6 @@ package service {
 		function updateGridObject(data : GridUpdateVo) : void;
 		function collapseUpdate(data : CollapseUpdateVo) : void;
 		function resetCrystal(id : int, color : String, xpos : int) : void;
+		function requestCollapseData(data:GridVo):void;
 	}
 }
