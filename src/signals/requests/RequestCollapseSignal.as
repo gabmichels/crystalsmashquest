@@ -7,7 +7,7 @@ package signals.requests {
 
 	public class RequestCollapseSignal extends Signal implements ISignal{
 		public function RequestCollapseSignal() {
-			super (GridVo);
+			super (Vector.<GridVo>);
 		}
 	}
 }

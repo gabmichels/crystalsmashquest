@@ -56,6 +56,7 @@ package view {
 			if(_crystalCollapseAmount > 1) {
 				_crystalCollapseAmount--;
 			} else {
+				trace("check again");
 				initCombinationLookup();
 			}
 		}
@@ -115,36 +116,45 @@ package view {
 
 		// collapse functions
 		public function initCollapse(data:Vector.<GridVo>):void {
-			var currentVo 				: GridVo;
-
 			_crystalCollapseAmount = 0;
 
 			data.sort(sortDataByPos);
 			data = cleanUpVerticalCombinations(data); // remove all vertical gridvos from data to simplify looking for collapsable crystals
 
-			for(var i : int = 0; i < data.length; i++) {
-				currentVo = data[i];
-				requestCollapseSignal.dispatch(currentVo);
-			}
+			requestCollapseSignal.dispatch(data);
+
 		}
 
-		public function collapseColumn(columnData:Vector.<GridVo>):void {
+		public function collapse(collapseData:Vector.<GridVo>):void {
 			var crystal 			: CrystalView;
-			var collapseCount 		: int = getCollapseCount(columnData);
+			var collapseCount 		: int;
 
-			for(var i : int = columnData.length - 1; i >= 0; i--) {
+			_crystalCollapseAmount = collapseData.length;
 
-				_crystalCollapseAmount++;
-				crystal = getCrystalById(columnData[i].crystalID);
+			trace(_crystalCollapseAmount);
+
+			for(var i : int = collapseData.length - 1; i >= 0; i--) {
+				collapseCount = getCollapseCount(collapseData, collapseData[i].idX);
+				crystal = getCrystalById(collapseData[i].crystalID);
 				crystal.collapse(collapseCount);
 			}
 		}
 
-		private function getCollapseCount(columnData:Vector.<GridVo>) : int {
-			var collapseCount : int = 0;
+		private function getCollapseCount(collapseData : Vector.<GridVo>, xPos : int) : int {
+		    var column			: Vector.<GridVo> = new <GridVo>[];
+			var collapseCount 	: int = 0;
+			var i 				: int;
+			var currentVo 		: GridVo;
 
-			for(var i : int = 0; i < columnData.length; i++) {
-				if(columnData[i].idY < 0) collapseCount++;
+			for(i = 0; i < collapseData.length; i++) {
+				currentVo = collapseData[i];
+				if(currentVo.idX == xPos) column.push(currentVo)
+			}
+
+			for(i = 0; i < column.length; i++) {
+				currentVo = column[i];
+				if(currentVo.idY < 0) collapseCount++;
+
 			}
 
 			return collapseCount;

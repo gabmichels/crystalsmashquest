@@ -10,7 +10,7 @@ package controller {
 		public var gridService : IGridService;
 
 		[Inject]
-		public var data : GridVo;
+		public var data : Vector.<GridVo>;
 
 		public function execute() : void {
 			gridService.requestCollapseData(data);

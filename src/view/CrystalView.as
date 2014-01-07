@@ -291,7 +291,6 @@ package view {
 			if (touch && touch.phase == TouchPhase.BEGAN) {
 				_dragStartX = touch.globalX;
 				_dragStartY = touch.globalY;
-				trace(id, vo.color, vo.idX, vo.idY)
 			} else if(touch && touch.phase == TouchPhase.MOVED) {
 				checkDragging(touch);
 			}

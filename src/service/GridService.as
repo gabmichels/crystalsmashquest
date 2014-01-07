@@ -21,7 +21,7 @@ package service {
 		public var resetCrystalResponse : ResponseResetCrystalSignal;
 
 		[Inject]
-		public var collapseColumnResponse : ResponseCollapseSignal;
+		public var collapseResponse 	: ResponseCollapseSignal;
 
 
 		public function initGrid():void {
@@ -114,7 +114,22 @@ package service {
 			}
 		}
 
-		public function requestCollapseData(data:GridVo):void {
+		public function requestCollapseData(data : Vector.<GridVo> ) : void {
+			var collapseData    : Vector.<GridVo> = new <GridVo>[];
+			var currentVo 		: GridVo;
+
+			for(var i : int = 0; i < data.length; i++) {
+				currentVo = data[i];
+				if(collapseData.length == 0) {
+					collapseData = getCollapseData(currentVo);
+				} else {
+					collapseData = collapseData.concat(getCollapseData(currentVo));
+				}
+			}
+			collapseResponse.dispatch(collapseData);
+		}
+
+		public function getCollapseData(data:GridVo):Vector.<GridVo> {
 			var columnData		: Vector.<GridVo> = getGridColumn(data.idX, GameConstants.ALL_GRIDS);
 			var collapseData    : Vector.<GridVo> = new <GridVo>[];
 			var currentVo 		: GridVo;
@@ -127,7 +142,7 @@ package service {
 				}
 			}
 
-			collapseColumnResponse.dispatch(collapseData);
+			return collapseData;
 		}
 
 

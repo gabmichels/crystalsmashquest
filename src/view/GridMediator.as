@@ -90,15 +90,15 @@ package view {
 			gridView.checkCollapseStatus();
 		}
 
-		private function handleResponseCollapse(columnData : Vector.<GridVo>):void {
-			gridView.collapseColumn(columnData);
+		private function handleResponseCollapse(collapseData : Vector.<GridVo>):void {
+			gridView.collapse(collapseData);
 		}
 
 		private function handleResetComplete():void {
 			gridView.checkResetStatus();
 		}
 
-		private function handleRequestCollapse(vo : GridVo):void {
+		private function handleRequestCollapse(vo : Vector.<GridVo>):void {
 			requestCollapse.dispatch(vo);
 		}
 
