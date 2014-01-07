@@ -1,13 +1,13 @@
 package controller {
 	import model.GameModel;
 
-	import service.ICrystalImageService;
+	import service.ILoadFileService;
 	import service.IGridService;
 
 	public class GameRestartCommand {
 
 		[Inject]
-		public var crystalLoader : ICrystalImageService;
+		public var crystalLoader : ILoadFileService;
 
 		[Inject]
 		public var gridService : IGridService;

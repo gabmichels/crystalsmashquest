@@ -1,13 +1,13 @@
 package controller {
 	import model.GameModel;
 
-	import service.ICrystalImageService;
+	import service.ILoadFileService;
 	import service.IGridService;
 
 	public class GameStartupCommand {
 
 		[Inject]
-		public var crystalLoader : ICrystalImageService;
+		public var fileLoader : ILoadFileService;
 
 		[Inject]
 		public var gridService : IGridService;
@@ -16,7 +16,8 @@ package controller {
 		public var gameModel : GameModel;
 
 		public function execute() : void {
-			crystalLoader.loadImages();
+			fileLoader.loadCrystalImages();
+			fileLoader.loadParticles();
 			gridService.initGrid();
 			gameModel.state = GameConstants.STATE_GAME_INIT;
 		}

@@ -6,6 +6,8 @@ package view.layer {
 	import starling.display.Sprite;
 	import starling.events.Event;
 
+	import view.particles.CrushParticleView;
+
 	public class GUIView extends Sprite{
 
 		public var startSignal : Signal = new Signal();

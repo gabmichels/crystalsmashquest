@@ -6,13 +6,14 @@ package {
 	import controller.GameStartupCommand;
 	import controller.GetCrystalDataCommand;
 	import controller.GetGridCommand;
+	import controller.GetParticleCommand;
 	import controller.ResetCrystalCommand;
 	import controller.SwapCrystalCommand;
 	import controller.UpdateGridObjectCommand;
 
 	import flash.events.IEventDispatcher;
 
-	import model.CrystalModel;
+	import model.DataModel;
 	import model.GameModel;
 	import model.GridModel;
 
@@ -25,15 +26,16 @@ package {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.bender.framework.api.LogLevel;
 
-	import service.CrystalImageService;
+	import service.LoadFileService;
 	import service.GridService;
-	import service.ICrystalImageService;
+	import service.ILoadFileService;
 	import service.IGridService;
 
 	import signals.notifications.CollapseCompleteSignal;
 
 	import signals.notifications.CombinationSignal;
 	import signals.notifications.CrystalsLoadedSignal;
+	import signals.notifications.DestroyParticleSignal;
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.ResetCompleteSignal;
@@ -46,12 +48,14 @@ package {
 	import signals.requests.RequestCrystalDataSignal;
 	import signals.requests.RequestGridObjectUpdateSignal;
 	import signals.requests.RequestGridSignal;
+	import signals.requests.RequestParticleSignal;
 	import signals.requests.RequestResetCrystalSignal;
 	import signals.response.ResponseCollapseSignal;
 	import signals.response.ResponseCrystalDataSignal;
 	import signals.response.ResponseCrystalsSignal;
 	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.response.ResponseGridSignal;
+	import signals.response.ResponseParticleSignal;
 	import signals.response.ResponseResetCrystalSignal;
 
 	import view.BackgroundMediator;
@@ -64,6 +68,8 @@ package {
 	import view.base.GameView;
 	import view.layer.GUIMediator;
 	import view.layer.GUIView;
+	import view.particles.CrushParticleMediator;
+	import view.particles.CrushParticleView;
 
 	public class AppConfig implements IConfig
 	{
@@ -103,6 +109,7 @@ package {
 			commandMap.map( RequestResetCrystalSignal).toCommand(ResetCrystalCommand);
 			commandMap.map( RequestCollapseSignal).toCommand(CollapseColumnCommand);
 			commandMap.map( RequestCollapseUpdateSignal).toCommand(CollapseUpdateCommand);
+			commandMap.map( RequestParticleSignal).toCommand(GetParticleCommand);
 
 			// signals.
 			injector.map( CrystalsLoadedSignal ).asSingleton();
@@ -118,6 +125,8 @@ package {
 			injector.map( ResetCompleteSignal ).asSingleton();
 			injector.map( ResponseCollapseSignal ).asSingleton();
 			injector.map( CollapseCompleteSignal ).asSingleton();
+			injector.map( ResponseParticleSignal ).asSingleton();
+			injector.map( DestroyParticleSignal ).asSingleton();
 
 			// views.
 			mediatorMap.map( GameView ).toMediator( GameMediator );
@@ -125,14 +134,15 @@ package {
 			mediatorMap.map( CrystalView ).toMediator( CrystalMediator );
 			mediatorMap.map( GUIView ).toMediator( GUIMediator );
 			mediatorMap.map( GridView ).toMediator( GridMediator );
+			mediatorMap.map( CrushParticleView ).toMediator( CrushParticleMediator );
 
 			// models.
-			injector.map( CrystalModel ).asSingleton();
+			injector.map( DataModel ).asSingleton();
 			injector.map( GridModel ).asSingleton();
 			injector.map( GameModel ).asSingleton();
 
 			// services.
-			injector.map( ICrystalImageService ).toSingleton( CrystalImageService );
+			injector.map( ILoadFileService ).toSingleton( LoadFileService );
 			injector.map( IGridService ).toSingleton( GridService );
 
 		}

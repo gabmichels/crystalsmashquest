@@ -9,12 +9,16 @@ package view {
 	import starling.core.Starling;
 
 	import starling.display.Sprite;
+	import starling.extensions.Particle;
+
+	import view.particles.CrushParticleView;
 
 	public class GridView extends Sprite {
 
 		public var requestCollapseSignal	: Signal;
 
 		private var _crystals 					: Vector.<CrystalView> = new <CrystalView>[];
+		private var _particles 					: Vector.<CrushParticleView> = new <CrushParticleView>[];
 		private var _grid 						: Vector.<GridVo>;
 		private var _crystalCrushAmount 		: int;
 		private var _combinationData			: Vector.<GridVo>;
@@ -89,30 +93,48 @@ package view {
 		public function crushCrystals(data:Vector.<GridVo>):void {
 			var currentVo 				: GridVo;
 			var crystal 				: CrystalView;
-
+			var particle				: CrushParticleView;
 			_crystalCrushAmount = data.length;
 
 			for(var i : int = 0; i < data.length; i++) {
 				currentVo 	= data[i];
 				crystal 	= getCrystalById(data[i].crystalID);
-				if(crystal)
+				if(crystal) {
 					crystal.crush();
+
+					particle = new CrushParticleView();
+					particle.x = crystal.x;
+					particle.y = crystal.y;
+					addChild(particle);
+					_particles.push(particle);
+				}
+			}
+		}
+
+		public function destroyParticle(view:CrushParticleView):void {
+			var currentParticle : CrushParticleView;
+
+			for(var i : int = _particles.length - 1; i >= 0; i--) {
+				currentParticle = _particles[i];
+
+				if(view == currentParticle) {
+					currentParticle.dispose();
+					removeChild(currentParticle);
+					currentParticle = null;
+					_particles.splice(i,1);
+					break;
+				}
 			}
 		}
 
 		// collapse functions
 		public function initCollapse(data:Vector.<GridVo>):void {
 			var currentVo 				: GridVo;
-			var vList					: Vector.<GridVo>;
 
 			_crystalCollapseAmount = 0;
 
-			data.sort(sortDataX);
-			// TODO FIX VERTICAL LIST
-			vList = getVerticalList(data); // remove all vertical gridvos from data to simplify looking for collapsable crystals
-
-			if(vList.length > 0)
-				data.push(vList[0]); // add only the top gridvo of the vertical list for the collapsable crystal lookup
+			data.sort(sortDataByPos);
+			data = cleanUpVerticalCombinations(data); // remove all vertical gridvos from data to simplify looking for collapsable crystals
 
 			for(var i : int = 0; i < data.length; i++) {
 				currentVo = data[i];
@@ -143,22 +165,26 @@ package view {
 		}
 
 
-		private function getVerticalList(data:Vector.<GridVo>):Vector.<GridVo> {
+		private function cleanUpVerticalCombinations(data:Vector.<GridVo>) : Vector.<GridVo> {
 			var idx 		: int;
-			var vList 		: Vector.<GridVo> = new <GridVo>[];
+			var count 		: int;
+			var newlist		: Vector.<GridVo> = new <GridVo>[];
 
 			for(var i : int = 0; i < data.length; i++) {
-				idx = data[i].idX;
-				if((i + 1) < data.length && data[i + 1].idX == idx) {
-					while(i < data.length && idx == data[i].idX ) {
-						vList.push(data[i]);
-						data.splice(i,1);
+				idx 	= data[i].idX;
+				count 	= 1;
+
+				if((i + count) < data.length && idx == data[i + count].idX) {
+					newlist.push(data[i]);
+					while((i + count) < data.length && idx == data[i + count].idX) {
+						i++;
 					}
-					break;
+				} else {
+					newlist.push(data[i]);
 				}
 			}
 
-			return vList.sort(sortDataY);
+			return newlist;
 		}
 
 		// combination check functions
@@ -306,23 +332,19 @@ package view {
 
 
 		// sort functions
-		private function sortDataY(x : GridVo, y : GridVo):int {
-			if(x.idY < y.idY) {
-				return -1
-			} else if(x.idY == y.idY){
-				return 0;
-			} else {
-				return 1;
-			}
-		}
 
-		private function sortDataX(x : GridVo, y : GridVo):int {
+		private function sortDataByPos(x : GridVo, y : GridVo):int {
+
 			if(x.idX < y.idX) {
-				return 1
-			} else if(x.idX == y.idX){
-				return 0;
-			} else {
+				return -1
+			} else if(x.idX == y.idX && x.idY < y.idY){
 				return -1;
+			} else if(x.idX == y.idX && x.idY > y.idY){
+				return 1;
+			} else if(x.idX == y.idX && x.idY == y.idY){
+				return 0;
+			}else {
+				return 1;
 			}
 		}
 

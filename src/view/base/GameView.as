@@ -9,6 +9,7 @@ package view.base {
 	import view.BackgroundView;
 	import view.GridView;
 	import view.layer.GUIView;
+	import view.particles.CrushParticleView;
 
 	public class GameView extends Sprite{
 

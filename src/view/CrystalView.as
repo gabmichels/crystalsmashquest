@@ -54,6 +54,7 @@ package view {
 
 		private function onAddedToStage(event:Event):void {
 			this.alpha = 0;
+
 			requestSignal.dispatch();
 		}
 
@@ -78,8 +79,8 @@ package view {
 			var img		:Image 		= new Image(texture);
 			var tween	:Tween;
 
-			img.pivotX 				= int(img.width / 2);
-			img.pivotY 				= int(img.height / 2);
+			this.pivotX 				= int(img.width / 2);
+			this.pivotY 				= int(img.height / 2);
 			addChild(img);
 
 			if(doTween) {
@@ -232,11 +233,11 @@ package view {
 			if(newVo.crystalID == id) {
 				this.scaleX 	= 1;
 				this.scaleY 	= 1;
-				this.alpha 		= 1;
-				this.x 			= newVo.x;
-				this.y 			= newVo.y;
+				this.alpha 	= 1;
+				this.x 				= newVo.x;
+				this.y 				= newVo.y;
 
-				vo = newVo;
+				vo 					= newVo;
 
 				resetComplete.dispatch();
 			}
@@ -272,6 +273,8 @@ package view {
 
 			colorNum 	= Math.random() * _crystalData.length;
 			texture 	= _crystalData[colorNum].texture;
+
+
 			addCrystalTexture(texture);
 
 			resetSignal.dispatch(new ResetCrystalVo(id, _crystalData[colorNum].color,  vo.idX));

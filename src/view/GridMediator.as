@@ -6,6 +6,7 @@ package view {
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.CollapseCompleteSignal;
+	import signals.notifications.DestroyParticleSignal;
 
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
@@ -15,6 +16,8 @@ package view {
 	import signals.requests.RequestGridSignal;
 	import signals.response.ResponseCollapseSignal;
 	import signals.response.ResponseGridSignal;
+
+	import view.particles.CrushParticleView;
 
 	public class GridMediator extends StarlingMediator{
 
@@ -51,6 +54,10 @@ package view {
 		[Inject]
 		public var collapseComplete		: CollapseCompleteSignal;
 
+		[Inject]
+		public var destroyParticle		: DestroyParticleSignal;
+
+
 		override public function initialize():void {
 
 			gameStartSignal.add(handleGameStart);
@@ -60,6 +67,11 @@ package view {
 			resetComplete.add(handleResetComplete);
 			responseCollapse.add(handleResponseCollapse);
 			collapseComplete.add(handleCollapseComplete);
+			destroyParticle.add(handleDestroyParticle);
+		}
+
+		private function handleDestroyParticle(view : CrushParticleView):void {
+			gridView.destroyParticle(view);
 		}
 
 		private function handleCollapseComplete():void {
