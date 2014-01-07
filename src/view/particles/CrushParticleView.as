@@ -2,7 +2,6 @@ package view.particles {
 	import org.osflash.signals.Signal;
 
 	import starling.core.Starling;
-
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.extensions.PDParticleSystem;
@@ -10,44 +9,41 @@ package view.particles {
 
 	public class CrushParticleView extends Sprite{
 
-		public var requestParticleDataSignal : Signal;
-		public var destroySignal : Signal;
+		public var returnSignal : Signal;
 
-		private var _particles : PDParticleSystem;
+		private var _particles 	: PDParticleSystem;
+		private var _xml 		: XML;
+		private var _texture 	: Texture;
+		private var _refId 		: int;
 
-		public function CrushParticleView() {
-			requestParticleDataSignal 	= new Signal();
-			destroySignal 				= new Signal();
-			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-		}
+		public function CrushParticleView(xml : XML, texture : Texture) {
+			returnSignal 				= new Signal();
+			_xml 						= xml;
+			_texture 					= texture;
 
-		private function onAddedToStage(event:Event):void {
-			requestParticleDataSignal.dispatch();
-		}
-
-		public function init(xml : XML, texture : Texture) : void {
-			_particles = new PDParticleSystem(xml, texture);
+			_particles = new PDParticleSystem(_xml, _texture);
 			addChild(_particles);
+		}
+
+		public function init() : void {
 			_particles.start(0.3);
 			Starling.juggler.add(_particles);
 			addEventListener(Event.ENTER_FRAME,checkParticleLifetime);
 		}
 
-
-		override public function dispose():void {
-			super.dispose();
-
-			Starling.juggler.remove(_particles);
-			removeChild(_particles, true);
-			_particles = null;
-		}
-
 		private function checkParticleLifetime(event:Event):void {
 			if(!_particles.isEmitting) {
 				removeEventListener(Event.ENTER_FRAME,checkParticleLifetime);
-				destroySignal.dispatch(this);
+				returnSignal.dispatch(this)
 			}
 		}
 
+		public function get refId():int {
+			return _refId;
+		}
+
+		public function set refId(value:int):void {
+			_refId = value;
+		}
 	}
 }

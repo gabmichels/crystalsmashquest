@@ -1,12 +1,7 @@
 package view.particles {
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
-	import signals.notifications.DestroyParticleSignal;
-
-	import signals.requests.RequestParticleSignal;
-	import signals.response.ResponseParticleSignal;
-
-	import starling.textures.Texture;
+	import signals.notifications.ReturnParticleSignal;
 
 	public class CrushParticleMediator extends StarlingMediator{
 
@@ -14,34 +9,19 @@ package view.particles {
 		public var pView			: CrushParticleView;
 
 		[Inject]
-		public var requestParticle 	: RequestParticleSignal;
-
-		[Inject]
-		public var responseParticle : ResponseParticleSignal;
-
-		[Inject]
-		public var destroyParticle	: DestroyParticleSignal;
+		public var returnParticle	: ReturnParticleSignal;
 
 
 		override public function initialize():void {
 
-			pView.requestParticleDataSignal.add(handleParticleRequest);
-			pView.destroySignal.add(handleDestroyParticle);
-			responseParticle.add(handleParticleResponse);
+			pView.returnSignal.add(handleReturnParticle);
 
 		}
 
-		private function handleDestroyParticle(view : CrushParticleView):void {
-			destroyParticle.dispatch(view);
+		private function handleReturnParticle(particle : CrushParticleView):void {
+			returnParticle.dispatch(particle);
 		}
 
-		private function handleParticleResponse(xml : XML, texture : Texture):void {
-			pView.init(xml, texture);
-		}
-
-		private function handleParticleRequest():void {
-			requestParticle.dispatch();
-		}
 
 	}
 }

@@ -1,18 +1,27 @@
 package controller {
-	import model.DataModel;
+	import model.vo.GridVo;
+
+	import service.IParticleService;
 
 	import signals.response.ResponseParticleSignal;
+
+	import view.particles.CrushParticleView;
 
 	public class GetParticleCommand {
 
 		[Inject]
-		public var fileModel : DataModel;
+		public var particleService : IParticleService;
 
 		[Inject]
 		public var responseSignal : ResponseParticleSignal;
 
+		[Inject]
+		public var data : GridVo;
+
 		public function execute() : void {
-			responseSignal.dispatch(fileModel.crushParticleXML, fileModel.crushParticleTexture);
+			var particle : CrushParticleView = particleService.getParticleSystem();
+				particle.refId = data.crystalID;
+			responseSignal.dispatch(particle, data);
 		}
 	}
 }

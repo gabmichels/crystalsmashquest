@@ -39,7 +39,7 @@ package view.base {
 		}
 
 		private function handleGameLoaded():void {
-			trace("game loaded -> show start layer");
+
 			view.showLayer();
 		}
 

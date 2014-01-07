@@ -7,7 +7,9 @@ package {
 	import controller.GetCrystalDataCommand;
 	import controller.GetGridCommand;
 	import controller.GetParticleCommand;
+	import controller.InitParticlesCommand;
 	import controller.ResetCrystalCommand;
+	import controller.ReturnParticleCommand;
 	import controller.SwapCrystalCommand;
 	import controller.UpdateGridObjectCommand;
 
@@ -26,20 +28,22 @@ package {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.bender.framework.api.LogLevel;
 
-	import service.LoadFileService;
 	import service.GridService;
-	import service.ILoadFileService;
 	import service.IGridService;
+	import service.ILoadFileService;
+	import service.IParticleService;
+	import service.LoadFileService;
+	import service.ParticleService;
 
 	import signals.notifications.CollapseCompleteSignal;
-
 	import signals.notifications.CombinationSignal;
 	import signals.notifications.CrystalsLoadedSignal;
-	import signals.notifications.DestroyParticleSignal;
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
+	import signals.notifications.InitParticleSignal;
 	import signals.notifications.ResetCompleteSignal;
 	import signals.notifications.RestartSignal;
+	import signals.notifications.ReturnParticleSignal;
 	import signals.notifications.StateUpdateSignal;
 	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.GameStartupSignal;
@@ -110,6 +114,8 @@ package {
 			commandMap.map( RequestCollapseSignal).toCommand(CollapseColumnCommand);
 			commandMap.map( RequestCollapseUpdateSignal).toCommand(CollapseUpdateCommand);
 			commandMap.map( RequestParticleSignal).toCommand(GetParticleCommand);
+			commandMap.map( ReturnParticleSignal).toCommand(ReturnParticleCommand);
+			commandMap.map( InitParticleSignal).toCommand(InitParticlesCommand);
 
 			// signals.
 			injector.map( CrystalsLoadedSignal ).asSingleton();
@@ -126,7 +132,6 @@ package {
 			injector.map( ResponseCollapseSignal ).asSingleton();
 			injector.map( CollapseCompleteSignal ).asSingleton();
 			injector.map( ResponseParticleSignal ).asSingleton();
-			injector.map( DestroyParticleSignal ).asSingleton();
 
 			// views.
 			mediatorMap.map( GameView ).toMediator( GameMediator );
@@ -144,6 +149,7 @@ package {
 			// services.
 			injector.map( ILoadFileService ).toSingleton( LoadFileService );
 			injector.map( IGridService ).toSingleton( GridService );
+			injector.map( IParticleService ).toSingleton( ParticleService );
 
 		}
 

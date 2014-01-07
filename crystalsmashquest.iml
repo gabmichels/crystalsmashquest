@@ -29,7 +29,7 @@
             <entry library-id="921cfd9f-2597-41a0-896a-56be0f5935d7">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="8d472124-3196-4fce-b88e-2d62e9683379">
+            <entry library-id="c3a912ea-d5e5-45eb-8fb6-b676856d1ca5">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -134,7 +134,7 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="8d472124-3196-4fce-b88e-2d62e9683379" />
+        <properties id="c3a912ea-d5e5-45eb-8fb6-b676856d1ca5" />
         <CLASSES>
           <root url="file://$MODULE_DIR$/../../frameworks/starling-extensions/Starling-Extension-Particle-System/src" />
         </CLASSES>

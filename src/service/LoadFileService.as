@@ -11,6 +11,7 @@ package service {
 	import model.vo.CrystalVo;
 
 	import signals.notifications.CrystalsLoadedSignal;
+	import signals.notifications.InitParticleSignal;
 
 	import starling.display.Image;
 	import starling.textures.Texture;
@@ -22,6 +23,10 @@ package service {
 
 		[Inject]
 		public var completeSignal:CrystalsLoadedSignal;
+
+		[Inject]
+		public var initParticles:InitParticleSignal;
+
 
 		private var _queues : int = 0;
 
@@ -75,6 +80,7 @@ package service {
 			trace(event.target + " is complete!");
 			_queues--;
 			if(_queues == 0)
+				initParticles.dispatch();
 				completeSignal.dispatch();
 		}
 	}

@@ -6,16 +6,17 @@ package view {
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.CollapseCompleteSignal;
-	import signals.notifications.DestroyParticleSignal;
-
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.ResetCompleteSignal;
+	import signals.notifications.ReturnParticleSignal;
 	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.RequestCollapseSignal;
 	import signals.requests.RequestGridSignal;
+	import signals.requests.RequestParticleSignal;
 	import signals.response.ResponseCollapseSignal;
 	import signals.response.ResponseGridSignal;
+	import signals.response.ResponseParticleSignal;
 
 	import view.particles.CrushParticleView;
 
@@ -55,8 +56,13 @@ package view {
 		public var collapseComplete		: CollapseCompleteSignal;
 
 		[Inject]
-		public var destroyParticle		: DestroyParticleSignal;
+		public var requestParticle		: RequestParticleSignal;
 
+		[Inject]
+		public var responseParticle		: ResponseParticleSignal;
+
+		[Inject]
+		public var returnParticle		: ReturnParticleSignal;
 
 		override public function initialize():void {
 
@@ -64,14 +70,20 @@ package view {
 			responseGridSignal.add(handleGridResponse);
 			updategrid.add(handleGridUpdate);
 			gridView.requestCollapseSignal.add(handleRequestCollapse);
+			gridView.requestParticleSignal.add(handleRequestParticle);
 			resetComplete.add(handleResetComplete);
 			responseCollapse.add(handleResponseCollapse);
 			collapseComplete.add(handleCollapseComplete);
-			destroyParticle.add(handleDestroyParticle);
+			responseParticle.add(handleResponseParticle);
 		}
 
-		private function handleDestroyParticle(view : CrushParticleView):void {
-			gridView.destroyParticle(view);
+
+		private function handleResponseParticle(particle : CrushParticleView, vo : GridVo):void {
+			gridView.addParticle(particle, vo);
+		}
+
+		private function handleRequestParticle(vo : GridVo):void {
+			requestParticle.dispatch(vo);
 		}
 
 		private function handleCollapseComplete():void {

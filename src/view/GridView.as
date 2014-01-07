@@ -4,18 +4,16 @@ package view {
 	import org.osflash.signals.Signal;
 
 	import starling.animation.Transitions;
-
 	import starling.animation.Tween;
 	import starling.core.Starling;
-
 	import starling.display.Sprite;
-	import starling.extensions.Particle;
 
 	import view.particles.CrushParticleView;
 
 	public class GridView extends Sprite {
 
 		public var requestCollapseSignal	: Signal;
+		public var requestParticleSignal	: Signal;
 
 		private var _crystals 					: Vector.<CrystalView> = new <CrystalView>[];
 		private var _particles 					: Vector.<CrushParticleView> = new <CrushParticleView>[];
@@ -26,6 +24,7 @@ package view {
 
 		public function GridView() {
 			requestCollapseSignal = new Signal();
+			requestParticleSignal = new Signal();
 		}
 
 		public function init(data:Vector.<GridVo>):void {
@@ -93,7 +92,6 @@ package view {
 		public function crushCrystals(data:Vector.<GridVo>):void {
 			var currentVo 				: GridVo;
 			var crystal 				: CrystalView;
-			var particle				: CrushParticleView;
 			_crystalCrushAmount = data.length;
 
 			for(var i : int = 0; i < data.length; i++) {
@@ -102,29 +100,17 @@ package view {
 				if(crystal) {
 					crystal.crush();
 
-					particle = new CrushParticleView();
-					particle.x = crystal.x;
-					particle.y = crystal.y;
-					addChild(particle);
-					_particles.push(particle);
+					requestParticleSignal.dispatch(data[i]);
 				}
 			}
 		}
 
-		public function destroyParticle(view:CrushParticleView):void {
-			var currentParticle : CrushParticleView;
-
-			for(var i : int = _particles.length - 1; i >= 0; i--) {
-				currentParticle = _particles[i];
-
-				if(view == currentParticle) {
-					currentParticle.dispose();
-					removeChild(currentParticle);
-					currentParticle = null;
-					_particles.splice(i,1);
-					break;
-				}
-			}
+		public function addParticle(particle : CrushParticleView, vo : GridVo) : void {
+			_particles.push(particle);
+			addChild(particle);
+			particle.init();
+			particle.x = vo.x;
+			particle.y = vo.y;
 		}
 
 		// collapse functions
@@ -361,6 +347,7 @@ package view {
 		public function set grid(value:Vector.<GridVo>):void {
 			_grid = value;
 		}
+
 
 	}
 }

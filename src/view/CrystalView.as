@@ -19,6 +19,8 @@ package view {
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
 
+	import view.particles.CrushParticleView;
+
 	public class CrystalView extends Sprite
 	{
 		public var requestSignal 		: Signal;
@@ -29,6 +31,7 @@ package view {
 		public var resetSignal			: Signal;
 		public var resetComplete		: Signal;
 		public var collapseComplete		: Signal;
+		public var requestParticle		: Signal;
 
 		private var _vo 				: GridVo;
 		private var _state				: int;
@@ -37,6 +40,7 @@ package view {
 		private var _dragStartX			: Number;
 		private var _dragStartY			: Number;
 		private var _id					: int;
+		private var _particle			: CrushParticleView;
 
 		public function CrystalView(vo : GridVo) {
 			_vo 						= vo;
@@ -48,6 +52,7 @@ package view {
 			resetSignal					= new Signal();
 			resetComplete				= new Signal();
 			collapseComplete			= new Signal();
+			requestParticle			= new Signal();
 
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -249,7 +254,8 @@ package view {
 			tween.scaleTo(0);
 			tween.onComplete = handleReset;
 			Starling.juggler.add(tween);
-			// TODO add particles
+
+			requestParticle.dispatch(id);
 		}
 
 		public function collapse(collapseCount:int):void {
@@ -315,7 +321,6 @@ package view {
 		public function set gridData(value:Vector.<GridVo>):void {
 			_gridData = value;
 		}
-
 
 	}
 }
