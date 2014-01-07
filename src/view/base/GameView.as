@@ -5,6 +5,7 @@ package view.base {
 
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.extensions.pixelmask.PixelMaskDisplayObject;
 
 	import view.BackgroundView;
 	import view.GridView;
@@ -15,7 +16,7 @@ package view.base {
 
 		private var _background : Sprite;
 		private var _startLayer : Sprite;
-		private var _grid		: Sprite;
+		private var _grid		: PixelMaskDisplayObject;
 
 		public function GameView(){
 

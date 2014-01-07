@@ -6,14 +6,16 @@ package view {
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
+	import starling.display.Quad;
 	import starling.display.Sprite;
+	import starling.extensions.pixelmask.PixelMaskDisplayObject;
 
 	import view.particles.CrushParticleView;
 
-	public class GridView extends Sprite {
+	public class GridView extends PixelMaskDisplayObject {
 
-		public var requestCollapseSignal	: Signal;
-		public var requestParticleSignal	: Signal;
+		public var requestCollapseSignal		: Signal;
+		public var requestParticleSignal		: Signal;
 
 		private var _crystals 					: Vector.<CrystalView> = new <CrystalView>[];
 		private var _particles 					: Vector.<CrushParticleView> = new <CrushParticleView>[];
@@ -21,6 +23,8 @@ package view {
 		private var _crystalCrushAmount 		: int;
 		private var _combinationData			: Vector.<GridVo>;
 		private var _crystalCollapseAmount		: int;
+		private var _gridCon					: Sprite;
+		private var _gridMask					: Sprite;
 
 		public function GridView() {
 			requestCollapseSignal = new Signal();
@@ -28,17 +32,27 @@ package view {
 		}
 
 		public function init(data:Vector.<GridVo>):void {
-			_grid = data;
-
 			var gridData	: GridVo;
 			var crystal		: CrystalView;
+			var quad 		: Quad = new Quad((GameConstants.GRID_COLS * GameConstants.GRID_CELL_SIZE), (GameConstants.GRID_COLS * GameConstants.GRID_CELL_SIZE), 0x00ff00);
+
+			_grid 				= data;
+			_gridCon 			= new Sprite();
+			_gridCon.x 			+=  int(GameConstants.GRID_CELL_SIZE / 2);
+			_gridCon.y 			+=  int(GameConstants.GRID_CELL_SIZE / 2);
+			_gridMask			= new Sprite();
+			_gridMask.addChild(quad);
+			this.mask 			= _gridMask;
+
+			addChild(_gridCon);
+
 			for (var i:int = 0; i < data.length; i++) {
 				gridData 	= data[i];
 				crystal 	= new CrystalView(gridData);
 				crystal.x 	= gridData.x;
 				crystal.y 	= gridData.y;
 				crystal.id	= i + 1;
-				addChild(crystal);
+				_gridCon.addChild(crystal);
 				_crystals.push(crystal);
 			}
 		}
@@ -56,7 +70,6 @@ package view {
 			if(_crystalCollapseAmount > 1) {
 				_crystalCollapseAmount--;
 			} else {
-				trace("check again");
 				initCombinationLookup();
 			}
 		}
@@ -110,8 +123,8 @@ package view {
 			_particles.push(particle);
 			addChild(particle);
 			particle.init();
-			particle.x = vo.x;
-			particle.y = vo.y;
+			particle.x = vo.x + GameConstants.GRID_CELL_SIZE / 2;
+			particle.y = vo.y + GameConstants.GRID_CELL_SIZE / 2;
 		}
 
 		// collapse functions
@@ -130,8 +143,6 @@ package view {
 			var collapseCount 		: int;
 
 			_crystalCollapseAmount = collapseData.length;
-
-			trace(_crystalCollapseAmount);
 
 			for(var i : int = collapseData.length - 1; i >= 0; i--) {
 				collapseCount = getCollapseCount(collapseData, collapseData[i].idX);
@@ -214,10 +225,15 @@ package view {
 				}
 			}
 
-			if(_combinationData) {
+			if(_combinationData.length > 0) {
+
+				_gridCon.touchable = false;
+
 				_combinationData = mergeCombinations(_combinationData.sort(sortDataID));
 
 				crushCrystals(_combinationData);
+			} else {
+				_gridCon.touchable = true;
 			}
 		}
 

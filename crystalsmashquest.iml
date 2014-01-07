@@ -32,6 +32,9 @@
             <entry library-id="c3a912ea-d5e5-45eb-8fb6-b676856d1ca5">
               <dependency linkage="Merged" />
             </entry>
+            <entry library-id="7d5817f8-b286-4038-87af-e22e68a9047e">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="AIR SDK" />
         </dependencies>
@@ -137,6 +140,16 @@
         <properties id="c3a912ea-d5e5-45eb-8fb6-b676856d1ca5" />
         <CLASSES>
           <root url="file://$MODULE_DIR$/../../frameworks/starling-extensions/Starling-Extension-Particle-System/src" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="7d5817f8-b286-4038-87af-e22e68a9047e" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../frameworks/starling-extensions/pixelmask/src" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
