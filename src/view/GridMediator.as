@@ -7,6 +7,7 @@ package view {
 
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
+	import signals.notifications.ResetCompleteSignal;
 	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.RequestGridSignal;
 	import signals.response.ResponseGridSignal;
@@ -34,19 +35,29 @@ package view {
 		[Inject]
 		public var updategrid 			: GridUpdateSignal;
 
+		[Inject]
+		public var resetComplete 		: ResetCompleteSignal;
+
+
 		override public function initialize():void {
 
 			gameStartSignal.add(handleGameStart);
 			responseGridSignal.add(handleGridResponse);
 			updategrid.add(handleGridUpdate);
+			gridView.requestCollapseSignal.add(handleRequestCollapse);
+			resetComplete.add(handleResetComplete);
+		}
+
+		private function handleResetComplete():void {
+			gridView.checkResetStatus();
+		}
+
+		private function handleRequestCollapse():void {
+
 		}
 
 		private function handleGridUpdate(grid : Vector.<GridVo>):void {
 			gridView.grid = grid;
-		}
-
-		private function handleDestroyCrystal(id : int):void {
-			gridView.destroyCrystal(id);
 		}
 
 		private function handleGridResponse(data : Vector.<GridVo>):void {

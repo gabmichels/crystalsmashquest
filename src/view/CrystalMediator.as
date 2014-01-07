@@ -11,6 +11,7 @@ package view {
 
 	import signals.notifications.CombinationSignal;
 	import signals.notifications.GridUpdateSignal;
+	import signals.notifications.ResetCompleteSignal;
 	import signals.notifications.RestartSignal;
 	import signals.notifications.StateUpdateSignal;
 	import signals.notifications.SwapCrystalsSignal;
@@ -66,6 +67,11 @@ package view {
 		[Inject]
 		public var requestReset				: RequestResetCrystalSignal;
 
+		[Inject]
+		public var resetComplete			: ResetCompleteSignal;
+
+
+
 		public function CrystalMediator() {
 		}
 
@@ -76,12 +82,17 @@ package view {
 			crystalView.combinationSignal.add(handleCombinationSignal)
 			crystalView.requestCollapseUpdate.add(handleCollapseUpdateRequest);
 			crystalView.resetSignal.add(handleRequestReset);
+			crystalView.resetComplete.add(handleResetComplete);
 			responseCrystalData.add(handleDataResponse);
 			stateSignal.add(handleStateUpdate);
 			restartSignal.add(handleRestart);
 			responseGridObjectUpdate.add(handleGridObjectUpdateResponse);
 			gridUpdateSignal.add(handleGridUpdate);
 			responseReset.add(handleResetResponse);
+		}
+
+		private function handleResetComplete():void {
+			resetComplete.dispatch();
 		}
 
 		private function handleResetResponse(vo : GridVo):void {

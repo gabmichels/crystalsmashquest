@@ -33,6 +33,7 @@ package {
 	import signals.notifications.CrystalsLoadedSignal;
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
+	import signals.notifications.ResetCompleteSignal;
 	import signals.notifications.RestartSignal;
 	import signals.notifications.StateUpdateSignal;
 	import signals.notifications.SwapCrystalsSignal;
@@ -109,6 +110,7 @@ package {
 			injector.map( ResponseGridObjectUpdateSignal ).asSingleton();
 			injector.map( CombinationSignal ).asSingleton();
 			injector.map( ResponseResetCrystalSignal ).asSingleton();
+			injector.map( ResetCompleteSignal ).asSingleton();
 
 			// Map views.
 			mediatorMap.map( GameView ).toMediator( GameMediator );

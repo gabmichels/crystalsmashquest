@@ -27,6 +27,7 @@ package view {
 		public var combinationSignal	: Signal;
 		public var requestCollapseUpdate: Signal;
 		public var resetSignal			: Signal;
+		public var resetComplete		:Signal;
 
 		private var _vo 				: GridVo;
 		private var _state				: int;
@@ -44,6 +45,7 @@ package view {
 			combinationSignal			= new Signal();
 			requestCollapseUpdate		= new Signal();
 			resetSignal					= new Signal();
+			resetComplete				= new Signal();
 
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -252,6 +254,8 @@ package view {
 				this.y 			= newVo.y;
 
 				vo = newVo;
+
+				resetComplete.dispatch();
 			}
 		}
 

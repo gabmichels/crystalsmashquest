@@ -12,14 +12,14 @@ package view {
 
 	public class GridView extends Sprite {
 
-		public var combinationSignal	: Signal;
+		public var requestCollapseSignal	: Signal;
 
 		private var _crystals : Vector.<CrystalView> = new <CrystalView>[];
 		private var _grid : Vector.<GridVo>;
-		private var _count : int = 0;
+		private var _crystalCrushAmount : int;
 
 		public function GridView() {
-			combinationSignal = new Signal();
+			requestCollapseSignal = new Signal();
 		}
 
 		public function init(data:Vector.<GridVo>):void {
@@ -35,6 +35,15 @@ package view {
 				crystal.id	= i + 1;
 				addChild(crystal);
 				_crystals.push(crystal);
+			}
+		}
+
+		public function checkResetStatus():void {
+			if(_crystalCrushAmount > 0) {
+				_crystalCrushAmount--;
+				trace("reset ongoing");
+			} else {
+				trace("collapse");
 			}
 		}
 
@@ -77,20 +86,13 @@ package view {
 			return null;
 		}
 
-		public function destroyCrystal(id : int) : void {
-			for(var i : int = 0; i < _crystals.length; i++) {
-				if(_crystals[i].id == id) {
-					_crystals.splice(i,1);
-					break;
-				}
-			}
-		}
-
 		public function crushCrystals(data:Vector.<GridVo>):void {
 			var currentVo 				: GridVo;
 			var crystal 				: CrystalView;
 			var collapseRowCount 		: Vector.<int>	= getCollapseCount(data);
 			var currentCollapseCount 	: int;
+
+			_crystalCrushAmount = data.length - 1;
 
 			for(var i : int = 0; i < data.length; i++) {
 				currentVo 	= data[i];
@@ -106,7 +108,6 @@ package view {
 			var currentVo 				: GridVo;
 			var currentCollapseCount 	: int;
 			var vList					: Vector.<GridVo>;
-			_count = 0;
 			data.sort(sortDataX);
 
 			vList = getVerticalList(data);
@@ -120,17 +121,17 @@ package view {
 
 				if(currentCollapseCount > 0) {
 					var test : Vector.<CrystalView> = getAllCollapsableCrystals(currentVo);
+					requestCollapseSignal.dispatch()
 //					collapseCrystals(test, currentCollapseCount);
 				}
 			}
-			trace("dropcount: ",_count);
 		}
 
 		private function collapseCrystals(crystals:Vector.<CrystalView>, collapseCount : int):void {
 			var crystal : CrystalView;
 
 			for(var i : int = 0; i < crystals.length; i++) {
-				_count++;
+				_crystalCrushAmount++;
 				crystal = crystals[i];
 				crystal.collapse(collapseCount);
 			}
@@ -360,5 +361,6 @@ package view {
 		public function set grid(value:Vector.<GridVo>):void {
 			_grid = value;
 		}
+
 	}
 }
