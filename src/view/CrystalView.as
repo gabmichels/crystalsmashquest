@@ -3,6 +3,7 @@ package view {
 	import model.vo.CrystalVo;
 	import model.vo.GridUpdateVo;
 	import model.vo.GridVo;
+	import model.vo.ResetCrystalVo;
 	import model.vo.SwapCrystalVo;
 
 	import org.osflash.signals.Signal;
@@ -25,6 +26,7 @@ package view {
 		public var updateGridRefSignal	: Signal;
 		public var combinationSignal	: Signal;
 		public var requestCollapseUpdate: Signal;
+		public var resetSignal			: Signal;
 
 		private var _vo 				: GridVo;
 		private var _state				: int;
@@ -41,6 +43,7 @@ package view {
 			updateGridRefSignal			= new Signal();
 			combinationSignal			= new Signal();
 			requestCollapseUpdate		= new Signal();
+			resetSignal					= new Signal();
 
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -51,7 +54,6 @@ package view {
 		}
 
 		public function init(grid : Vector.<GridVo>, crystals : Vector.<CrystalVo> = null, state : int = -1) : void {
-			while(numChildren > 0) removeChildAt(0); // remove old crystal
 			this.alpha 			= 0;	// set alpha to zero for fade in
 
 			if(!(isNaN(state)))
@@ -66,19 +68,25 @@ package view {
 		}
 
 
-		private function addCrystalTexture(texture : Texture) : void {
+		private function addCrystalTexture(texture : Texture, doTween : Boolean = false) : void {
+			while(numChildren > 0) removeChildAt(0); // remove old crystal
 
 			var img		:Image 		= new Image(texture);
-			var tween	:Tween 		= new Tween(this, 0.5, Transitions.LINEAR);
+			var tween	:Tween;
+
 			img.pivotX 				= int(img.width / 2);
 			img.pivotY 				= int(img.height / 2);
 			addChild(img);
 
-			tween.delay 			= (_vo.idX + _vo.idY) * 0.03;
-			tween.fadeTo(1);
-			Starling.juggler.add(tween);
+			if(doTween) {
+				tween 				= new Tween(this, 0.5, Transitions.LINEAR);
+				tween.delay 		= (_vo.idX + _vo.idY) * 0.03;
+				tween.fadeTo(1);
+				Starling.juggler.add(tween);
+			}
 
-			addEventListener(TouchEvent.TOUCH, handleTouch);
+			if(!(hasEventListener(TouchEvent.TOUCH)))
+				addEventListener(TouchEvent.TOUCH, handleTouch);
 		}
 
 		private function initCrystal():void {
@@ -94,7 +102,7 @@ package view {
 			texture 	= crystals[colorNum].texture;
 			updateGridRefSignal.dispatch(new GridUpdateVo(id, crystals[colorNum].color, vo));
 
-			addCrystalTexture(texture);
+			addCrystalTexture(texture, true);
 
 		}
 
@@ -138,62 +146,6 @@ package view {
 			}
 
 			return availableColors;
-		}
-
-		public function checkCombination() : void {
-
-			var horizontalList 	: Vector.<GridVo> = getList(GameConstants.HORIZONTAL);
-			var verticalList 	: Vector.<GridVo> = getList(GameConstants.VERTICAL);
-
-			var vCombo 			: Vector.<GridVo> = checkListCombination(verticalList);
-			var hCombo 			: Vector.<GridVo> = checkListCombination(horizontalList);
-			var mergedCombo 	: Vector.<GridVo>;
-
-			if(hCombo && vCombo) {
-				mergedCombo = mergeCombinations(vCombo, hCombo);
-				combinationSignal.dispatch(mergedCombo);
-			} else if(hCombo && !vCombo) {
-				combinationSignal.dispatch(hCombo);
-			} else if(!hCombo && vCombo) {
-				combinationSignal.dispatch(vCombo);
-			}
-
-		}
-
-		private function mergeCombinations(vCombo:Vector.<GridVo>, hCombo:Vector.<GridVo>):Vector.<GridVo> {
-			var merged : Vector.<GridVo> = vCombo.concat(hCombo);
-
-			var lastVoPos : int = merged.lastIndexOf(vo);
-
-			merged.splice(lastVoPos,1);
-
-			return merged;
-		}
-
-		private function checkListCombination(list:Vector.<GridVo>):Vector.<GridVo> {
-			var currentVo 		: GridVo;
-			var combination 	: Vector.<GridVo> = new <GridVo>[];
-			var rest			: int = list.length;
-
-			for(var i : int = 0; i < list.length; i++) {
-				currentVo = list[i];
-				if(currentVo) {
-					if(currentVo.color == vo.color && (rest + combination.length) >= GameConstants.MINIMUM_COMBINATION_COUNT) {
-						combination.push(currentVo);
-					} else if(currentVo.color != vo.color && combination.length >= GameConstants.MINIMUM_COMBINATION_COUNT && combination.indexOf(vo) != -1) {
-						break;
-					} else if(currentVo.color != vo.color && combination.length < GameConstants.MINIMUM_COMBINATION_COUNT && rest >= GameConstants.MINIMUM_COMBINATION_COUNT) {
-						combination = new <GridVo>[];
-					}
-				}
-				rest--;
-			}
-
-			if(combination.length >= GameConstants.MINIMUM_COMBINATION_COUNT) {
-				return combination;
-			} else {
-				return null;
-			}
 		}
 
 		private function getGridById(x : int, y : int) : GridVo {
@@ -291,21 +243,32 @@ package view {
 			}
 		}
 
+		public function updateAfterReset(newVo:GridVo):void {
+			if(newVo.crystalID == id) {
+				this.scaleX 	= 1;
+				this.scaleY 	= 1;
+				this.alpha 		= 1;
+				this.x 			= newVo.x;
+				this.y 			= newVo.y;
+
+				vo = newVo;
+			}
+		}
+
 		public function crush():void {
 			var tween : Tween = new Tween(this, 0.2, Transitions.EASE_IN);
 			tween.fadeTo(0);
 			tween.scaleTo(0);
-
+			tween.onComplete = handleReset;
 			Starling.juggler.add(tween);
-			destroy();
 			// TODO add particles
 		}
 
 		public function collapse(collapseCount:int):void {
 			var tween : Tween = new Tween(this, 0.5, Transitions.EASE_OUT_BOUNCE);
 			tween.moveTo(vo.x, vo.y + collapseCount * GameConstants.GRID_CELL_SIZE);
-
-			requestCollapseUpdate.dispatch(new CollapseUpdateVo(id, vo.color, vo.idX, vo.idY + collapseCount));
+//			tween.onComplete = checkCombination;
+//			requestCollapseUpdate.dispatch(new CollapseUpdateVo(id, vo.color, vo.idX, vo.idY + collapseCount));
 
 			Starling.juggler.add(tween);
 		}
@@ -315,17 +278,25 @@ package view {
 				addEventListener(TouchEvent.TOUCH, handleTouch);
 		}
 
-		public function destroy():void {
-			removeEventListener(TouchEvent.TOUCH, handleTouch);
-		}
-
 		// events
+
+		private function handleReset() : void {
+			var colorNum 		: int;
+			var texture 		: Texture;
+
+			colorNum 	= Math.random() * _crystalData.length;
+			texture 	= _crystalData[colorNum].texture;
+			addCrystalTexture(texture);
+
+			resetSignal.dispatch(new ResetCrystalVo(id, _crystalData[colorNum].color,  vo.idX));
+		}
 
 		private function handleTouch(event:TouchEvent):void {
 			var touch:Touch = event.getTouch(this);
 			if (touch && touch.phase == TouchPhase.BEGAN) {
 				_dragStartX = touch.globalX;
 				_dragStartY = touch.globalY;
+				trace(id, vo.color, vo.idX, vo.idY)
 			} else if(touch && touch.phase == TouchPhase.MOVED) {
 				checkDragging(touch);
 			}
@@ -355,6 +326,7 @@ package view {
 		public function set gridData(value:Vector.<GridVo>):void {
 			_gridData = value;
 		}
+
 
 	}
 }

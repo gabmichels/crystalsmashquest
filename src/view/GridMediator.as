@@ -5,9 +5,8 @@ package view {
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
-	import signals.notifications.CombinationSignal;
-
 	import signals.notifications.GameStartSignal;
+	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.RequestGridSignal;
 	import signals.response.ResponseGridSignal;
@@ -33,21 +32,21 @@ package view {
 		public var swapSignal			: SwapCrystalsSignal;
 
 		[Inject]
-		public var combinationSignal	: CombinationSignal;
-
-
+		public var updategrid 			: GridUpdateSignal;
 
 		override public function initialize():void {
 
 			gameStartSignal.add(handleGameStart);
 			responseGridSignal.add(handleGridResponse);
-			combinationSignal.add(handleCombination)
+			updategrid.add(handleGridUpdate);
 		}
 
-		private function handleCombination(data : Vector.<GridVo>):void {
-			gridView.crushCrystals(data);
-			gridView.initCollapse(data);
+		private function handleGridUpdate(grid : Vector.<GridVo>):void {
+			gridView.grid = grid;
+		}
 
+		private function handleDestroyCrystal(id : int):void {
+			gridView.destroyCrystal(id);
 		}
 
 		private function handleGridResponse(data : Vector.<GridVo>):void {

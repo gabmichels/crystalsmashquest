@@ -3,26 +3,24 @@ package view {
 	import model.vo.CrystalVo;
 	import model.vo.GridUpdateVo;
 	import model.vo.GridVo;
+	import model.vo.ResetCrystalVo;
 	import model.vo.SwapCrystalVo;
 
 	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.CombinationSignal;
-	import signals.requests.RequestCollapseUpdateSignal;
-
-	import signals.response.ResponseGridObjectUpdateSignal;
-	import signals.requests.RequestGridObjectUpdateSignal;
-
 	import signals.notifications.GridUpdateSignal;
-
 	import signals.notifications.RestartSignal;
-
 	import signals.notifications.StateUpdateSignal;
 	import signals.notifications.SwapCrystalsSignal;
-
+	import signals.requests.RequestCollapseUpdateSignal;
 	import signals.requests.RequestCrystalDataSignal;
+	import signals.requests.RequestGridObjectUpdateSignal;
+	import signals.requests.RequestResetCrystalSignal;
 	import signals.response.ResponseCrystalDataSignal;
+	import signals.response.ResponseGridObjectUpdateSignal;
+	import signals.response.ResponseResetCrystalSignal;
 
 	public class CrystalMediator extends StarlingMediator{
 
@@ -62,6 +60,12 @@ package view {
 		[Inject]
 		public var requestCollapseUpdate	: RequestCollapseUpdateSignal;
 
+		[Inject]
+		public var responseReset			: ResponseResetCrystalSignal;
+
+		[Inject]
+		public var requestReset				: RequestResetCrystalSignal;
+
 		public function CrystalMediator() {
 		}
 
@@ -71,11 +75,21 @@ package view {
 			crystalView.updateGridRefSignal.add(handleGridObjectUpdateRequest);
 			crystalView.combinationSignal.add(handleCombinationSignal)
 			crystalView.requestCollapseUpdate.add(handleCollapseUpdateRequest);
+			crystalView.resetSignal.add(handleRequestReset);
 			responseCrystalData.add(handleDataResponse);
 			stateSignal.add(handleStateUpdate);
 			restartSignal.add(handleRestart);
 			responseGridObjectUpdate.add(handleGridObjectUpdateResponse);
 			gridUpdateSignal.add(handleGridUpdate);
+			responseReset.add(handleResetResponse);
+		}
+
+		private function handleResetResponse(vo : GridVo):void {
+			crystalView.updateAfterReset(vo);
+		}
+
+		private function handleRequestReset(resetVo : ResetCrystalVo):void {
+			requestReset.dispatch(resetVo);
 		}
 
 		private function handleCollapseUpdateRequest(vo : CollapseUpdateVo):void {

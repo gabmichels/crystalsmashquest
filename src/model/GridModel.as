@@ -9,6 +9,7 @@ package model {
 		public var gridUpdateSignal : GridUpdateSignal;
 
 		private var _grid : Vector.<GridVo>;
+		private var _collapseGrid : Vector.<GridVo>;
 
 		public function get grid():Vector.<GridVo> {
 			return _grid;
@@ -19,8 +20,12 @@ package model {
 			gridUpdateSignal.dispatch(_grid);
 		}
 
-		public function updateGridObject(index : int, vo : GridVo) : void {
-			_grid[index] = vo;
+		public function get collapseGrid():Vector.<GridVo> {
+			return _collapseGrid;
+		}
+
+		public function set collapseGrid(value:Vector.<GridVo>):void {
+			_collapseGrid = value;
 		}
 	}
 }

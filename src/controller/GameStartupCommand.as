@@ -16,7 +16,6 @@ package controller {
 		public var gameModel : GameModel;
 
 		public function execute() : void {
-			trace("load images command")
 			crystalLoader.loadImages();
 			gridService.initGrid();
 			gameModel.state = GameConstants.STATE_GAME_INIT;

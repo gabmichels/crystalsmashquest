@@ -5,6 +5,7 @@ package {
 	import controller.GameStartupCommand;
 	import controller.GetCrystalDataCommand;
 	import controller.GetGridCommand;
+	import controller.ResetCrystalCommand;
 	import controller.SwapCrystalCommand;
 	import controller.UpdateGridObjectCommand;
 
@@ -29,9 +30,6 @@ package {
 	import service.IGridService;
 
 	import signals.notifications.CombinationSignal;
-	import signals.requests.RequestCollapseUpdateSignal;
-
-	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.notifications.CrystalsLoadedSignal;
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
@@ -39,12 +37,16 @@ package {
 	import signals.notifications.StateUpdateSignal;
 	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.GameStartupSignal;
+	import signals.requests.RequestCollapseUpdateSignal;
 	import signals.requests.RequestCrystalDataSignal;
 	import signals.requests.RequestGridObjectUpdateSignal;
 	import signals.requests.RequestGridSignal;
+	import signals.requests.RequestResetCrystalSignal;
 	import signals.response.ResponseCrystalDataSignal;
 	import signals.response.ResponseCrystalsSignal;
+	import signals.response.ResponseGridObjectUpdateSignal;
 	import signals.response.ResponseGridSignal;
+	import signals.response.ResponseResetCrystalSignal;
 
 	import view.BackgroundMediator;
 	import view.BackgroundView;
@@ -94,6 +96,7 @@ package {
 			commandMap.map( RequestCrystalDataSignal).toCommand(GetCrystalDataCommand);
 			commandMap.map( RequestGridObjectUpdateSignal).toCommand(UpdateGridObjectCommand);
 			commandMap.map( RequestCollapseUpdateSignal).toCommand(CollapseUpdateCommand);
+			commandMap.map( RequestResetCrystalSignal).toCommand(ResetCrystalCommand);
 
 			// Map independent notification signals.
 			injector.map( CrystalsLoadedSignal ).asSingleton();
@@ -105,6 +108,7 @@ package {
 			injector.map( GridUpdateSignal ).asSingleton();
 			injector.map( ResponseGridObjectUpdateSignal ).asSingleton();
 			injector.map( CombinationSignal ).asSingleton();
+			injector.map( ResponseResetCrystalSignal ).asSingleton();
 
 			// Map views.
 			mediatorMap.map( GameView ).toMediator( GameMediator );

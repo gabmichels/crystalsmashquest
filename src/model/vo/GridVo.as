@@ -8,7 +8,8 @@ package model.vo {
 		public var y 			: int;
 		public var color		: String;
 
-		public function GridVo(idx, idy, x, y) {
+		public function GridVo(id, idx, idy, x, y) {
+			this.crystalID = id;
 			this.idX = idx;
 			this.idY = idy;
 			this.x = x;
