@@ -53,7 +53,6 @@ package view {
 			if(_crystalCollapseAmount > 1) {
 				_crystalCollapseAmount--;
 			} else {
-				trace("lookup again");
 				initCombinationLookup();
 			}
 		}
@@ -76,21 +75,11 @@ package view {
 
 		private function handleTweenComplete():void {
 			initCombinationLookup();
-//			target.addListener();
 		}
 
 		private function getCrystalById(id : int) : CrystalView {
 			for(var i : int = 0; i < _crystals.length; i++) {
 				if(id == _crystals[i].id) {
-					return _crystals[i];
-				}
-			}
-			return null;
-		}
-
-		private function getCrystalByPos(idx : int, idy : int) : CrystalView {
-			for(var i : int = 0; i < _crystals.length; i++) {
-				if(idx == _crystals[i].vo.idX && idy == _crystals[i].vo.idY) {
 					return _crystals[i];
 				}
 			}
@@ -345,10 +334,6 @@ package view {
 			} else {
 				return 1;
 			}
-		}
-
-		public function get grid():Vector.<GridVo> {
-			return _grid;
 		}
 
 		public function set grid(value:Vector.<GridVo>):void {
