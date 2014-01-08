@@ -6,6 +6,7 @@ package view {
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.CollapseCompleteSignal;
+	import signals.notifications.GameOverSignal;
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.ResetCompleteSignal;
@@ -64,6 +65,9 @@ package view {
 		[Inject]
 		public var returnParticle		: ReturnParticleSignal;
 
+		[Inject]
+		public var gameOverSignal		: GameOverSignal;
+
 		override public function initialize():void {
 
 			gameStartSignal.add(handleGameStart);
@@ -77,6 +81,11 @@ package view {
 			collapseComplete.add(handleCollapseComplete);
 			responseParticle.add(handleResponseParticle);
 			swapSignal.add(handleSwap);
+			gameOverSignal.add(handleGameOver)
+		}
+
+		private function handleGameOver():void {
+			gridView.touchable = false;
 		}
 
 		private function handleCrystalSwap(data : SwapCrystalVo):void {
@@ -120,6 +129,7 @@ package view {
 		private function handleGameStart():void {
 			gameStartSignal.remove(handleGameStart);
 			requestGridSignal.dispatch();
+			gridView.touchable = true;
 		}
 
 		private function handleSwap(data : SwapCrystalVo):void {

@@ -38,6 +38,7 @@ package {
 	import signals.notifications.CollapseCompleteSignal;
 	import signals.notifications.CombinationSignal;
 	import signals.notifications.CrystalsLoadedSignal;
+	import signals.notifications.GameOverSignal;
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.InitParticleSignal;
@@ -132,6 +133,7 @@ package {
 			injector.map( ResponseCollapseSignal ).asSingleton();
 			injector.map( CollapseCompleteSignal ).asSingleton();
 			injector.map( ResponseParticleSignal ).asSingleton();
+			injector.map( GameOverSignal ).asSingleton();
 
 			// views.
 			mediatorMap.map( GameView ).toMediator( GameMediator );

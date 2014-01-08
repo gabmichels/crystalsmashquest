@@ -7,6 +7,7 @@ package {
 		public static const GRID_XPOS	 				: int = 325;
 		public static const GRID_YPOS	 				: int = 95;
 		public static const DRAG_DISTANCE				: int = 15;
+		public static const ROUND_TIME					: int = 60;
 
 		// game states
 		public static const STATE_GAME_INIT				: int = 1;
