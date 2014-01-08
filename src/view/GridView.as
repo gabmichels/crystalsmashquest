@@ -186,13 +186,11 @@ package view {
 			for(i = column.length - 1; i > 0; i--) {
 				currentVo = column[i];
 				if(currentVo.idY <= checkedVo.idY && currentVo.idY > 0) {
-					trace(currentVo.idY - 1, column[i - 1].idY)
-					if((i - 1) < column.length && column[i - 1].idY < currentVo.idY - 1 && column[i - 1].idY > 0) {
+					if(column[i - 1].idY < currentVo.idY - 1 && column[i - 1].idY > 0) {
 						gap = (currentVo.idY - 1) - (column[i - 1].idY);
 					}
 				}
 			}
-				trace(gap);
 			return collapseCount - gap;
 		}
 
@@ -243,7 +241,6 @@ package view {
 					swapVo.data2 = _lastSwap.data1;
 					swapVo.reverse = true;
 					swapSignal.dispatch(swapVo);
-					trace("reverse swap")
 				}
 			}
 		}
