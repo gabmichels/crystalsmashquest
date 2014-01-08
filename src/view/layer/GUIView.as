@@ -31,6 +31,12 @@ package view.layer {
 
 			_secondsPassed = GameConstants.ROUND_TIME;
 
+			_label = new TextField(400,100,"","GoodGirl", 65, 0xFF6600 );
+			_label.x = 100;
+			_label.y = 100;
+			_label.autoSize = TextFieldAutoSize.BOTH_DIRECTIONS;
+
+			addChild(_label);
 			addChild(DisplayObject(_startbutton));
 
 			_startbutton.addEventListener(Event.TRIGGERED, handleStartClick);
@@ -48,6 +54,7 @@ package view.layer {
 		private function handleStartClick(event:Event):void {
 			startSignal.dispatch();
 			_startbutton.label = "RESTART GAME";
+			_label.text = String(GameConstants.ROUND_TIME);
 
 			if(!_timer) {
 				_timer = new Timer(1000, GameConstants.ROUND_TIME);
@@ -60,11 +67,6 @@ package view.layer {
 				_secondsPassed = GameConstants.ROUND_TIME;
 			}
 
-			_label = new TextField(400,100,String(_secondsPassed),"GoodGirl", 65, 0xFF6600 );
-			_label.x = 100;
-			_label.y = 100;
-			_label.autoSize = TextFieldAutoSize.BOTH_DIRECTIONS;
-			addChild(_label);
 		}
 	}
 }

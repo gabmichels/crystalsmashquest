@@ -147,7 +147,6 @@ package view {
 			_crystalCollapseAmount = 0;
 
 			data.sort(sortDataByPos);
-			data = cleanUpVerticalCombinations(data); // remove all vertical gridvos from data to simplify looking for collapsable crystals
 
 			requestCollapseSignal.dispatch(data);
 
@@ -184,39 +183,17 @@ package view {
 
 			}
 
-			for(i = column.length - 1; i >= 0; i--) {
+			for(i = column.length - 1; i > 0; i--) {
 				currentVo = column[i];
 				if(currentVo.idY <= checkedVo.idY && currentVo.idY > 0) {
-					if((i - 1) < column.length && column[i - 1].idY > currentVo.idY - 1 && column[i - 1].idY > 0) {
-						gap++;
+					trace(currentVo.idY - 1, column[i - 1].idY)
+					if((i - 1) < column.length && column[i - 1].idY < currentVo.idY - 1 && column[i - 1].idY > 0) {
+						gap = (currentVo.idY - 1) - (column[i - 1].idY);
 					}
 				}
 			}
-
-			return collapseCount;
-		}
-
-
-		private function cleanUpVerticalCombinations(data:Vector.<GridVo>) : Vector.<GridVo> {
-			var idx 		: int;
-			var count 		: int;
-			var newlist		: Vector.<GridVo> = new <GridVo>[];
-
-			for(var i : int = 0; i < data.length; i++) {
-				idx 	= data[i].idX;
-				count 	= 1;
-
-				if((i + count) < data.length && idx == data[i + count].idX) {
-					newlist.push(data[i]);
-					while((i + count) < data.length && idx == data[i + count].idX) {
-						i++;
-					}
-				} else {
-					newlist.push(data[i]);
-				}
-			}
-
-			return newlist;
+				trace(gap);
+			return collapseCount - gap;
 		}
 
 		// combination check functions

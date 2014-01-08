@@ -115,21 +115,45 @@ package service {
 		}
 
 		public function requestCollapseData(data : Vector.<GridVo> ) : void {
+			var filteredData	: Vector.<GridVo> = cleanUpVerticalCombinations(data);
 			var collapseData    : Vector.<GridVo> = new <GridVo>[];
 			var currentVo 		: GridVo;
 
-			for(var i : int = 0; i < data.length; i++) {
-				currentVo = data[i];
+			for(var i : int = 0; i < filteredData.length; i++) {
+				currentVo = filteredData[i];
 				if(collapseData.length == 0) {
 					collapseData = getCollapseData(currentVo);
 				} else {
 					collapseData = collapseData.concat(getCollapseData(currentVo));
 				}
 			}
+			collapseData = filterOutCrushedData(collapseData, data);
 			collapseResponse.dispatch(collapseData);
 		}
 
+		private function filterOutCrushedData(collapseData:Vector.<GridVo>, data:Vector.<GridVo>):Vector.<GridVo> {
+			var currentVo 		: GridVo;
+			var checkVo 		: GridVo;
+
+			for(var j : int = 0; j < data.length; j++) {
+				checkVo = data[j];
+
+				for(var i : int = collapseData.length - 1; i > 0; i--) {
+					currentVo = collapseData[i];
+
+					if(checkVo.crystalID == currentVo.crystalID && checkVo.idX == currentVo.idX && checkVo.idY == currentVo.idY) {
+						collapseData.splice(i,1);
+					}
+				}
+
+			}
+
+			return collapseData;
+		}
+
+
 		public function getCollapseData(data:GridVo):Vector.<GridVo> {
+
 			var columnData		: Vector.<GridVo> = getGridColumn(data.idX, GameConstants.ALL_GRIDS);
 			var collapseData    : Vector.<GridVo> = new <GridVo>[];
 			var currentVo 		: GridVo;
@@ -143,6 +167,28 @@ package service {
 			}
 
 			return collapseData;
+		}
+
+		private function cleanUpVerticalCombinations(data:Vector.<GridVo>) : Vector.<GridVo> {
+			var idx 		: int;
+			var count 		: int;
+			var newlist		: Vector.<GridVo> = new <GridVo>[];
+
+			for(var i : int = 0; i < data.length; i++) {
+				idx 	= data[i].idX;
+				count 	= 1;
+
+				if((i + count) < data.length && idx == data[i + count].idX) {
+					while((i + count) < data.length && idx == data[i + count].idX) {
+						i++;
+					}
+					newlist.push(data[i]);
+				} else {
+					newlist.push(data[i]);
+				}
+			}
+
+			return newlist;
 		}
 
 
