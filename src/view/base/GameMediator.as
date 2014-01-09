@@ -1,5 +1,4 @@
 package view.base {
-	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.CrystalsLoadedSignal;
@@ -7,12 +6,7 @@ package view.base {
 
 	import starling.core.Starling;
 
-	import view.layer.GUIView;
-
 	public class GameMediator extends StarlingMediator{
-
-		[Inject]
-		public var logger:ILogger;
 
 		[Inject]
 		public var view:GameView;
@@ -30,8 +24,6 @@ package view.base {
 		}
 
 		override public function initialize():void {
-
-			logger.info( "initialized" );
 
 			gameStartupSignal.dispatch();
 			crystalLoaded.add(handleGameLoaded);

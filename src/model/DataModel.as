@@ -10,7 +10,6 @@ package model {
 		private var _crystals : Vector.<CrystalVo> = new <CrystalVo>[];
 		private var _crushParticleXML : XML;
 		private var _crushParticleTexture : Texture;
-		private var _crushParticle : PDParticleSystem;
 
 		public function get crushParticleXML():XML {
 			return _crushParticleXML;

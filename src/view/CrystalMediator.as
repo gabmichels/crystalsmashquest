@@ -6,34 +6,24 @@ package view {
 	import model.vo.ResetCrystalVo;
 	import model.vo.SwapCrystalVo;
 
-	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.CollapseCompleteSignal;
-
 	import signals.notifications.CombinationSignal;
 	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.ResetCompleteSignal;
 	import signals.notifications.RestartSignal;
-	import signals.notifications.ReturnParticleSignal;
 	import signals.notifications.StateUpdateSignal;
 	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.RequestCollapseUpdateSignal;
 	import signals.requests.RequestCrystalDataSignal;
 	import signals.requests.RequestGridObjectUpdateSignal;
-	import signals.requests.RequestParticleSignal;
 	import signals.requests.RequestResetCrystalSignal;
 	import signals.response.ResponseCrystalDataSignal;
 	import signals.response.ResponseGridObjectUpdateSignal;
-	import signals.response.ResponseParticleSignal;
 	import signals.response.ResponseResetCrystalSignal;
 
-	import view.particles.CrushParticleView;
-
 	public class CrystalMediator extends StarlingMediator{
-
-		[Inject]
-		public var logger					: ILogger;
 
 		[Inject]
 		public var crystalView				: CrystalView;
@@ -110,7 +100,7 @@ package view {
 		}
 
 		private function handleResetResponse(vo : GridVo):void {
-			crystalView.updateAfterReset(vo);
+			crystalView.updateAfterCrystalReset(vo);
 		}
 
 		private function handleRequestReset(resetVo : ResetCrystalVo):void {
@@ -159,7 +149,7 @@ package view {
 
 		private function handleDataResponse(grid : Vector.<GridVo>, crystals : Vector.<CrystalVo>, state : int) : void {
 			responseCrystalData.remove(handleDataResponse);
-			crystalView.init(grid, crystals, state);
+			crystalView.init(grid, crystals);
 		}
 	}
 }

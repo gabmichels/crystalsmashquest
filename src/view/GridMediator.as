@@ -2,7 +2,6 @@ package view {
 	import model.vo.GridVo;
 	import model.vo.SwapCrystalVo;
 
-	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.CollapseCompleteSignal;
@@ -10,6 +9,7 @@ package view {
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.GridUpdateSignal;
 	import signals.notifications.ResetCompleteSignal;
+	import signals.notifications.RestartSignal;
 	import signals.notifications.ReturnParticleSignal;
 	import signals.notifications.SwapCrystalsSignal;
 	import signals.requests.RequestCollapseSignal;
@@ -22,9 +22,6 @@ package view {
 	import view.particles.CrushParticleView;
 
 	public class GridMediator extends StarlingMediator{
-
-		[Inject]
-		public var logger				: ILogger;
 
 		[Inject]
 		public var gridView 			: GridView;
@@ -68,6 +65,10 @@ package view {
 		[Inject]
 		public var gameOverSignal		: GameOverSignal;
 
+		[Inject]
+		public var restartSignal		: RestartSignal;
+
+
 		override public function initialize():void {
 
 			gameStartSignal.add(handleGameStart);
@@ -81,7 +82,12 @@ package view {
 			collapseComplete.add(handleCollapseComplete);
 			responseParticle.add(handleResponseParticle);
 			swapSignal.add(handleSwap);
-			gameOverSignal.add(handleGameOver)
+			gameOverSignal.add(handleGameOver);
+			restartSignal.add(handleGameRestart)
+		}
+
+		private function handleGameRestart():void {
+			gridView.touchable = true;
 		}
 
 		private function handleGameOver():void {
@@ -110,7 +116,7 @@ package view {
 		}
 
 		private function handleResetComplete():void {
-			gridView.checkResetStatus();
+			gridView.checkCrushingComplete();
 		}
 
 		private function handleRequestCollapse(vo : Vector.<GridVo>):void {
@@ -129,7 +135,6 @@ package view {
 		private function handleGameStart():void {
 			gameStartSignal.remove(handleGameStart);
 			requestGridSignal.dispatch();
-			gridView.touchable = true;
 		}
 
 		private function handleSwap(data : SwapCrystalVo):void {

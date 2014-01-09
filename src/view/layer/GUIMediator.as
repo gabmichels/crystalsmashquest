@@ -1,16 +1,12 @@
 package view.layer {
-	import robotlegs.bender.framework.api.ILogger;
 	import robotlegs.extensions.starlingViewMap.impl.StarlingMediator;
 
 	import signals.notifications.GameOverSignal;
-
 	import signals.notifications.GameStartSignal;
 	import signals.notifications.RestartSignal;
 
 	public class GUIMediator extends StarlingMediator{
 
-		[Inject]
-		public var logger			: ILogger;
 
 		[Inject]
 		public var startLayerView	: GUIView;
@@ -23,7 +19,6 @@ package view.layer {
 
 		[Inject]
 		public var gameOverSignal 	: GameOverSignal;
-
 
 		override public function initialize():void {
 
@@ -45,8 +40,5 @@ package view.layer {
 		private function handleRestart():void {
 			restartSignal.dispatch();
 		}
-
-
-
 	}
 }

@@ -28,7 +28,7 @@ package {
 			// init starling
 			Starling.handleLostContext 	= true;
 			_starling 					= new Starling(GameView, stage);
-			_starling.showStats 		= true;
+//			_starling.showStats 		= true;
 
 			// Init Robotlegs.
 			_context = new Context();

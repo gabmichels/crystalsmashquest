@@ -8,6 +8,7 @@ package model.vo {
 		private var _idY 		: int;
 		private var _x 			: int;
 		private var _y 			: int;
+		private var _state		: int;
 
 		public function GridVo(id, idx, idy, x, y) {
 			this.crystalID = id;
@@ -15,6 +16,7 @@ package model.vo {
 			_idY = idy;
 			_x = x;
 			_y = y;
+			_state = GameConstants.GRID_STATE_IDLE;
 		}
 
 		public function get idX():int {
@@ -31,6 +33,14 @@ package model.vo {
 
 		public function get y():int {
 			return _y;
+		}
+
+		public function get state():int {
+			return _state;
+		}
+
+		public function set state(value:int):void {
+			_state = value;
 		}
 	}
 }

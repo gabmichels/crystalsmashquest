@@ -2,8 +2,8 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="crystalsmashquest">
     <configurations>
-      <configuration name="crystalsmashquest" pure-as="true" main-class="Application" output-file="crystalsmashquest.swf" output-folder="$MODULE_DIR$/bin">
-        <dependencies target-player="11.9">
+      <configuration name="crystalsmashquest" target-platform="Desktop" pure-as="true" main-class="Application" output-file="crystalsmashquest.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies>
           <entries>
             <entry library-id="dbb70e10-23b1-4bf9-9647-624f8d1cfa16">
               <dependency linkage="Merged" />
@@ -41,7 +41,11 @@
         <compiler-options>
           <option name="additionalOptions" value="-advanced-telemetry=true" />
         </compiler-options>
-        <packaging-air-desktop />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/csq_descriptor.xml" package-file-name="crystalsmashquest">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/assets" path-in-package="assets" />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>

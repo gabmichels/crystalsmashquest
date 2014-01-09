@@ -4,6 +4,8 @@ package service {
 	import model.vo.GridUpdateVo;
 	import model.vo.GridVo;
 
+	import signals.notifications.CollapseCompleteSignal;
+
 	import signals.response.ResponseCollapseSignal;
 
 	import signals.response.ResponseGridObjectUpdateSignal;
@@ -23,6 +25,8 @@ package service {
 		[Inject]
 		public var collapseResponse 	: ResponseCollapseSignal;
 
+		[Inject]
+		public var collapseComplete 	: CollapseCompleteSignal;
 
 		public function initGrid():void {
 			var totalCells 		: int 				= GameConstants.GRID_ROWS * GameConstants.GRID_COLS;
@@ -68,9 +72,9 @@ package service {
 				currentVo = grid[i];
 
 				if(currentVo.idX == data1.idX && currentVo.idY == data1.idY) {
-					updateGridObject(new GridUpdateVo(id2, color2,data1));
+					updateGridObject(new GridUpdateVo(id2, color2,data1,GameConstants.GRID_STATE_IDLE));
 				} else if (currentVo.idX == data2.idX && currentVo.idY == data2.idY) {
-					updateGridObject(new GridUpdateVo(id1, color1,data2));
+					updateGridObject(new GridUpdateVo(id1, color1,data2,GameConstants.GRID_STATE_IDLE));
 				}
 			}
 
@@ -81,6 +85,7 @@ package service {
 			var updatedVo 	: GridVo 			= vo.gridVo;
 			updatedVo.crystalID 				= vo.crystalID;
 			updatedVo.color 					= vo.color;
+			updatedVo.state						= vo.state;
 			gridObjectUpdate.dispatch(updatedVo);
 		}
 
@@ -89,13 +94,16 @@ package service {
 			var collapseCount : int 	= (oldVo.idY < 1) ? data.collapseCount + 1 : data.collapseCount; // avoid idY = 0
 			var newVo : GridVo 			= getGridById(oldVo.idX, oldVo.idY + collapseCount);
 
+			updateGridObject(new GridUpdateVo(data.id, oldVo.color,newVo,GameConstants.GRID_STATE_IDLE));
+
 			if(oldVo.idY < 1) {
-				updateGridObject(new GridUpdateVo(data.id, oldVo.color,newVo));
 				oldVo.crystalID = -1;
 				oldVo.color 	= null;
-			} else {
-				updateGridObject(new GridUpdateVo(data.id, oldVo.color,newVo));
+				oldVo.state 	= GameConstants.GRID_STATE_IDLE;
 			}
+
+			collapseComplete.dispatch();
+
 		}
 
 		public function resetCrystal(id:int, color : String, xpos:int):void {
@@ -127,25 +135,21 @@ package service {
 					collapseData = collapseData.concat(getCollapseData(currentVo));
 				}
 			}
-			collapseData = filterOutCrushedData(collapseData, data);
+			collapseData = filterOutCrushedData(collapseData);
 			collapseResponse.dispatch(collapseData);
 		}
 
-		private function filterOutCrushedData(collapseData:Vector.<GridVo>, data:Vector.<GridVo>):Vector.<GridVo> {
+		private function filterOutCrushedData(collapseData:Vector.<GridVo>):Vector.<GridVo> {
 			var currentVo 		: GridVo;
-			var checkVo 		: GridVo;
 
-			for(var j : int = 0; j < data.length; j++) {
-				checkVo = data[j];
+			for(var i : int = collapseData.length - 1; i >= 0; i--) {
+				currentVo = collapseData[i];
 
-				for(var i : int = collapseData.length - 1; i > 0; i--) {
-					currentVo = collapseData[i];
-
-					if(checkVo.crystalID == currentVo.crystalID && checkVo.idX == currentVo.idX && checkVo.idY == currentVo.idY) {
-						collapseData.splice(i,1);
-					}
+				if(currentVo.state == GameConstants.GRID_STATE_CRUSH) {
+					collapseData.splice(i,1);
+				} else {
+					currentVo.state = GameConstants.GRID_STATE_COLLAPSE_PENDING;
 				}
-
 			}
 
 			return collapseData;

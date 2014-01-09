@@ -62,11 +62,12 @@ package view {
 			}
 		}
 
-		public function checkResetStatus():void {
+		public function checkCrushingComplete():void {
 			if(_crystalCrushAmount > 1) {
 				_crystalCrushAmount--;
 			} else {
 				if(_combinationData)
+
 					initCollapse(_combinationData);
 			}
 		}
@@ -159,39 +160,28 @@ package view {
 			_crystalCollapseAmount = collapseData.length;
 
 			for(var i : int = collapseData.length - 1; i >= 0; i--) {
-				collapseCount = getCollapseCount(collapseData, collapseData[i]);
+				collapseCount = getCollapseCount(collapseData[i]);
 				crystal = getCrystalById(collapseData[i].crystalID);
 				crystal.collapse(collapseCount);
 			}
 		}
 
-		private function getCollapseCount(collapseData : Vector.<GridVo>, checkedVo : GridVo) : int {
-		    var column			: Vector.<GridVo> = new <GridVo>[];
+		private function getCollapseCount(checkedVo : GridVo) : int {
+		    var column			: Vector.<GridVo> = getColumnData(checkedVo.idX);
 			var collapseCount 	: int = 0;
-			var gap 			: int = 0;
-			var i 				: int;
 			var currentVo 		: GridVo;
 
-			for(i = 0; i < collapseData.length; i++) {
-				currentVo = collapseData[i];
-				if(currentVo.idX == checkedVo.idX) column.push(currentVo)
-			}
-
-			for(i = 0; i < column.length; i++) {
+			for(var i : int = 0; i < column.length; i++) {
 				currentVo = column[i];
-				if(currentVo.idY < 0) collapseCount++;
-
-			}
-
-			for(i = column.length - 1; i > 0; i--) {
-				currentVo = column[i];
-				if(currentVo.idY <= checkedVo.idY && currentVo.idY > 0) {
-					if(column[i - 1].idY < currentVo.idY - 1 && column[i - 1].idY > 0) {
-						gap = (currentVo.idY - 1) - (column[i - 1].idY);
+				if(currentVo.idY >= checkedVo.idY) {
+					if(currentVo.state == GameConstants.GRID_STATE_CRUSH) {
+						collapseCount++;
 					}
 				}
 			}
-			return collapseCount - gap;
+
+			return collapseCount;
+
 		}
 
 		// combination check functions
@@ -203,6 +193,7 @@ package view {
 
 			_combinationData = new Vector.<GridVo>();
 
+			// check vertical combinations for every column
 			for(i = 1; i <= GameConstants.GRID_COLS; i++) {
 				data = getColumnData(i);
 				combo = checkCombination(data);
@@ -214,6 +205,7 @@ package view {
 				}
 			}
 
+			// check vertical combinations for every row
 			for(i = 1; i <= GameConstants.GRID_ROWS; i++) {
 				data = getRowData(i);
 				combo = checkCombination(data);
@@ -225,12 +217,13 @@ package view {
 				}
 			}
 
+			// crush crystals if there are combinations, else if a swap without combination was triggered: swap back
 			if(_combinationData.length > 0) {
 
 				_gridCon.touchable	= false;
 				_swapTriggered 		= false;
 
-				_combinationData 	= mergeCombinations(_combinationData.sort(sortDataID));
+				_combinationData 	= mergeCombinations(_combinationData.sort(sortDataID)); // remove double entries
 
 				crushCrystals(_combinationData);
 			} else {
@@ -326,6 +319,7 @@ package view {
 			}
 		}
 
+		// helper functions
 		private function getColumnData(id : int) : Vector.<GridVo> {
 			var data : Vector.<GridVo> = new <GridVo>[];
 
@@ -381,7 +375,6 @@ package view {
 		public function set grid(value:Vector.<GridVo>):void {
 			_grid = value;
 		}
-
 
 	}
 }

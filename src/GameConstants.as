@@ -19,5 +19,12 @@ package {
 		public static const COLLAPSE_GRID				: int = 1;
 		public static const ALL_GRIDS					: int = 2;
 
+		// grid vo states
+		public static const GRID_STATE_IDLE				: int = 1;
+		public static const GRID_STATE_CRUSH			: int = 2;
+		public static const GRID_STATE_COLLAPSE_PENDING	: int = 3;
+		public static const GRID_STATE_COLLAPSING		: int = 4;
+
+
 	}
 }
